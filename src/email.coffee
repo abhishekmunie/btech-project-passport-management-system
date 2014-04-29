@@ -43,8 +43,8 @@ fs.readFile passwordResetTemplateFile, (err, data) ->
 module.exports =
   sendVerificationEMail: (to, verificationKey, callback) ->
     debug "Sending Verification email to #{to} with key: #{verificationKey}"
-    sendMail email, 'Email Verification', verificationMailTemplate.render(key: verificationKey), callback
+    sendMail to, 'Email Verification', verificationMailTemplate.render(key: encodeURIComponent(verificationKey)), callback
 
   sendPasswordResetEMail: (to, resetKey, callback) ->
     debug "Sending Reset email to #{to} with key: #{resetKey}"
-    sendMail email, 'Password Reset', passwordResetTemplate.render(key: resetKey), callback
+    sendMail to, 'Password Reset', passwordResetTemplate.render(key: encodeURIComponent(resetKey)), callback

@@ -5,7 +5,7 @@ title: Verification
 <div class="container-fluid">
   {% include success-error.html %}
   {% raw %}
-  {{^locals.error}}
+  {{^locals.hideForm}}
   <div class="panel panel-default center-block auth-panel">
     <div class="panel-heading">
       <h3 class="panel-title">Please create credentials for your account</h3>
@@ -14,30 +14,26 @@ title: Verification
       <form action="/auth/verification/" method="post" class="form-signin" role="form">
         <input type="hidden" name="verificationKey" value="{{locals.verificationKey}}" />
         <div class="form-group">
-          <label for="inputEmail">Email</label>
-          <input type="email" class="form-control form-control-static" id="inputEmail" value="{{locals.email}}" placeholder="Enter your email" disabled />
+          <label class="control-label" for="inputEmail">Email</label>
+          <input type="email" class="form-control form-control-static" name="email" id="inputEmail" value="{{locals.email}}" placeholder="Enter your email" disabled />
         </div>
         <div class="form-group">
-          <label class="col-sm-3 control-label" for="pwd">Password<span class="mandatory">*</span></label>
-          <div class="col-sm-9">
-            <input class="form-control" type="password" name="password" maxlength="255" id="pwd" aria-required="true" autofocus="" required>
-            <p class="help-block"><a data-toggle="modal" data-target="#PasswordPolicyModal" title="Password Policy">Password Policy</a></p>
-          </div>
+          <label class="control-label" for="pwd">Password<span class="mandatory">*</span></label>
+          <input class="form-control" type="password" name="password" maxlength="255" id="pwd" aria-required="true" autofocus="" required>
+          <p class="help-block"><a data-toggle="modal" data-target="#PasswordPolicyModal" title="Password Policy">Password Policy</a></p>
+        </div>
+        <div class="form-group">
+          <label class="control-label" for="confirmPassword">Confirm Password<span class="mandatory">*</span></label>
+          <input class="form-control" type="password" name="confirmPassword" maxlength="255" id="confirmPassword" aria-required="true" required>
+          <p class="help-block"></p>
           <div class="clearfix"></div>
-        </div>
-        <div class="form-group">
-          <label class="col-sm-3 control-label" for="confirmPassword">Confirm Password<span class="mandatory">*</span></label>
-          <div class="col-sm-9">
-            <input class="form-control" type="password" name="confirmPassword" maxlength="255" id="confirmPassword" aria-required="true" required>
-            <p class="help-block"></p>
-          </div>
         </div>
         {{#query.redirect}}<input type="hidden" name="redirect" value="{{query.redirect}}">{{/query.redirect}}
         <input class="btn btn-primary btn-block" type="submit" value="Sign in" />
       </form>
     </div>
   </div>
-  {{^locals.error}}
+  {{/locals.hideForm}}
   {% endraw %}
 </div>
 <!-- Password Policy Modal -->

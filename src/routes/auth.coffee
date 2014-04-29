@@ -24,14 +24,12 @@ router.post '/signin', (req, res, next) ->
       res.locals.email = email
       next()
     else
-      user = email: email
       async.map [admin, pgo, va, citizen]
       , (user, callback) ->
         user.getForEmail email, callback
       , (err, users) ->
-        console.log users
-        req.session.user = user for user in users when user?
-        console.log req.session.user
+        req.session.user = filteredUser for filteredUser in users when filteredUser?
+        req.session.user = new user.User(email) unless req.session.user
         if req.param 'redirect'
           res.redirect req.param 'redirect'
         else
@@ -74,42 +72,71 @@ router.post '/signup', (req, res, next) ->
     next()
   return
 
-router.post '/verification', (req, res, next) ->
-  email = req.param 'email'
-  verificationKey = req.param 'verificationKey'
-  if verificationKey of verificationKey = ''
-    res.locals.error = new Error('Invalid Verification Link')
-    next()
-    return
-  unverifiedUser.verifyVerificationKey email, verificationKey, (err, validity) ->
-    if err
-      res.locals.error = err
-      next()
-      return
-    if validity is true
-      if req.param 'redirect'
-        res.redirect req.param 'redirect'
-      else
-        res.redirect '/dashboard/'
-    else
-      res.locals.error = new Error('Invalid Verification.')
-      next()
-      return
+rollback = (client, done) -> client.query 'ROLLBACK', (err) -> done? err
 
 router.all '/verification', (req, res, next) ->
   verificationKey = req.param 'verificationKey'
-  if verificationKey of verificationKey = ''
+  if not verificationKey or verificationKey is ''
     res.locals.error = new Error('Invalid Verification Link')
+    res.locals.hideForm = true
     next()
     return
   unverifiedUser.getEmailForVerificationKey verificationKey, (err, email) ->
     unless email
       res.locals.error = new Error('Invalid Verification Link')
+      res.locals.hideForm = true
       next()
       return
     res.locals.email = email
     res.locals.verificationKey = verificationKey
     next()
     return
+
+router.post '/verification', (req, res, next) ->
+  if res.locals.error
+    next()
+    return
+  verificationKey = req.param 'verificationKey'
+  password = req.param 'password'
+  confirmPassword = req.param 'confirmPassword'
+  if password isnt confirmPassword
+    res.locals.error = new Error('Password and Confirmation Password didn\'t match.')
+    next()
+    return
+
+  PGConnect (err, client, done) ->
+    if err
+      done? client
+      callback? err
+      return
+    client.query 'BEGIN', (err) ->
+      if err
+        rollback client, done
+        res.locals.error = err
+        next()
+        return
+      user.addUser res.locals.email, password, client, (err) ->
+        if err
+          rollback client, done
+          res.locals.error = err
+          next()
+          return
+        unverifiedUser.removeUnverifiedUser verificationKey, client, (err) ->
+          if err
+            rollback client, done
+            res.locals.error = err
+            next()
+            return
+          client.query 'COMMIT', (err) ->
+            if err
+              done? client
+              res.locals.error = err
+              next()
+              return
+            done?()
+            if req.param 'redirect'
+              res.redirect req.param 'redirect'
+            else
+              res.redirect '/dashboard/'
 
 module.exports = router

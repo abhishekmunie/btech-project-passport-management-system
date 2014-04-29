@@ -7,6 +7,9 @@ admin   = require '../user/admin'
 pgo     = require '../user/pgo'
 va      = require '../user/va'
 
+globals = require '../globals'
+debug = globals.debug
+
 router.all /^\/dashboard/, (req, res, next) ->
   res.redirect "/auth/signin?redirect=#{encodeURIComponent req.url}" unless req.session.user
   switch req.session.user.type
