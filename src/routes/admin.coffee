@@ -51,8 +51,7 @@ router.post '/pgo-management', (req, res, next) ->
         return
       region.setPGOForRegionId Id, GrantingOfficerEmail, (err, row) ->
         return next err if err
-        console.log row
-        res.locals.success = msg: "Granting Officer's Email was successfully Authorize."
+        res.locals.success = message: "Granting Officer's Email was successfully Authorize."
         next()
         return
     when 'unsetGrantingOfficerEmail'
@@ -60,7 +59,7 @@ router.post '/pgo-management', (req, res, next) ->
       region.unsetPGOForRegionId Id, (err, row) ->
         return next err if err
         console.log row
-        res.locals.success = msg: "Granting Officer's Email was successfully Unauthorize."
+        res.locals.success = message: "Granting Officer's Email was successfully Unauthorize."
         next()
         return
     else

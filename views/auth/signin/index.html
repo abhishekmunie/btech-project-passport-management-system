@@ -133,11 +133,11 @@
   <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
   {{#locals.success.details}}
   <details>
-    <summary><strong>Success!</strong> {{locals.success.msg}}</summary>
+    <summary><strong>Success!</strong> {{locals.success.message}}</summary>
     <p>{{{locals.success.details}}}</p>
   </details>
   {{/locals.success.details}}{{^locals.success.details}}
-  <strong>Success!</strong> {{locals.success.msg}}</summary>
+  <strong>Success!</strong> {{locals.success.message}}</summary>
   {{/locals.success.details}}
 </div>
 {{/locals.success}}
@@ -146,11 +146,11 @@
   <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
   {{#locals.error.details}}
   <details>
-    <summary><strong>Error!</strong> {{locals.error.msg}}</summary>
+    <summary><strong>Error!</strong> {{locals.error.message}}</summary>
     <p>{{{locals.error.details}}}</p>
   </details>
   {{/locals.error.details}}{{^locals.error.details}}
-  <strong>Error!</strong> {{locals.error.msg}}</summary>
+  <strong>Error!</strong> {{locals.error.message}}</summary>
   {{/locals.error.details}}
 </div>
 {{/locals.error}}

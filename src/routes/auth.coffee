@@ -70,7 +70,7 @@ router.post '/signup', (req, res, next) ->
       res.locals.email = email
       next()
       return
-    res.locals.success = msg: 'You have been sent a verification email. Please check your inbox and click verify to activate your account.'
+    res.locals.success = message: 'You have been sent a verification email. Please check your inbox and click verify to activate your account.'
     next()
   return
 
