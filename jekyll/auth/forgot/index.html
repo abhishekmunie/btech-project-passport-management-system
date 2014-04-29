@@ -1,0 +1,27 @@
+---
+layout: auth
+title: Forgot Password?
+---
+
+<div class="container-fluid">
+  <div class="panel panel-default center-block auth-panel">
+    <div class="panel-heading">Forgot Password?</div>
+    {% include success-error.html %}
+    <div class="panel-body">
+      <form role="form" action="/auth/forgot/" method="post">
+        <div class="form-group">
+          <label class="col-sm-3 control-label" for="email">E-mail Id<span class="mandatory">*</span></label>
+          <div class="col-sm-9">
+            <input class="form-control" type="email" {% set_attribute_named_when_autofill email%} maxlength="255" id="email" aria-required="true" required>
+            <p class="help-block"></p>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-sm-offset-3 col-sm-9">
+            <input type="submit" value="Reset Password" class="btn btn-primary">
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

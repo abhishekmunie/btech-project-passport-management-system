@@ -1,0 +1,8 @@
+{% assign levels = page.url | split: '/' %}
+{% assign breadcrumb_href = '/' %}
+<ol class="breadcrumb">
+  <li></li>
+  {% for level in levels %}{% unless  level == levels.first or level == levels.last %}{% assign breadcrumb_href = breadcrumb_href | append: level | append: '/' %}
+  <li><a href="{{breadcrumb_href}}">{{level | capitalize}}</a></li>
+  {% endunless %}{% endfor %}
+</ol>

@@ -1,0 +1,25 @@
+---
+layout: default
+---
+
+<div class="container-fluid">
+  <div class="page-header">
+      <h1 class="text-muted text-center">Admin Portal</h1>
+  </div>
+  <div class="row">
+    <div class="col-sm-3 col-md-2">
+      <ul class="nav nav-pills nav-stacked nav-sidebar">
+        <li class="{% is_active /admin/index.html%}" ><a href="/admin" >Dashboard</a></li>
+        <li role="presentation" class="divider"></li>
+        <li class="{% is_active_level /admin/reset%}" ><a href="/admin/reset/" >Reset</a></li>
+        <li class="{% is_active_level /admin/pgo-management%}" ><a href="/admin/pgo-management/" >Manage Granting Officers</a></li>
+        <li class="{% is_active_level /admin/settings%}" ><a href="/admin/settings/" >Settings</a></li>
+      </ul>
+    </div>
+    <div class="col-sm-9 col-md-10 main">
+      <div class="container-fluid">
+        {{content}}
+      </div>
+    </div>
+  </div>
+</div>

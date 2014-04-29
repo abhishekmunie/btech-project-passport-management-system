@@ -1,0 +1,17 @@
+<!--[if lt IE 7]>
+<div id="dev-warnng" class="alert alert-danger">
+  <p class="chromeframe">
+    You are using an <strong>outdated</strong> browser.
+    Please <a href="http://browsehappy.com/" class="alert-link>upgrade your browser</a> or
+    <a href="http://www.google.com/chromeframe/?redirect=true" class="alert-link>activate Google Chrome Frame</a> to improve your experience.
+  </p>
+</div>
+<![endif]-->
+{% raw %}{{^session.dont_warn}}{% endraw %}
+<div id="dev-warning" class="alert alert-warning alert-dismissable">
+  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+  <a href="/_dismiss-warning?redirect={% raw %}{{originalUrl}}{% endraw %}" class="alert-link pull-right" >Dont show again</a>
+  <strong>Warning!</strong> This is an academic project, not the official page.
+  It's available under <a href="{{ site.licenses.url }}" target="_blank" class="alert-link">{{ site.licenses.type }} Licence</a> at <a href="{{ site.repository }}" target="_blank" class="alert-link">GitHub</a>
+</div>
+{% raw %}{{/session.dont_warn}}{% endraw %}

@@ -1,0 +1,24 @@
+---
+layout: default
+---
+
+<div class="container-fluid">
+  <div class="page-header">
+      <h1 class="text-muted text-center">Passport Granting Officer Portal</h1>
+  </div>
+  <div class="row">
+    <div class="col-sm-3 col-md-2">
+      <ul class="nav nav-pills nav-stacked nav-sidebar">
+        <li class="{% is_active /pgo/index.html%}" ><a href="/pgo" >Dashboard</a></li>
+        <li role="presentation" class="divider"></li>
+        <li class="{% is_active_level /pgo/reset%}" ><a href="/pgo/reset/" >Reset</a></li>
+        <li class="{% is_active_level /pgo/settings%}" ><a href="/pgo/settings/" >Settings</a></li>
+      </ul>
+    </div>
+    <div class="col-sm-9 col-md-10 main">
+      <div class="container-fluid">
+        {{content}}
+      </div>
+    </div>
+  </div>
+</div>

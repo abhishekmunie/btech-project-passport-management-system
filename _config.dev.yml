@@ -1,0 +1,58 @@
+exclude: ['.rvmrc', '.rbenv-version', 'README.md', 'changelog.md', 'bin', 'vendor', 'Gemfile', 'Gemfile.lock', 'Procfile', 'Rakefile', 'unicorn.rb', 'config.ru']
+name: Passport Management System
+company: ASE Inc.
+markdown: redcarpet
+pygments: true
+source: jekyll
+destination: views
+
+licenses:
+  type: MIT
+  url: "https://raw.github.com/abhishekmunie/btech-project-passport-management-system/master/LICENSE"
+
+repository: https://github.com/abhishekmunie/btech-project-passport-management-system
+issues: https://github.com/abhishekmunie/btech-project-passport-management-system/issues
+
+title_suffix: Passpot Management System
+tagline: ""
+home: http://btech-project-passport-management-system.abhishekmunie.com
+search_title: btech-project-passport-management-system.abhishekmunie.com
+author:
+  name    : Abhishek Munie
+  email   : projects@abhishekmunie.com
+  github  : abhishekmunie
+  twitter : abhishekmunie
+publisher : https://plus.google.com/101030613278833301135
+
+production_url : http://btech-project-pms.abhishekmunie.com
+
+ASSET_PATH :
+  static : /static/
+  css    : /css/
+  js     : /js/
+  img    : /images/
+
+main_nav:
+  About: /about
+  Contact: /contact
+
+
+imports :
+  css :
+    normalize:       /css/normalize.css
+    bootstrap:       /bower_components/bootstrap/dist/css/bootstrap.min.css
+    bootstrap-theme: /bower_components/bootstrap/dist/css/bootstrap-theme.css
+    font-awesome:    /bower_components/font-awesome/css/font-awesome.min.css
+    main:            /css/main.css
+  modernizr: /bower_components/modernizr/modernizr.js
+  js :
+    bootstrap: /bower_components/bootstrap/dist/js/bootstrap.min.js
+    # angular:   /bower_components/angular/angular.min.js
+    plugins:   /js/plugins.js
+    main :     /js/main.js
+
+config:
+  google:
+    # analytics:
+    #   id: UA-XXXXX-X
+

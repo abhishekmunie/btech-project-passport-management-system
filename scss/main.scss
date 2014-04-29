@@ -1,0 +1,53 @@
+
+@import "base";
+@import "h5bp";
+
+
+@-webkit-viewport { width: device-width; }
+@-moz-viewport    { width: device-width; }
+@-ms-viewport     { width: device-width; }
+@-o-viewport      { width: device-width; }
+@viewport         { width: device-width; }
+
+
+@import "bootstrap-cover";
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: 60px;
+}
+
+#footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 60px;
+  background-color: #f5f5f5;
+}
+
+
+#dev-warning {
+  margin-bottom: 0;
+}
+
+nav.navbar {
+  margin-bottom: 0;
+}
+
+
+.auth-panel {
+  max-width: 33em;
+}
+
+form label .info-text {
+  font-size: 0.7em;
+}
+
+@import "h5bp-helpers";

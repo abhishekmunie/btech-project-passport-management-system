@@ -1,0 +1,67 @@
+{
+  "name": "Passport-Management-System",
+  "description": "A system to masnage Passport applictions and their processing.",
+  "keywords": [
+    "pms",
+    "passport"
+  ],
+  "version": "0.1.0",
+  "authors": [
+    {
+      "name": "Abhishek Munie",
+      "email": "projects@abhishekmunie.com"
+    }
+  ],
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://raw.github.com/abhishekmunie/btech-project-passport-management-system/master/LICENSE"
+    }
+  ],
+  "engines": {
+    "node": ">=0.10.15",
+    "npm": ">=1.1.39"
+  },
+  "directories": {
+    "lib": "./lib"
+  },
+  "main": "server.js",
+  "dependencies": {
+    "async": "latest",
+    "body-parser": "latest",
+    "cachelicious": "cblage/node-cachelicious",
+    "coffee-script": "latest",
+    "connect": "latest",
+    "connect-pg-simple": "latest",
+    "convict": "latest",
+    "cookie-parser": "latest",
+    "debug": "latest",
+    "ejs": "latest",
+    "express": "latest",
+    "express-session": "latest",
+    "hogan.js": "latest",
+    "lodash": "latest",
+    "morgan": "latest",
+    "pg": "latest",
+    "postgrator": "latest",
+    "resolve-path": "latest",
+    "serve-static": "latest",
+    "static-favicon": "latest",
+    "validator": "latest",
+    "nodemailer": "latest"
+  },
+  "scripts": {
+    "start": "node server.js"
+  },
+  "homepage": "https://passport-management-system.herokuapp.com",
+  "bugs": "https://github.com/abhishekmunie/btech-project-passport-management-system/issues",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/abhishekmunie/btech-project-passport-management-system.git"
+  },
+  "devDependencies": {
+    "connect-livereload": "latest",
+    "node-inspector": "latest"
+  },
+  "readmeFilename": "README.md"
+}

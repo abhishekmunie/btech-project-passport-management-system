@@ -1,0 +1,44 @@
+---
+layout: admin
+title: Passport Granting Officers Management
+---
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Passport Granting Officers Management</h3>
+  </div>
+  {% include success-error.html %}
+  <div class="panel-body">
+    <table class="table table-striped table-hover">
+      <thead>
+        <tr><th>ID</th><th>Region</th><th>Passport Granting Officers</th></tr>
+      </thead>
+      <tbody>
+      {% raw %}
+      {{#locals.regions}}
+        <tr>
+          <td>{{Id}}</td>
+          <td>{{Name}}</td>
+          <td>
+            {{#GrantingOfficerEmail}}
+            <form action="/admin/pgo-management" method="post" class="form-inline" role="form">
+              <input type="hidden" name="action" value="unsetGrantingOfficerEmail" />
+              <input type="hidden" name="Id" value="{{Id}}" />
+              <input type="email" value="{{GrantingOfficerEmail}}" disabled class="form-control" />
+              <input type="submit" class="btn btn-danger" value="Unauthorize" />
+            </form>
+            {{/GrantingOfficerEmail}}{{^GrantingOfficerEmail}}
+            <form action="/admin/pgo-management" method="post" class="form-inline" role="form">
+              <input type="hidden" name="action" value="setGrantingOfficerEmail" />
+              <input type="hidden" name="Id" value="{{Id}}" />
+              <input type="email" name="GrantingOfficerEmail" value="{{GrantingOfficerEmail}}" placeholder="Passport Granting Officer's Email" class="form-control" />
+              <input type="submit" class="btn btn-primary" value="Authorize" />
+            </form>
+            {{/GrantingOfficerEmail}}
+          </td>
+        </tr>
+      {{/locals.regions}}
+      {% endraw %}
+      </tbody>
+    </table>
+  </div>
+</div>

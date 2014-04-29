@@ -1,0 +1,419 @@
+/*! HTML5 Boilerplate v4.3.0 | MIT License | http://h5bp.com/ */
+/*
+ * What follows is the result of much research on cross-browser styling.
+ * Credit left inline and big thanks to Nicolas Gallagher, Jonathan Neal,
+ * Kroc Camen, and the H5BP dev community and team.
+ */
+/* ==========================================================================
+   Base styles: opinionated defaults
+   ========================================================================== */
+/* line 17, ../../scss/_h5bp.scss */
+html,
+button,
+input,
+select,
+textarea {
+  color: #222; }
+
+/* line 21, ../../scss/_h5bp.scss */
+html {
+  font-size: 1em;
+  line-height: 1.4; }
+
+/*
+ * Remove text-shadow in selection highlight: h5bp.com/i
+ * These selection rule sets have to be separate.
+ * Customize the background color to match your design.
+ */
+/* line 32, ../../scss/_h5bp.scss */
+::-moz-selection {
+  background: #b3d4fc;
+  text-shadow: none; }
+
+/* line 37, ../../scss/_h5bp.scss */
+::selection {
+  background: #b3d4fc;
+  text-shadow: none; }
+
+/*
+ * A better looking default horizontal rule
+ */
+/* line 46, ../../scss/_h5bp.scss */
+hr {
+  display: block;
+  height: 1px;
+  border: 0;
+  border-top: 1px solid #ccc;
+  margin: 1em 0;
+  padding: 0; }
+
+/*
+ * Remove the gap between images, videos, audio and canvas and the bottom of
+ * their containers: h5bp.com/i/440
+ */
+/* line 63, ../../scss/_h5bp.scss */
+audio,
+canvas,
+img,
+video {
+  vertical-align: middle; }
+
+/*
+ * Remove default fieldset styles.
+ */
+/* line 71, ../../scss/_h5bp.scss */
+fieldset {
+  border: 0;
+  margin: 0;
+  padding: 0; }
+
+/*
+ * Allow only vertical resizing of textareas.
+ */
+/* line 81, ../../scss/_h5bp.scss */
+textarea {
+  resize: vertical; }
+
+/* ==========================================================================
+   Browse Happy prompt
+   ========================================================================== */
+/* line 89, ../../scss/_h5bp.scss */
+.browsehappy {
+  margin: 0.2em 0;
+  background: #ccc;
+  color: #000;
+  padding: 0.2em 0; }
+
+/* ==========================================================================
+   Author's custom styles
+   ========================================================================== */
+@-webkit-viewport {
+  width: device-width; }
+
+@-moz-viewport {
+  width: device-width; }
+
+@-ms-viewport {
+  width: device-width; }
+
+@-o-viewport {
+  width: device-width; }
+
+@viewport {
+  width: device-width; }
+
+/* Extra markup and styles for table-esque vertical and horizontal centering */
+/* line 2, ../../scss/_bootstrap-cover.scss */
+.site-wrapper {
+  display: table;
+  width: 100%; }
+
+/* line 8, ../../scss/_bootstrap-cover.scss */
+.site-wrapper-inner {
+  display: table-cell;
+  vertical-align: top; }
+
+/* line 12, ../../scss/_bootstrap-cover.scss */
+.cover-container {
+  margin-right: auto;
+  margin-left: auto; }
+
+/* Padding for spacing */
+/* line 18, ../../scss/_bootstrap-cover.scss */
+.inner {
+  padding: 30px; }
+
+/*
+ * Cover
+ */
+/* line 26, ../../scss/_bootstrap-cover.scss */
+.cover {
+  padding: 0 20px; }
+
+/* line 29, ../../scss/_bootstrap-cover.scss */
+.cover .btn-lg {
+  padding: 10px 20px;
+  font-weight: bold; }
+
+/*
+ * Footer
+ */
+/* line 39, ../../scss/_bootstrap-cover.scss */
+.mastfoot {
+  color: #999;
+  /* IE8 proofing */
+  color: rgba(255, 255, 255, 0.5); }
+
+/*
+ * Affix and center
+ */
+@media (min-width: 768px) {
+  /* Pull out the header and footer */
+  /* line 51, ../../scss/_bootstrap-cover.scss */
+  .masthead {
+    position: fixed;
+    top: 0; }
+
+  /* line 55, ../../scss/_bootstrap-cover.scss */
+  .mastfoot {
+    position: fixed;
+    bottom: 0; }
+
+  /* Start the vertical centering */
+  /* line 60, ../../scss/_bootstrap-cover.scss */
+  .site-wrapper-inner {
+    vertical-align: middle; }
+
+  /* Handle the widths */
+  /* line 66, ../../scss/_bootstrap-cover.scss */
+  .masthead,
+  .mastfoot,
+  .cover-container {
+    width: 100%;
+    /* Must be percentage or pixels for horizontal alignment */ } }
+@media (min-width: 992px) {
+  /* line 74, ../../scss/_bootstrap-cover.scss */
+  .masthead,
+  .mastfoot,
+  .cover-container {
+    width: 700px; } }
+/* line 79, ../../scss/_bootstrap-cover.scss */
+#carbonads-container {
+  display: none; }
+
+/* line 79, ../../scss/_bootstrap-cover.scss */
+h1[id] {
+  padding-top: 0px;
+  margin-top: 20px; }
+
+/* line 79, ../../scss/_bootstrap-cover.scss */
+.bs-old-docs {
+  display: none; }
+
+/* line 79, ../../scss/_bootstrap-cover.scss */
+.bs-social {
+  display: none; }
+
+/* line 79, ../../scss/_bootstrap-cover.scss */
+.col-md-3 {
+  display: none !important; }
+
+/* line 79, ../../scss/_bootstrap-cover.scss */
+.col-md-9 {
+  width: 100% !important; }
+
+/* line 79, ../../scss/_bootstrap-cover.scss */
+.navbar-fixed-top {
+  position: absolute !important; }
+
+/* Sticky footer styles
+-------------------------------------------------- */
+/* line 17, ../../scss/main.scss */
+html {
+  position: relative;
+  min-height: 100%; }
+
+/* line 21, ../../scss/main.scss */
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: 60px; }
+
+/* line 26, ../../scss/main.scss */
+#footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 60px;
+  background-color: #f5f5f5; }
+
+/* line 36, ../../scss/main.scss */
+#dev-warning {
+  margin-bottom: 0; }
+
+/* line 40, ../../scss/main.scss */
+nav.navbar {
+  margin-bottom: 0; }
+
+/* line 45, ../../scss/main.scss */
+.auth-panel {
+  max-width: 33em; }
+
+/* line 49, ../../scss/main.scss */
+form label .info-text {
+  font-size: 0.7em; }
+
+/*! HTML5 Boilerplate v4.3.0 | MIT License | http://h5bp.com/ */
+/* ==========================================================================
+   H5BP Helper classes
+   ========================================================================== */
+/*
+ * Image replacement
+ */
+/* line 11, ../../scss/_h5bp-helpers.scss */
+.ir {
+  background-color: transparent;
+  border: 0;
+  overflow: hidden;
+  /* IE 6/7 fallback */
+  *text-indent: -9999px; }
+
+/* line 19, ../../scss/_h5bp-helpers.scss */
+.ir:before {
+  content: "";
+  display: block;
+  width: 0;
+  height: 150%; }
+
+/*
+ * Hide from both screenreaders and browsers: h5bp.com/u
+ */
+/* line 30, ../../scss/_h5bp-helpers.scss */
+.hidden {
+  display: none !important;
+  visibility: hidden; }
+
+/*
+ * Hide only visually, but have it available for screenreaders: h5bp.com/v
+ */
+/* line 39, ../../scss/_h5bp-helpers.scss */
+.visuallyhidden {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px; }
+
+/*
+ * Extends the .visuallyhidden class to allow the element to be focusable
+ * when navigated to via the keyboard: h5bp.com/p
+ */
+/* line 56, ../../scss/_h5bp-helpers.scss */
+.visuallyhidden.focusable:active,
+.visuallyhidden.focusable:focus {
+  clip: auto;
+  height: auto;
+  margin: 0;
+  overflow: visible;
+  position: static;
+  width: auto; }
+
+/*
+ * Hide visually and from screenreaders, but maintain layout
+ */
+/* line 69, ../../scss/_h5bp-helpers.scss */
+.invisible {
+  visibility: hidden; }
+
+/*
+ * Clearfix: contain floats
+ *
+ * For modern browsers
+ * 1. The space content is one way to avoid an Opera bug when the
+ *    `contenteditable` attribute is included anywhere else in the document.
+ *    Otherwise it causes space to appear at the top and bottom of elements
+ *    that receive the `clearfix` class.
+ * 2. The use of `table` rather than `block` is only necessary if using
+ *    `:before` to contain the top-margins of child elements.
+ */
+/* line 86, ../../scss/_h5bp-helpers.scss */
+.clearfix:before,
+.clearfix:after {
+  content: " ";
+  /* 1 */
+  display: table;
+  /* 2 */ }
+
+/* line 91, ../../scss/_h5bp-helpers.scss */
+.clearfix:after {
+  clear: both; }
+
+/*
+ * For IE 6/7 only
+ * Include this rule to trigger hasLayout and contain floats.
+ */
+/* line 100, ../../scss/_h5bp-helpers.scss */
+.clearfix {
+  *zoom: 1; }
+
+/* ==========================================================================
+   EXAMPLE Media Queries for Responsive Design.
+   These examples override the primary ('mobile first') styles.
+   Modify as content requires.
+   ========================================================================== */
+@media only screen and (min-width: 35em) {
+  /* Style adjustments for viewports that meet the condition */ }
+@media print, (-o-min-device-pixel-ratio: 5 / 4), (-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi) {
+  /* Style adjustments for high resolution devices */ }
+/* ==========================================================================
+   Print styles.
+   Inlined to avoid required HTTP connection: h5bp.com/r
+   ========================================================================== */
+@media print {
+  /* line 127, ../../scss/_h5bp-helpers.scss */
+  * {
+    background: transparent !important;
+    color: #000 !important;
+    /* Black prints faster: h5bp.com/s */
+    box-shadow: none !important;
+    text-shadow: none !important; }
+
+  /* line 135, ../../scss/_h5bp-helpers.scss */
+  a,
+  a:visited {
+    text-decoration: underline; }
+
+  /* line 139, ../../scss/_h5bp-helpers.scss */
+  a[href]:after {
+    content: " (" attr(href) ")"; }
+
+  /* line 143, ../../scss/_h5bp-helpers.scss */
+  abbr[title]:after {
+    content: " (" attr(title) ")"; }
+
+  /*
+   * Don't show links for images, or javascript/internal links
+   */
+  /* line 153, ../../scss/_h5bp-helpers.scss */
+  .ir a:after,
+  a[href^="javascript:"]:after,
+  a[href^="#"]:after {
+    content: ""; }
+
+  /* line 158, ../../scss/_h5bp-helpers.scss */
+  pre,
+  blockquote {
+    border: 1px solid #999;
+    page-break-inside: avoid; }
+
+  /* line 163, ../../scss/_h5bp-helpers.scss */
+  thead {
+    display: table-header-group;
+    /* h5bp.com/t */ }
+
+  /* line 168, ../../scss/_h5bp-helpers.scss */
+  tr,
+  img {
+    page-break-inside: avoid; }
+
+  /* line 172, ../../scss/_h5bp-helpers.scss */
+  img {
+    max-width: 100% !important; }
+
+  @page {
+    margin: 0.5cm; }
+
+  /* line 182, ../../scss/_h5bp-helpers.scss */
+  p,
+  h2,
+  h3 {
+    orphans: 3;
+    widows: 3; }
+
+  /* line 188, ../../scss/_h5bp-helpers.scss */
+  h2,
+  h3 {
+    page-break-after: avoid; } }

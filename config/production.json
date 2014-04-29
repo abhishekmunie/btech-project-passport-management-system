@@ -1,0 +1,21 @@
+/*
+ * See lib/config.js for details
+*/
+{
+  "session": {
+    "type": "pg",
+    "config": {
+      "cookie": {
+        "secure": true,
+        "httpOnly": true,
+        "maxAge": 86400000 // 1 day
+      },
+      "proxy": true
+    }
+  },
+  "force_https": {
+    "enable": true,
+    "host": "passport-management-system.herokuapp.com",
+    "maxAge": 2592000000
+  }
+}

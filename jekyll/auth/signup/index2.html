@@ -1,0 +1,447 @@
+---
+layout: default
+title: Signup
+---
+<div class="container-fluid">
+  <div class="page-header">
+    <h1 class="text-muted text-center">New User Registration</h1>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading">Please enter your details:</div>
+    <div class="panel-body">
+      <form role="form" action="/auth/signup/" method="post">
+        <h4>Applicant Details</h4>
+        <div class="form-group">
+          <label class="col-sm-3 control-label" for="givenName">Given Name&nbsp;<span class="info-text">(Max 45 Characters) </span><span class="mandatory">*</span></label>
+          <div class="col-sm-9">
+            <input class="form-control" type="text" {% set_attribute_named_when_autofill GivenName%} maxlength="255" id="givenName" aria-required="true" required >
+            <p class="help-block"><strong>First Name + Middle Name</strong>. Initials and honorifics (e.g. Dr.,Col.,etc.) are not allowed.</p>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-3 control-label" for="Surname">Surname&nbsp;<span class="info-text" >(Max 45 Characters) </span></label>
+          <div class="col-sm-9">
+            <input class="form-control" type="text" {% set_attribute_named_when_autofill Surname%} maxlength="255" id="Surname">
+            <p class="help-block"></p>
+          </div>
+          <div class="clearfix"></div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-3 control-label" for="email">E-mail Id<span class="info-text" >&nbsp;(Max 35 Characters)</span><span class="mandatory">*</span></label>
+          <div class="col-sm-9">
+            <input class="form-control" type="text" {% set_attribute_named_when_autofill email%} maxlength="255" id="email" aria-required="true" required>
+            <p class="help-block"></p>
+          </div>
+          <div class="clearfix"></div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-3 control-label" for="pwd">Password<span class="mandatory">*</span></label>
+          <div class="col-sm-9">
+            <input class="form-control" type="password" name="password" maxlength="255" id="pwd" aria-required="true" required>
+            <p class="help-block">
+              <a data-toggle="modal" data-target="#PasswordPolicyModal" title="Password Policy">Password Policy</a>
+            </p>
+          </div>
+          <div class="clearfix"></div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-3 control-label" for="confirmPassword">Confirm Password<span class="mandatory">*</span></label>
+          <div class="col-sm-9">
+            <input class="form-control" type="password" name="confirmPassword" maxlength="255" id="confirmPassword" aria-required="true" required>
+            <p class="help-block"></p>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-3 control-label" for="HasAliases">Are you known by any other names(aliases)?<span class="mandatory">*</span></label>
+          <div class="col-sm-9">
+            <label for="HAYes" class="radio-inline"><input type="radio" id="HANo" value="y" {% set_attribute_named_when_autofill HasAliases%} /> Yes</label>
+            <label for="HANo" class="radio-inline"><input type="radio" id="HAYes" value="n" {% set_attribute_named_when_autofill HasAliases%} /> No</label>
+            <p class="help-block"></p>
+          </div>
+          <div class="clearfix"></div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-3 control-label" for="HaveChangedName">Have you ever changed your name ?<span class="mandatory">*</span></label>
+          <div class="col-sm-9">
+            <label for="HCNYes" class="radio-inline"><input type="radio" id="HCNNo" value="y" {% set_attribute_named_when_autofill HaveChangedName%} /> Yes</label>
+            <label for="HCNNo" class="radio-inline"><input type="radio" id="HCNYes" value="n" {% set_attribute_named_when_autofill HaveChangedName%} /> No</label>
+            <p class="help-block"></p>
+          </div>
+          <div class="clearfix"></div>
+        </div>
+        <div class="form-group">
+          <label for="ContactNumber" class="col-sm-3 control-label">Contact Number</label>
+          <div class="col-sm-9">
+            <input type="number" id="ContactNumber" {% set_attribute_named_when_autofill ContactNumber%} maxlength="10" class="form-control">
+            <p class="help-block"></p>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-3 control-label" for="DateOfBirth">Date of Birth (DD/MM/YYYY)<span class="mandatory">*</span></label>
+          <div class="col-sm-9">
+            <input class="form-control" type="date" {% set_attribute_named_when_autofill DateOfBirth%} maxlength="255" id="DateOfBirth" aria-required="true" required>
+            <p class="help-block"></p>
+          </div>
+          <div class="clearfix"></div>
+        </div>
+        <hr />
+        <div class="clearfix"></div>
+        <h4>Place Of Birth</h4>
+        <div class="form-group">
+          <label for="City" class="col-sm-3 control-label">Village or Town or City<span class="mandatory">*</span></label>
+          <div class="col-sm-9">
+            <input type="text" id="City" {% set_attribute_named_when_autofill City%} maxlength="255" class="form-control" required>
+            <p class="help-block"></p>
+          </div>
+          <div class="clearfix"></div>
+        </div>
+        <div class="form-group">
+          <label for="Country" class="col-sm-3 control-label">Country&nbsp;<span class="info-text" >(If abroad)</span><span class="mandatory">*</span></label>
+          <div class="col-sm-9">
+            <input type="text" id="Country" {% set_attribute_named_when_autofill Country%} maxlength="255" class="form-control" required>
+            <p class="help-block"></p>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="State" class="col-sm-3 control-label">State&nbsp;<span class="info-text" >(If in India)</span><span class="mandatory">*</span></label>
+          <div class="col-sm-9">
+            <input type="text" id="State" {% set_attribute_named_when_autofill State%} maxlength="255" class="form-control" required>
+            <p class="help-block">If born before 15/08/1947 in a place now in Pakistan or Bangladesh, select "Undivided India".</p>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="District" class="col-sm-3 control-label">District&nbsp;<span class="info-text" >(If in India)</span><span class="mandatory">*</span></label>
+          <div class="col-sm-9">
+            <input type="text" id="District" {% set_attribute_named_when_autofill District%} maxlength="255" class="form-control" required>
+            <p class="help-block"></p>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="Gender" class="col-sm-3 control-label">Gender<span class="mandatory">*</span></label>
+          <div class="col-sm-9">
+            <label for="GenderMale" class="radio-inline"><input type="radio" id="GenderMale" value="m" {% set_attribute_named_when_autofill Gender%} /> Male</label>
+            <label for="GenderFemale" class="radio-inline"><input type="radio" id="GenderFemale" value="f" {% set_attribute_named_when_autofill Gender%} /> Female</label>
+            <p class="help-block"></p>
+          </div>
+          <div class="clearfix"></div>
+        </div>
+        <div class="form-group">
+          <label for="MaritalStatus" class="col-sm-3 control-label">Marital Status<span class="mandatory">*</span></label>
+          <div class="col-sm-9">
+            <select id="MaritalStatus" {% set_attribute_named_when_autofill MaritalStatus%} aria-required="true" required >
+              <option disabled>----- Select -----</option>
+              <option value="s">Single</option>
+              <option value="m">Married</option>
+              <option value="d">Divorced</option>
+              <option value="w">Widow / Widower</option>
+              <option value="p">Seperated</option>
+            </select>
+            <p class="help-block"></p>
+          </div>
+          <div class="clearfix"></div>
+        </div>
+        <div class="form-group">
+          <label for="CitizenshipBy" class="col-sm-3 control-label">Citizenship of India by<span class="mandatory">*</span></label>
+          <div class="col-sm-9">
+            <select id="CitizenshipBy" {% set_attribute_named_when_autofill CitizenshipBy%} aria-required="true" required >
+              <option disabled>----- Select -----</option>
+              <option value="b">Birth</option>
+              <option value="d">Descent</option>
+              <option value="r">Registration / Naturalization</option>
+            </select>
+            <p class="help-block"></p>
+          </div>
+          <div class="clearfix"></div>
+        </div>
+        <div class="form-group">
+          <label for="PAN" class="col-sm-3 control-label">PAN&nbsp;<span class="info-text" >(If available)</span></label>
+          <div class="col-sm-9">
+            <input type="text" id="PAN" {% set_attribute_named_when_autofill PAN%} maxlength="255" class="form-control">
+            <p class="help-block"></p>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="VoterID" class="col-sm-3 control-label">Voter ID&nbsp;<span class="info-text" >(If available)</span></label>
+          <div class="col-sm-9">
+            <input type="text" id="VoterID" {% set_attribute_named_when_autofill VoterID%} maxlength="255" class="form-control">
+            <p class="help-block"></p>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="EmploymentType" class="col-sm-3 control-label">Employment Type<span class="mandatory">*</span></label>
+          <div class="col-sm-9">
+            <select id="EmploymentType" {% set_attribute_named_when_autofill EmploymentType%} aria-required="true" required >
+              <option disabled>----- Select -----</option>
+              <option value="a">Government</option>
+              <option value="b">Homemaker</option>
+              <option value="c">Not Employed</option>
+              <option value="d">Others</option>
+              <option value="e">Owners, Partners &amp; Directors of companies which are mambers of CII, FICCI &amp; ASSOCHAM</option>
+              <option value="f">Private</option>
+              <option value="g">PSU</option>
+              <option value="h">Retired - Government Servent</option>
+              <option value="i">Retired - Private Service</option>
+              <option value="j">Self Employed</option>
+              <option value="k">Statutory Body</option>
+              <option value="l">Student</option>
+            </select>
+            <p class="help-block"></p>
+          </div>
+          <div class="clearfix"></div>
+        </div>
+        <div class="form-group">
+          <label for="EducationalQualification" class="col-sm-3 control-label">Educational Qualification<span class="mandatory">*</span></label>
+          <div class="col-sm-9">
+            <select id="EducationalQualification" {% set_attribute_named_when_autofill EducationalQualification%} aria-required="true" required >
+              <option disabled>----- Select -----</option>
+              <option value="">5th pass or less</option>
+              <option value="">Between 6th and 9th standard</option>
+              <option value="">10th pass and above</option>
+              <option value="">Graduate and above</option>
+            </select>
+            <p class="help-block"></p>
+          </div>
+          <div class="clearfix"></div>
+        </div>
+        <div class="form-group">
+          <label for="AadhaarNumber" class="col-sm-3 control-label">Aadhaar Number</label>
+          <div class="col-sm-9">
+            <input type="number" id="AadhaarNumber" {% set_attribute_named_when_autofill AadhaarNumber%} maxlength="255" class="form-control">
+            <p class="help-block"></p>
+          </div>
+          <div class="clearfix"></div>
+        </div>
+        <hr />
+        <div class="clearfix"></div>
+        <h4>Family Details (Father/Mother/Legal Guardian details; at least one is mandatory.) <span class="mandatory">*</span></h4>
+        <div class="form-group">
+          <label class="col-sm-3 control-label" for="FatherGivenName">Father's Given Name&nbsp;<span class="info-text" >(Max 45 Characters) </span></label>
+          <div class="col-sm-9">
+            <input class="form-control" type="text" {% set_attribute_named_when_autofill FatherGivenName%} maxlength="255" id="FatherGivenName" aria-required="true" required >
+            <p class="help-block"><strong>First Name + Middle Name</strong>. Initials and honorifics (e.g. Dr.,Col.,etc.) are not allowed.</p>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-3 control-label" for="FatherSurname">Father's Surname&nbsp;<span class="info-text" >(Max 45 Characters) </span></label>
+          <div class="col-sm-9">
+            <input class="form-control" type="text" {% set_attribute_named_when_autofill FatherSurname%} maxlength="255" id="FatherSurname">
+            <p class="help-block"></p>
+          </div>
+          <div class="clearfix"></div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-3 control-label" for="MotherGivenName">Mother's Given Name&nbsp;<span class="info-text" >(Max 45 Characters) </span></label>
+          <div class="col-sm-9">
+            <input class="form-control" type="text" {% set_attribute_named_when_autofill MotherGivenName%} maxlength="255" id="MotherGivenName" aria-required="true" required >
+            <p class="help-block"><strong>First Name + Middle Name</strong>. Initials and honorifics (e.g. Dr.,Col.,etc.) are not allowed.</p>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-3 control-label" for="MotherSurname">Mother's Surname&nbsp;<span class="info-text" >(Max 45 Characters) </span></label>
+          <div class="col-sm-9">
+            <input class="form-control" type="text" {% set_attribute_named_when_autofill MotherSurname%} maxlength="255" id="MotherSurname">
+            <p class="help-block"></p>
+          </div>
+          <div class="clearfix"></div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-3 control-label" for="LegalGuardianGivenName">Legal Guardian's Given Name&nbsp;<span class="info-text" >(Max 45 Characters) </span></label>
+          <div class="col-sm-9">
+            <input class="form-control" type="text" {% set_attribute_named_when_autofill LegalGuardianGivenName%} maxlength="255" id="LegalGuardianGivenName" aria-required="true" required >
+            <p class="help-block"><strong>First Name + Middle Name</strong>. Initials and honorifics (e.g. Dr.,Col.,etc.) are not allowed.</p>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-3 control-label" for="LegalGuardianSurname">Legal Guardian's Surname&nbsp;<span class="info-text" >(Max 45 Characters) </span></label>
+          <div class="col-sm-9">
+            <input class="form-control" type="text" {% set_attribute_named_when_autofill LegalGuardianSurname%} maxlength="255" id="LegalGuardianSurname">
+            <p class="help-block"></p>
+          </div>
+          <div class="clearfix"></div>
+        </div>
+        <hr />
+        <div class="clearfix"></div>
+        <h4>Present Residential Address Details (where applicant presently resides)</h4>
+        <div class="form-group">
+          <label class="col-sm-3 control-label" for="PresentAddressOutOfCountry">Is your present address out of India? <span class="mandatory">*</span></label>
+          <div class="col-sm-9">
+            <label for="PAOOCYes" class="radio-inline"><input type="radio" id="PAOOCNo" value="y" {% set_attribute_named_when_autofill PresentAddressOutOfCountry%} /> Yes</label>
+            <label for="PAOOCNo" class="radio-inline"><input type="radio" id="PAOOCYes" value="n" {% set_attribute_named_when_autofill PresentAddressOutOfCountry%} /> No</label>
+            <p class="help-block"></p>
+          </div>
+          <div class="clearfix"></div>
+        </div>
+        <hr />
+        <div class="clearfix"></div>
+        <h4>References in your Village or Town or City</h4>
+        <div class="form-group">
+          <label for="FirstReferenceNameandAddress" class="col-sm-3 control-label">First Reference Name and Address<span class="mandatory">*</span></label>
+          <div class="col-sm-9">
+            <input type="text" id="FirstReferenceNameandAddress" {% set_attribute_named_when_autofill FirstReferenceNameandAddress%} maxlength="255" class="form-control" required>
+            <p class="help-block"></p>
+          </div>
+          <div class="clearfix"></div>
+        </div>
+        <div class="form-group">
+          <label for="FirstReferenceMobileNumber" class="col-sm-3 control-label">Mobile Number</label>
+          <div class="col-sm-9">
+            <input type="number" id="FirstReferenceMobileNumber" {% set_attribute_named_when_autofill FirstReferenceMobileNumber%} maxlength="10" class="form-control">
+            <p class="help-block"></p>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="SecondReferenceNameandAddress" class="col-sm-3 control-label">Second Reference Name and Address<span class="mandatory">*</span></label>
+          <div class="col-sm-9">
+            <input type="text" id="SecondReferenceNameandAddress" {% set_attribute_named_when_autofill SecondReferenceNameandAddress%} maxlength="255" class="form-control" required>
+            <p class="help-block"></p>
+          </div>
+          <div class="clearfix"></div>
+        </div>
+        <div class="form-group">
+          <label for="SecondReferenceMobileNumber" class="col-sm-3 control-label">Mobile Number</label>
+          <div class="col-sm-9">
+            <input type="number" id="SecondReferenceMobileNumber" {% set_attribute_named_when_autofill SecondReferenceMobileNumber%} maxlength="10" class="form-control">
+            <p class="help-block"></p>
+          </div>
+        </div>
+        <div class="clearfix"></div>
+        <hr />
+        <h4>Emergency Contact Details </h4>
+        <div class="form-group">
+          <label for="EmergencyNameAndAddress" class="col-sm-3 control-label">Name and Address<span class="mandatory">*</span></label>
+          <div class="col-sm-9">
+            <input type="text" id="EmergencyNameAndAddress" {% set_attribute_named_when_autofill EmergencyNameAndAddress%} maxlength="255" class="form-control" required>
+            <p class="help-block"></p>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="EmergencyMobileNumber" class="col-sm-3 control-label">Mobile Number</label>
+          <div class="col-sm-9">
+            <input type="number" id="EmergencyMobileNumber" {% set_attribute_named_when_autofill EmergencyMobileNumber%} maxlength="10" class="form-control">
+            <p class="help-block"></p>
+          </div>
+        </div>
+        <div class="clearfix"></div>
+        <hr />
+        <h4>Previous Passport / Application Details</h4>
+        <div class="form-group">
+          <label for="AppliedButNotIssued" class="col-sm-3 control-label">Have you ever applied for passport, but not issued?<span class="mandatory">*</span></label>
+          <div class="col-sm-9">
+            <label for="ABNIYes" class="radio-inline"><input type="radio" id="ABNINo" value="y" {% set_attribute_named_when_autofill AppliedButNotIssued%} /> Yes</label>
+            <label for="ABNINo" class="radio-inline"><input type="radio" id="ABNIYes" value="n" {% set_attribute_named_when_autofill AppliedButNotIssued%} /> No</label>
+            <p class="help-block"></p>
+          </div>
+          <div class="clearfix"></div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="form-group">
+          <label for="PreviousPassportNumber" class="col-sm-3 control-label">Previous Passport Number</label>
+          <div class="col-sm-9">
+            <input type="text" id="PreviousPassportNumber" {% set_attribute_named_when_autofill PreviousPassportNumber%} maxlength="255" class="form-control">
+            <p class="help-block"></p>
+          </div>
+          <div class="clearfix"></div>
+        </div>
+        <hr />
+        <div class="clearfix"></div>
+        <h4>Other Details</h4>
+        <div class="form-group">
+          <label for="OtherDetails1" class="col-sm-10 control-label">1) Have you ever been charged with criminal proceedings or any arrest warrant/ summon pending before a court of India? <span class="mandatory">*</span></label>
+          <div class="col-sm-2">
+            <label for="OD1Yes" class="radio-inline"><input type="radio" id="OD1No" value="y" {% set_attribute_named_when_autofill OtherDetails1%} /> Yes</label>
+            <label for="OD1No" class="radio-inline"><input type="radio" id="OD1Yes" value="n" {% set_attribute_named_when_autofill OtherDetails1%} /> No</label>
+            <p class="help-block"></p>
+          </div>
+          <div class="clearfix"></div>
+        </div>
+        <div class="form-group">
+          <label for="OtherDetails2" class="col-sm-10 control-label">2) Have you at any time during the period of 5 years immediately preceding the date of this application been convicted by a court in India for any criminal offence and sentenced to imprisonment for two years or more? <span class="mandatory">*</span></label>
+          <div class="col-sm-2">
+            <label for="OD2Yes" class="radio-inline"><input type="radio" id="OD2No" value="y" {% set_attribute_named_when_autofill OtherDetails2%} /> Yes</label>
+            <label for="OD2No" class="radio-inline"><input type="radio" id="OD2Yes" value="n" {% set_attribute_named_when_autofill OtherDetails2%} /> No</label>
+            <p class="help-block"></p>
+          </div>
+          <div class="clearfix"></div>
+        </div>
+        <div class="form-group">
+          <label for="OtherDetails3" class="col-sm-10 control-label">3) Have you ever been refused or denied passport?  <span class="mandatory">*</span></label>
+          <div class="col-sm-2">
+            <label for="OD3Yes" class="radio-inline"><input type="radio" id="OD3No" value="y" {% set_attribute_named_when_autofill OtherDetails3%} /> Yes</label>
+            <label for="OD3No" class="radio-inline"><input type="radio" id="OD3Yes" value="n" {% set_attribute_named_when_autofill OtherDetails3%} /> No</label>
+            <p class="help-block"></p>
+          </div>
+          <div class="clearfix"></div>
+        </div>
+        <div class="form-group">
+          <label for="OtherDetails4" class="col-sm-10 control-label">4) Has your Passport ever been impounded or Revoked? <span class="mandatory">*</span></label>
+          <div class="col-sm-2">
+            <label for="OD4Yes" class="radio-inline"><input type="radio" id="OD4No" value="y" {% set_attribute_named_when_autofill OtherDetails4%} /> Yes</label>
+            <label for="OD4No" class="radio-inline"><input type="radio" id="OD4Yes" value="n" {% set_attribute_named_when_autofill OtherDetails4%} /> No</label>
+            <p class="help-block"></p>
+          </div>
+          <div class="clearfix"></div>
+        </div>
+        <div class="form-group">
+          <label for="OtherDetails5" class="col-sm-10 control-label">5) Have you ever applied for/been granted political asylum to/by any foreign country? <span class="mandatory">*</span></label>
+          <div class="col-sm-2">
+            <label for="OD5Yes" class="radio-inline"><input type="radio" id="OD5No" value="y" {% set_attribute_named_when_autofill OtherDetails5%} /> Yes</label>
+            <label for="OD5No" class="radio-inline"><input type="radio" id="OD5Yes" value="n" {% set_attribute_named_when_autofill OtherDetails5%} /> No</label>
+            <p class="help-block"></p>
+          </div>
+          <div class="clearfix"></div>
+        </div>
+        <div class="form-group">
+          <label for="OtherDetails6" class="col-sm-10 control-label">6) Have you ever returned to India on Emergency Certificate (EC) or were ever deported or repatriated? <span class="mandatory">*</span></label>
+          <div class="col-sm-2">
+            <label for="OD6Yes" class="radio-inline"><input type="radio" id="OD6No" value="y" {% set_attribute_named_when_autofill OtherDetails6%} /> Yes</label>
+            <label for="OD6No" class="radio-inline"><input type="radio" id="OD6Yes" value="n" {% set_attribute_named_when_autofill OtherDetails6%} /> No</label>
+            <p class="help-block"></p>
+          </div>
+          <div class="clearfix"></div>
+        </div>
+        <hr />
+        <div class="clearfix"></div>
+        <h4>Self Declaration</h4>
+        <div class="clearfix"></div>
+        <!-- <div class="form-group"> -->
+          <div class="panel panel-info">
+            <div class="panel-body">
+              I owe allegiance to the sovereignty, unity &amp; integrity of India, and have not voluntarily acquired citizenship or travel document of any other country. I have not lost, surrendered or been deprived of the the citizenship of India and I affirm that the information given by me in this form and the enclosures is true and I solely responsible for its accuracy, and I am liable to be penalized or prosecuted if found otherwise. I am aware that under the Passport Act, 1967 it is a criminal offence to furnish any false information or to suppress any material information with a view to obtaining passport or travel document.
+            </div>
+            <div class="panel-footer">
+              <label class="checkbox-inline">
+                <input type="checkbox" id="inlineCheckbox1" value="option1"> I Agree
+              </label>
+            </div>
+          </div>
+        <!-- </div> -->
+        <div class="form-group">
+          <!-- <div class="col-sm-offset-3 col-sm-9"> -->
+            <input type="submit" id="frmSample_register" value="Register" class="btn btn-primary">
+            <input type="reset" id="frmSample_clear" value="Clear" class="btn btn-default">
+          <!-- </div> -->
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<!-- Password Policy Modal -->
+<div class="modal fade" id="PasswordPolicyModal" tabindex="-1" role="dialog" aria-labelledby="PasswordPolicyModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="PasswordPolicyModalLabel">Password Policy</h4>
+      </div>
+      <div class="modal-body">
+        <ol>
+          <li>Should contain aleast one uppercase, lowercase, number and special character.</li>
+          <li>Should have a minimum length of 10.</li>
+        </ol>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,37 @@
+<nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="{{site.home}}">{{site.name}}</a>
+    </div>
+    <div class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li class="{% if page.url == '/index.html' %}active{% endif %}"><a href="/"> <i class="fa fa-home fa-lg"></i> </a></li>
+        {% for l1 in site.main_nav %}<li class="{% is_active_level l1[1]%}"><a href="{{l1[1]}}">{{l1[0]}}</a></li>
+        {% endfor %}
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        {% raw %}{{#session.user}}
+        <li class="dropdown">
+          <a class="btn dropdown-toggle" data-toggle="dropdown" href="/user/">
+            <span class="glyphicon glyphicon-user"></span>
+            {{#session.user.name}}{{session.user.name}}{{/session.user.name}}{{^session.user.name}}{{session.user.email}}{{/session.user.name}} <span class="fa fa-caret-down"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="/dashboard/"><i class="fa fa-user fa-fw"></i> Dashboard</a></li>
+            <li><a href="/dashboard/settings"><i class="fa fa-cogs fa-fw"></i> Settings</a></li>
+            <li class="divider"></li>
+            <li><a href="/auth/signout"><i class="fa fa-ban fa-fw"></i> Sign out</a></li>
+          </ul>
+        </li>
+        {{/session.user}}{{^session.user}}
+        <li><a href="/auth/signin">Sign in</a></li>
+        {{/session.user}}{% endraw %}
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div>
+</nav>

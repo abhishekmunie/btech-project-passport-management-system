@@ -1,0 +1,29 @@
+---
+layout: auth
+title: Signin
+---
+
+<div class="container-fluid">
+  <div id="signin-panel" class="auth-panel panel panel-default center-block">
+    <div class="panel-heading">
+      <h3 class="panel-title">Please enter your credentials</h3>
+    </div>
+    {% include success-error.html %}
+    <div class="panel-body">
+      <form action="/auth/signin/" method="post" class="form-signin" role="form">
+        <div class="form-group">
+          <label for="inputEmail">Email</label>
+          <input type="email" class="form-control" id="inputEmail" {% set_attribute_named_when_autofill email%} placeholder="Enter your email" autofocus="" required />
+        </div>
+        <div class="form-group">
+          <label for="inputPassword">Password</label>
+          <input type="password" class="form-control" id="inputPassword" name="password" placeholder="Password" required />
+          <p class="help-block"><a href="/auth/forgot/">Forgot Password?</a></p>
+        </div>
+        {% raw %}{{#query.redirect}}<input type="hidden" name="redirect" value="{{query.redirect}}">{{/query.redirect}}{% endraw %}
+        <input class="btn btn-primary btn-block" type="submit" value="Sign in" />
+      </form>
+    </div>
+    <div class="panel-footer">New User? <a href="/auth/signup/">Register here</a>.</div>
+  </div>
+</div>

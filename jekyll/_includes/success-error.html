@@ -1,0 +1,28 @@
+{% raw %}
+{{#locals.success}}
+<div class="alert alert-success alert-dismissable">
+  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+  {{#locals.success.details}}
+  <details>
+    <summary><strong>Success!</strong> {{locals.success.msg}}</summary>
+    <p>{{{locals.success.details}}}</p>
+  </details>
+  {{/locals.success.details}}{{^locals.success.details}}
+  <strong>Success!</strong> {{locals.success.msg}}</summary>
+  {{/locals.success.details}}
+</div>
+{{/locals.success}}
+{{#locals.error}}
+<div class="alert alert-danger alert-dismissable">
+  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+  {{#locals.error.details}}
+  <details>
+    <summary><strong>Error!</strong> {{locals.error.msg}}</summary>
+    <p>{{{locals.error.details}}}</p>
+  </details>
+  {{/locals.error.details}}{{^locals.error.details}}
+  <strong>Error!</strong> {{locals.error.msg}}</summary>
+  {{/locals.error.details}}
+</div>
+{{/locals.error}}
+{% endraw %}
