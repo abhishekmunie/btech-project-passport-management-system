@@ -33,7 +33,7 @@ router.all /^\/va/, va.filter
 router.all /^\/user/, citizen.filter
 router.all /^\/citizen-registration/, (req, res, next) ->
    debug "Citizen Registration Auth Filter: #{req.url}"
-   return res.redirect "/auth/signin?redirect=#{encodeURIComponent req.url}" unless req.session.user? and req.session.user.type is user.TYPE
+   return res.redirect "/auth/signin?redirect=#{encodeURIComponent req.url}" unless req.session.user? and req.session.user.type is user.type
    next()
 
 router.get '/login', (req, res, next) ->
