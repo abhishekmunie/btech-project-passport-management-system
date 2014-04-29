@@ -44,7 +44,7 @@ app.use cookieParser config.cookie_secret
 if config.force_https.enable is true
   app.use (req, res, next) ->
     unless req.secure or req.headers['x-forwarded-proto'] is 'https'
-      return res.redirect 301, "https://#{config.force_https.host or req.headers.host}#{req.path}"
+      return res.redirect 301, "https://#{config.force_https.host or req.headers.host}#{req.url}"
     res.set 'Strict-Transport-Security': "max-age=#{config.force_https.maxAge}#{config.force_https.includeSubdomains ? "; includeSubDomains" : ""}"
     res.removeHeader 'X-Powered-By'
     next()
