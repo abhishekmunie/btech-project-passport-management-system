@@ -61,7 +61,6 @@ config.session.config.store = new pgSession(
 app.use session config.session.config
 
 ## static content handler
-# app.use staticCache
 app.use (req, res, next) ->
   debug "Cachelicious Handler: #{req.url}"
   return next() if req.url[1] is '_' or /^\/(.*\/_.*|node_modules\/.*|package.json|Procfile|vendor\/.*)$/.test req.url
@@ -87,7 +86,6 @@ app.all /\.(html|htm|xml|xhtml|xht)$/, (req, res, next) ->
   debug "Hogan Handler: #{req.url}"
   template.sendHogan req, res, (err) ->
     if err
-      console.error err
       req.url = req.url.replace new RegExp("\\/#{config.index}.html"), "/#{config.index}.ejs"
       return next()
   return
@@ -96,23 +94,9 @@ app.all /\.ejs$/, (req, res, next) ->
   debug "EJS Handler: #{req.url}"
   template.sendEJS req, res, (err) ->
     if err
-      console.error err
       req.url = req.url.replace new RegExp("\\/#{config.index}.ejs"), "/"
       return next()
   return
-
-## Test for session persistance
-# app.get '/session-test', (req, res) ->
-#   console.log "Received Key Request"
-#   unless req.session.testkey
-#     req.session.testkey = crypto.createHash('sha1').update(crypto.randomBytes 256).digest 'hex'
-#     console.log "New Key Generated"
-#   res.set
-#     'Cache-Control'               : 'private, no-cache'
-#   console.log "Sending Key"
-#   res.send req.session.testkey
-#   console.log "Key Sent"
-#   return
 
 ## catch 404 and forwarding to error handler
 app.use (req, res, next) ->

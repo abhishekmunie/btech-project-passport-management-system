@@ -114,11 +114,6 @@ configConvict = convict
     doc: 'Filename of default page that will be served for paths ending in /'
     format: String
     default: 'index'
-  livereload:
-    doc: 'The port to bind livereload event.'
-    format: 'port'
-    default: 35729
-    arg: 'livereload'
   static_file:
     source:
       doc: 'Directory from where static content will be served'
