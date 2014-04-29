@@ -92,6 +92,7 @@ PRIMARY KEY ("ApplicationId", "ValidationType")
 CREATE TABLE IF NOT EXISTS "passport"."ValidationAuthority" (
 "Name" varchar(255) NOT NULL,
 "email" varchar(255) NOT NULL,
+"RegionId" int NOT NULL,
 PRIMARY KEY ("email")
 );
 
@@ -126,8 +127,8 @@ PRIMARY KEY ("Id")
 
 CREATE TABLE IF NOT EXISTS "passport"."UnverifiedUser" (
 "email" varchar(255) NOT NULL,
-"VerifiationKey" varchar(255) NOT NULL,
-PRIMARY KEY ("VerifiationKey")
+"VerificationKey" varchar(255) NOT NULL,
+PRIMARY KEY ("VerificationKey")
 );
 
 CREATE TABLE IF NOT EXISTS "Setting" (
@@ -141,6 +142,7 @@ ALTER TABLE "passport"."Validation" ADD CONSTRAINT "fk_Validations_AppId" FOREIG
 ALTER TABLE "passport"."Passport" ADD CONSTRAINT "fk_Passport_Application" FOREIGN KEY ("ApplicationId") REFERENCES "passport"."PassportApplication" ("Id");
 ALTER TABLE "passport"."Citizen" ADD CONSTRAINT "fk_Citizen_user" FOREIGN KEY ("email") REFERENCES "passport"."User" ("email");
 ALTER TABLE "passport"."ValidationAuthority" ADD CONSTRAINT "fk_ValidationAuthority_VAemail" FOREIGN KEY ("email") REFERENCES "passport"."User" ("email");
+ALTER TABLE "passport"."ValidationAuthority" ADD CONSTRAINT "fk_ValidationAuthority_RegionId" FOREIGN KEY ("RegionId") REFERENCES "passport"."Region" ("Id");
 ALTER TABLE "passport"."PassportGrantingOfficer" ADD CONSTRAINT "fk_PassportGrantingOfficer_user" FOREIGN KEY ("email") REFERENCES "passport"."User" ("email");
 ALTER TABLE "passport"."PassportApplication" ADD CONSTRAINT "fk_PassportApplication" FOREIGN KEY ("CitizenEmail") REFERENCES "passport"."Citizen" ("email");
 ALTER TABLE "passport"."Validation" ADD CONSTRAINT "fk_Validation" FOREIGN KEY ("ValidationAuthorityEmail") REFERENCES "passport"."ValidationAuthority" ("email");
