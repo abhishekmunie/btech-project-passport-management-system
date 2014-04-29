@@ -130,6 +130,12 @@ CREATE TABLE IF NOT EXISTS "passport"."UnverifiedUser" (
 PRIMARY KEY ("VerifiationKey")
 );
 
+CREATE TABLE IF NOT EXISTS "Setting" (
+"key" varchar(255) NOT NULL,
+"value" varchar(255),
+PRIMARY KEY ("key")
+);
+
 
 ALTER TABLE "passport"."Validation" ADD CONSTRAINT "fk_Validations_AppId" FOREIGN KEY ("ApplicationId") REFERENCES "passport"."PassportApplication" ("Id");
 ALTER TABLE "passport"."Passport" ADD CONSTRAINT "fk_Passport_Application" FOREIGN KEY ("ApplicationId") REFERENCES "passport"."PassportApplication" ("Id");
