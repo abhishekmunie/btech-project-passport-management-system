@@ -19,36 +19,36 @@
     }
   ],
   "engines": {
-    "node": ">=0.10.15",
-    "npm": ">=1.1.39"
+    "node": "0.10.x",
+    "npm": "1.4.x"
   },
   "directories": {
     "lib": "./lib"
   },
   "main": "server.js",
   "dependencies": {
-    "async": "^0.7.0",
-    "body-parser": "^1.0.2",
+    "async": "0.7.x",
+    "body-parser": "1.0.x",
     "cachelicious": "cblage/node-cachelicious",
-    "coffee-script": "^1.7.1",
-    "connect": "^2.14.5",
-    "connect-pg-simple": "^1.0.2",
-    "convict": "^0.4.2",
-    "cookie-parser": "^1.0.1",
-    "debug": "^0.8.1",
-    "ejs": "^1.0.0",
-    "express": "^4.1.1",
-    "express-session": "^1.0.4",
-    "hogan.js": "^2.0.0",
-    "lodash": "^2.4.1",
-    "morgan": "^1.0.0",
-    "nodemailer": "^0.6.3",
-    "pg": "^3.0.3",
-    "postgrator": "^0.2.0",
-    "resolve-path": "^1.0.0",
-    "serve-static": "^1.1.0",
-    "static-favicon": "^1.0.2",
-    "validator": "^3.11.0"
+    "coffee-script": "1.7.x",
+    "connect": "2.14.x",
+    "connect-pg-simple": "1.0.x",
+    "convict": "0.4.x",
+    "cookie-parser": "1.0.x",
+    "debug": "0.8.x",
+    "ejs": "1.0.x",
+    "express": "4.1.x",
+    "express-session": "1.0.x",
+    "hogan.js": "2.0.x",
+    "lodash": "2.4.x",
+    "morgan": "1.0.x",
+    "nodemailer": "0.6.x",
+    "pg": "3.0.x",
+    "postgrator": "0.2.x",
+    "resolve-path": "1.0.x",
+    "serve-static": "1.1.x",
+    "static-favicon": "1.0.x",
+    "validator": "3.11.x"
   },
   "scripts": {
     "start": "node server.js"
