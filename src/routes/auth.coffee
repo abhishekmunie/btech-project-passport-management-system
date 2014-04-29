@@ -91,6 +91,7 @@ router.all '/verification/:verificationKey', (req, res, next) ->
       return
     res.locals.email = email
     res.locals.verificationKey = verificationKey
+    res.locals.encodedVerificationKey = encodeURIComponent(verificationKey)
     next()
     return
 
