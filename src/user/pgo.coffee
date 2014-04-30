@@ -113,15 +113,23 @@ removePassportGrantingOfficer = (email, client, callback) ->
   deletePassportGrantingOfficerFromDatabase email, client, (err) ->
     user.removeUser email, client, callback
 
+
+filter = (req, res, next) ->
+  debug "Passport Granting Officer Auth Filter: #{req.url}"
+  res.redirect "/auth/signin?redirect=#{encodeURIComponent req.url}" unless req.session.user?
+  isPassportGrantingOfficer req.session.user.email, (err, pgoValidity) ->
+    unless pgoValidity
+      if req.session.user
+        res.redirect "/auth/signin"
+      else
+        res.redirect "/auth/signin?redirect=#{encodeURIComponent req.url}"
+    next()
+
 module.exports =
   PassportGrantingOfficer: PassportGrantingOfficer
   type: TYPE
 
-  filter: (req, res, next) ->
-    debug "Passport Granting Officer Auth Filter: #{req.url}"
-    req.url = "/auth/signin/pgo" unless req.session.user? and req.session.user.type is TYPE
-    next()
-
+  filter: filter
   getPassportGrantingOfficers: getPassportGrantingOfficers
   addPassportGrantingOfficer: addPassportGrantingOfficer
   removePassportGrantingOfficer: removePassportGrantingOfficer

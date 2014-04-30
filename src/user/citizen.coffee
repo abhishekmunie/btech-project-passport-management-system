@@ -188,7 +188,6 @@ class Citizen extends user.User
     , (err, result) ->
       if err
         done? client
-        console.error 'error running query', err
         callback? err
         return
       done?()
@@ -205,59 +204,145 @@ class Citizen extends user.User
       PGConnect (err, client, done) ->
         if err
           done? client
-          console.error 'error fetching client from pool', err
           callback? err
           return
         insertQuery client, done, callback
+
+
+getForEmail = (email, callback) ->
+  PGConnect (err, client, done) ->
+    if err
+      done? client
+      callback? err
+      return
+    client.query
+      name: "get_citizen_for_email"
+      text: "SELECT * FROM #{EntityName} WHERE \"email\" = $1::varchar"
+      values: [email]
+    , (err, result) ->
+      if err
+        done? client
+        callback? err
+        return
+      done?()
+      if result.rows[0]
+        callback? null, new Citizen('db', result.rows[0])
+      else
+        callback? null, null
+
+isCitizen = (email, callback) ->
+  PGConnect (err, client, done) ->
+    if err
+      done? client
+      callback? err
+      return
+    client.query
+      name: "is_citizen"
+      text: "SELECT count(*) AS exists FROM #{EntityName} WHERE email = $1::varchar"
+      values: [email]
+    , (err, result) ->
+      if err
+        done? client
+        callback? err
+        return
+      done?()
+      callback? null, result.rows[0].exists is '1'
+
+attr_maps =
+  MaritalStatus:
+    's':'Single'
+    'm':'Married'
+    'd':'Divorced'
+    'w':'Widow / Widower'
+    'p':'Seperated'
+  CitizenshipBy:
+    'b':'Birth'
+    'd':'Descent'
+    'r':'Registration / Naturalization'
+  EmploymentType:
+    'a':'Government'
+    'b':'Homemaker'
+    'c':'Not Employed'
+    'd':'Others'
+    'e':'Owners, Partners &amp; Directors of companies which are mambers of CII, FICCI &amp; ASSOCHAM'
+    'f':'Private'
+    'g':'PSU'
+    'h':'Retired - Government Servent'
+    'i':'Retired - Private Service'
+    'j':'Self Employed'
+    'k':'Statutory Body'
+    'l':'Student'
+  EducationalQualification:
+    'a':'5th pass or less'
+    'b':'Between 6th and 9th standard'
+    'c':'10th pass and above'
+    'd':'Graduate and above'
+  HasAliases:
+    'y': 'Yes'
+    'n': 'No'
+  HaveChangedName:
+    'y': 'Yes'
+    'n': 'No'
+  Gender:
+    'm':'Male'
+    'f':'Female'
+  PresentAddressOutOfCountry:
+    'y': 'Yes'
+    'n': 'No'
+  AppliedButNotIssued:
+    'y': 'Yes'
+    'n': 'No'
+  OtherDetails1:
+    'y': 'Yes'
+    'n': 'No'
+  OtherDetails2:
+    'y': 'Yes'
+    'n': 'No'
+  OtherDetails3:
+    'y': 'Yes'
+    'n': 'No'
+  OtherDetails4:
+    'y': 'Yes'
+    'n': 'No'
+  OtherDetails5:
+    'y': 'Yes'
+    'n': 'No'
+  OtherDetails6:
+    'y': 'Yes'
+    'n': 'No'
+
+attr_list = {}
+
+for attr, map of attr_maps
+  attr_list[attr] = []
+  for key, value of map
+    attr_list[attr].push
+      key: key
+      value: value
+
+expandValueUsingMap = (hash) ->
+  hash[attr] = map[hash[attr]] for attr, map of attr_maps
+  hash
+
+filter = (req, res, next) ->
+  debug "Citizen Auth Filter: #{req.url}"
+  res.redirect "/auth/signin?redirect=#{encodeURIComponent req.url}" unless req.session.user?
+  isCitizen req.session.user.email, (err, citizenValidity) ->
+    unless citizenValidity
+      if req.session.user
+        res.redirect "/auth/signin"
+      else
+        res.redirect "/auth/signin?redirect=#{encodeURIComponent req.url}"
+    next()
 
 module.exports =
   Citizen: Citizen
   type: TYPE
 
-  filter:(req, res, next) ->
-    debug "Citizen Auth Filter: #{req.url}"
-    return res.redirect "/auth/signin?redirect=#{encodeURIComponent req.url}" unless req.session.user? and req.session.user.type is TYPE
-    next()
+  attr_maps: attr_maps
+  attr_list: attr_list
 
-  isCitizen: (email, callback) ->
-    PGConnect (err, client, done) ->
-      if err
-        done? client
-        console.error 'error fetching client from pool', err
-        callback? err
-        return
-      client.query
-        name: "is_citizen"
-        text: "SELECT count(*) AS exists FROM #{EntityName} WHERE email = $1::varchar"
-        values: [email]
-      , (err, result) ->
-        if err
-          done? client
-          console.error 'error running query', err
-          callback? err
-          return
-        done?()
-        callback? null, result.rows[0].exists is '1'
-
-  getForEmail: (email, callback) ->
-    PGConnect (err, client, done) ->
-      if err
-        done? client
-        console.error 'error fetching client from pool', err
-        callback? err
-        return
-      client.query
-        name: "get_citizen_for_email"
-        text: "SELECT * FROM #{EntityName} WHERE email = $1::varchar"
-        values: [email]
-      , (err, result) ->
-        if err
-          done? client
-          console.error 'error running query', err
-          callback? err
-          return
-        done?()
-        if result.rows[0]
-          callback? null, new Citizen('db', result.rows[0])
-        else
-          callback? null, null
+  expandValueUsingMap: expandValueUsingMap
+  filter: filter
+  isCitizen: isCitizen
+  getForEmail: getForEmail

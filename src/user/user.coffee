@@ -28,31 +28,31 @@ class User
       done?()
       callback?()
 
-  insertIntoDatabase: (password, client, callback) ->
-    if typeof client is "function"
-      callback = client
-      client = undefined
+insertIntoDatabase = (email, password, client, callback) ->
+  if typeof client is "function"
+    callback = client
+    client = undefined
 
-    crypto.randomBytes 126, (ex, buf) =>
-      return callback? ex if ex
-      salt = buf.toString 'base64'
-      appCrypto.genKey password, salt, (err, key) =>
-        return callback? err if err
+  crypto.randomBytes 126, (ex, buf) ->
+    return callback? ex if ex
+    salt = buf.toString 'base64'
+    appCrypto.genKey password, salt, (err, key) ->
+      return callback? err if err
 
-        if client?
-          insertQuery [@email, key, salt], client, null, callback
-        else
-          PGConnect (err, client, done) =>
-            if err
-              done? client
-              console.error 'error fetching client from pool', err
-              callback? err
-              return
-            insertQuery [@email, key, salt], client, done, callback
+      if client?
+        insertQuery [email, key, salt], client, null, callback
+      else
+        PGConnect (err, client, done) ->
+          if err
+            done? client
+            console.error 'error fetching client from pool', err
+            callback? err
             return
-        return
+          insertQuery [email, key, salt], client, done, callback
+          return
       return
     return
+  return
 
 getSaltForEmail = (email, callback) ->
   PGConnect (err, client, done) ->
@@ -104,8 +104,7 @@ verifyCredentials = (email, password, callback) ->
 
 addUser = (email, password, client, callback) ->
   debug "Adding user with email: #{email}"
-  new User(email).insertIntoDatabase password, client, callback
-
+  insertIntoDatabase email, password, client, callback
 
 
 deleteQuery = (values, client, done, callback) ->
