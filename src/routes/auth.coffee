@@ -74,7 +74,7 @@ router.post '/signup', (req, res, next) ->
 
 rollback = (client, done) -> client.query 'ROLLBACK', (err) -> done? err
 
-router.all '/verification', (res, req, next) ->
+router.all '/verification', (req, res, next) ->
   res.locals.error = new Error('Invalid Verification Link')
   res.locals.hideForm = true
   next()
@@ -138,7 +138,7 @@ router.post '/verification', (req, res, next) ->
               next()
               return
             done?()
-            req.session.user = new user.USER(res.locals.email)
+            req.session.user = new user.User(res.locals.email)
             if req.param 'redirect'
               res.redirect req.param 'redirect'
             else
