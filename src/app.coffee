@@ -67,6 +67,9 @@ app.use (req, res, next) ->
   # req.url = req.url.replace /^(.+)\.(\d+)\.(js|css|png|jpg|gif)$/, '$1.$3' if config.cache_busting
   return staticCache.apply @, arguments
 
+app.all /\.(html|htm|xml|xhtml|xht)$/, (req, res, next) ->
+  res.redirect req.url.replace new RegExp("\\/#{config.index}\.(html|htm|xml|xhtml|xht|ejs)"), "/"
+
 app.use '/',                     require './routes/root'
 app.use '/auth',                 require './routes/auth'
 app.use '/admin',                require './routes/admin'
@@ -86,7 +89,7 @@ app.all /\.(html|htm|xml|xhtml|xht)$/, (req, res, next) ->
   debug "Hogan Handler: #{req.url}"
   template.sendHogan req, res, (err) ->
     if err
-      req.url = req.url.replace new RegExp("\\/#{config.index}.html"), "/#{config.index}.ejs"
+      req.url = req.url.replace new RegExp("\\/#{config.index}\.(html|htm|xml|xhtml|xht)"), "/#{config.index}.ejs"
       return next()
   return
 
@@ -94,7 +97,7 @@ app.all /\.ejs$/, (req, res, next) ->
   debug "EJS Handler: #{req.url}"
   template.sendEJS req, res, (err) ->
     if err
-      req.url = req.url.replace new RegExp("\\/#{config.index}.ejs"), "/"
+      req.url = req.url.replace new RegExp("\\/#{config.index}\.ejs"), "/"
       return next()
   return
 
