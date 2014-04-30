@@ -5,13 +5,25 @@ $ ->
 
   webshims.setOptions
     extendNative: true
-    'forms-ext':
-      replaceUI: 'auto'
-    'mediaelement':
-      replaceUI: 'auto'
+    # 'forms-ext':
+    #   types: 'datetime-local range date time number month color'
     forms:
-      lazyCustomMessages: true
+      lazyCustomMessages: false
+
+  webshims.setOptions 'forms',
+    iVal:
+      # handleBubble: 'hide'
+      recheckDelay: 400
+      # the class of the errorbox, which is normally appended to the fieldWrapper
+      errorBoxClass: 'ws-errorbox col-sm-offset-3 col-sm-9'
+      # classes to adjust to your CSS/CSS-framework
+      errorMessageClass: 'help-block'
+      successWrapperClass: 'has-success'
+      errorWrapperClass: 'has-error'
+      fx: 'slide'
+      # add config to find right wrapper
+      fieldWrapper: '.form-group'
 
   # webshims will implement those features in all browsers/devices
   # but will only enhance capable browsers on desktop with custom styleable mediaelement controls and form widgets
-  webshims.polyfill 'forms forms-ext mediaelement'
+  webshims.polyfill 'forms forms-ext details'

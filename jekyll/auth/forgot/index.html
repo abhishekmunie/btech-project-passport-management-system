@@ -8,11 +8,12 @@ title: Forgot Password?
     <div class="panel-heading">Forgot Password?</div>
     {% include success-error.html %}
     <div class="panel-body">
-      <form role="form" action="/auth/forgot/" method="post">
-        <div class="form-group">
+      <form role="form" action="/auth/forgot/" method="post" class="form-horizontal ws-validate">
+        <div class="form-group has-feedback">
           <label class="col-sm-3 control-label" for="email">E-mail Id<span class="mandatory">*</span></label>
           <div class="col-sm-9">
-            <input class="form-control" type="email" {% set_attribute_named_when_autofill email%} maxlength="255" id="email" aria-required="true" required>
+            <input class="form-control" type="email" {% set_attribute_named_when_autofill email%} maxlength="255" id="email" aria-required="true" required="" />
+            <span class="glyphicon glyphicon-ok form-control-feedback"></span><span class="glyphicon glyphicon-remove form-control-feedback"></span>
             <p class="help-block"></p>
           </div>
         </div>

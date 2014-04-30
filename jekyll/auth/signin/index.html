@@ -10,14 +10,16 @@ title: Signin
     </div>
     {% include success-error.html %}
     <div class="panel-body">
-      <form action="/auth/signin/" method="post" class="form-signin" role="form">
-        <div class="form-group">
+      <form action="/auth/signin/" method="post" class="form-signin ws-validate" role="form" >
+        <div class="form-group has-feedback">
           <label for="inputEmail">Email</label>
-          <input type="email" class="form-control" id="inputEmail" {% set_attribute_named_when_autofill email%} placeholder="Enter your email" autofocus="" required />
+          <input type="email" class="form-control" id="inputEmail" {% set_attribute_named_when_autofill email%} placeholder="Enter your email" autofocus="" required="" />
+            <span class="glyphicon glyphicon-ok form-control-feedback"></span><span class="glyphicon glyphicon-remove form-control-feedback"></span>
         </div>
-        <div class="form-group">
+        <div class="form-group has-feedback">
           <label for="inputPassword">Password</label>
-          <input type="password" class="form-control" id="inputPassword" name="password" placeholder="Password" required />
+          <input type="password" class="form-control" id="inputPassword" name="password" placeholder="Password" required="" />
+            <span class="glyphicon glyphicon-ok form-control-feedback"></span><span class="glyphicon glyphicon-remove form-control-feedback"></span>
           <p class="help-block"><a href="/auth/forgot/">Forgot Password?</a></p>
         </div>
         {% raw %}{{#query.redirect}}<input type="hidden" name="redirect" value="{{query.redirect}}">{{/query.redirect}}{% endraw %}

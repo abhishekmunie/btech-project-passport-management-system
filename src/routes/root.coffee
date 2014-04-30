@@ -8,7 +8,8 @@ pgo     = require '../user/pgo'
 va      = require '../user/va'
 
 globals = require '../globals'
-debug = globals.debug
+config  = globals.config
+debug   = globals.debug
 
 router.all /^\/dashboard/, (req, res, next) ->
   res.redirect "/auth/signin?redirect=#{encodeURIComponent req.url}" unless req.session.user
@@ -27,14 +28,15 @@ router.all /^\/dashboard/, (req, res, next) ->
       res.redirect "/auth/signin?redirect=#{encodeURIComponent req.url}"
   return
 
-router.all /^\/admin/, admin.filter
-router.all /^\/pgo/, pgo.filter
-router.all /^\/va/, va.filter
-router.all /^\/user/, citizen.filter
-router.all /^\/citizen-registration/, (req, res, next) ->
-   debug "Citizen Registration Auth Filter: #{req.url}"
-   return res.redirect "/auth/signin?redirect=#{encodeURIComponent req.url}" unless req.session.user? and req.session.user.type is user.type
-   next()
+if config.env is 'production'
+  router.all /^\/admin/, admin.filter
+  router.all /^\/pgo/, pgo.filter
+  router.all /^\/va/, va.filter
+  router.all /^\/user/, citizen.filter
+  router.all /^\/citizen-registration/, (req, res, next) ->
+     debug "Citizen Registration Auth Filter: #{req.url}"
+     return res.redirect "/auth/signin?redirect=#{encodeURIComponent req.url}" unless req.session.user? and req.session.user.type is user.type
+     next()
 
 router.get '/login', (req, res, next) ->
   res.redirect req.url.replace /^\/login/, "/auth/signin"

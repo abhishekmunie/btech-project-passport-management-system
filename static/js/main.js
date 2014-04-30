@@ -3,15 +3,20 @@ $(function() {
   webshims.setOptions('enhanceAuto', !(matchMedia('(max-device-width: 720px)').matches || matchMedia('(max-device-width: 1024px)').matches && Modernizr.touchevents));
   webshims.setOptions({
     extendNative: true,
-    'forms-ext': {
-      replaceUI: 'auto'
-    },
-    'mediaelement': {
-      replaceUI: 'auto'
-    },
     forms: {
-      lazyCustomMessages: true
+      lazyCustomMessages: false
     }
   });
-  return webshims.polyfill('forms forms-ext mediaelement');
+  webshims.setOptions('forms', {
+    iVal: {
+      recheckDelay: 400,
+      errorBoxClass: 'ws-errorbox col-sm-offset-3 col-sm-9',
+      errorMessageClass: 'help-block',
+      successWrapperClass: 'has-success',
+      errorWrapperClass: 'has-error',
+      fx: 'slide',
+      fieldWrapper: '.form-group'
+    }
+  });
+  return webshims.polyfill('forms forms-ext details');
 });

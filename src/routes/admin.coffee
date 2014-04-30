@@ -11,9 +11,9 @@ region = require '../passport/region'
 
 postgrator = require 'postgrator'
 postgrator.config.set
-    migrationDirectory: path.resolve __dirname, '../../sql'
-    driver: postgrator.pg,
-    connectionString: globals.config.pg_url
+  migrationDirectory: path.resolve __dirname, '../../sql'
+  driver: postgrator.pg,
+  connectionString: globals.config.pg_url
 
 admin   = require '../user/admin'
 

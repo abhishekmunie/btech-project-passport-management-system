@@ -1,57 +1,21 @@
 ---
 layout: user
-title: Passport Appliccation
+title: Passport Application
 ---
+
 <div class="container-fluid">
-  <div class="page-header">
-    <h1 class="text-muted text-center">Passport Appliccation</h1>
-  </div>
   <div class="panel panel-default">
-    <div class="panel-heading">Please passport details:</div>
+    <div class="panel-heading"><h3 class="panel-title text-center">Passport Appliccation</h3></div>
     <div class="panel-body">
-      <form role="form" action="/auth/signup/" method="post">
+      <form role="form" action="/user/application/" method="post">
         <div class="form-group">
           <label class="col-sm-3 control-label" for="Region">Passport Office <span class="mandatory">*</span> <span class="info-text">(As per Present Address)</span></label>
           <div class="col-sm-9">
-            <select name="Region" id="Region" class="form-control" aria-required="true" required >
+            <select name="Region" id="Region" class="form-control" aria-required="true" required="" />
               <option disabled>----- Select -----</option>
-              <option value="1">Ahmedabad</option>
-              <option value="2">Amritsar</option>
-              <option value="5">Bangalore</option>
-              <option value="4">Bareilly</option>
-              <option value="7">Bhopal</option>
-              <option value="3">Bhubaneswar</option>
-              <option value="10">Chandigarh</option>
-              <option value="26">Chennai</option>
-              <option value="11">Cochin</option>
-              <option value="9">Coimbatore</option>
-              <option value="14">Dehradun</option>
-              <option value="15">Delhi</option>
-              <option value="18">Ghaziabad</option>
-              <option value="16">Goa</option>
-              <option value="17">Guwahati</option>
-              <option value="19">Hyderabad</option>
-              <option value="23">Jaipur</option>
-              <option value="21">Jalandhar</option>
-              <option value="22">Jammu</option>
-              <option value="8">Kolkata</option>
-              <option value="24">Kozhikode</option>
-              <option value="25">Lucknow</option>
-              <option value="27">Madurai</option>
-              <option value="28">Malappuram</option>
-              <option value="6">Mumbai</option>
-              <option value="29">Nagpur</option>
-              <option value="30">Patna</option>
-              <option value="31">Pune</option>
-              <option value="33">Raipur</option>
-              <option value="32">Ranchi</option>
-              <option value="35">Shimla</option>
-              <option value="34">Srinagar</option>
-              <option value="36">Surat</option>
-              <option value="37">Thane</option>
-              <option value="38">Trichy</option>
-              <option value="39">Trivandrum</option>
-              <option value="40">Visakhapatnam</option>
+              {% raw %}{{#locals.regions}}
+              <option value="{{Id}}">{{Name}}</option>
+              {{/locals.regions}}{% endraw %}
             </select>
             <p class="help-block">Tibetan Refugees applying for Identity Certificate must register with 'Delhi' Passport Office.</p>
           </div>
@@ -59,8 +23,9 @@ title: Passport Appliccation
         <div class="form-group">
           <label for="PassportType" class="col-sm-3 control-label">Passport Type <span class="mandatory">*</span></label>
           <div class="col-sm-9">
-            <label for="PTN" class="radio-inline"><input type="radio" id="PTN" value="n" {% set_attribute_named_when_autofill PassportType%} /> Normal</label>
-            <label for="PTD" class="radio-inline"><input type="radio" id="PTD" value="d" {% set_attribute_named_when_autofill PassportType%} /> Diplomatic</label>
+            {%raw%}{{#locals.attr_list.PassportType}}
+            <label for="PT{{key}}" class="radio-inline"><input type="radio" id="PT{{key}}" value="{{key}}" {%endraw%}{% set_attribute_named_when_autofill PassportType%}{%raw%} /> {{value}}</label>
+            {{/locals.attr_list.PassportType}}{%endraw%}
             <p class="help-block"></p>
           </div>
           <div class="clearfix"></div>
@@ -68,8 +33,9 @@ title: Passport Appliccation
         <div class="form-group">
           <label for="ApplyingFor" class="col-sm-3 control-label">Applying for <span class="mandatory">*</span></label>
           <div class="col-sm-9">
-            <label for="AFFP" class="radio-inline"><input type="radio" id="AFFP" value="f" {% set_attribute_named_when_autofill ApplyingFor%} /> Fresh Passport</label>
-            <label for="AFROP" class="radio-inline"><input type="radio" id="AFROP" value="r" {% set_attribute_named_when_autofill ApplyingFor%} /> Re-issue of Passport</label>
+            {%raw%}{{#locals.attr_list.ApplyingFor}}
+            <label for="AF{{key}}" class="radio-inline"><input type="radio" id="AF{{key}}" value="{{key}}" {%endraw%}{% set_attribute_named_when_autofill ApplyingFor%}{%raw%} /> {{value}}</label>
+            {{/locals.attr_list.ApplyingFor}}{%endraw%}
             <p class="help-block"></p>
           </div>
           <div class="clearfix"></div>
@@ -77,8 +43,9 @@ title: Passport Appliccation
         <div class="form-group">
           <label for="ApplicationType" class="col-sm-3 control-label">Type of Application <span class="mandatory">*</span></label>
           <div class="col-sm-9">
-            <label for="ATN" class="radio-inline"><input type="radio" id="ATN" value="n" {% set_attribute_named_when_autofill ApplicationType%} /> Normal</label>
-            <label for="ATT" class="radio-inline"><input type="radio" id="ATT" value="t" {% set_attribute_named_when_autofill ApplicationType%} /> Tatkaal</label>
+            {%raw%}{{#locals.attr_list.ApplicationType}}
+            <label for="AT{{key}}" class="radio-inline"><input type="radio" id="AT{{key}}" value="{{key}}" {%endraw%}{% set_attribute_named_when_autofill ApplicationType%}{%raw%} /> {{value}}</label>
+            {{/locals.attr_list.ApplicationType}}{%endraw%}
             <p class="help-block"></p>
           </div>
           <div class="clearfix"></div>
@@ -86,8 +53,9 @@ title: Passport Appliccation
         <div class="form-group">
           <label for="PassportBookletType" class="col-sm-3 control-label">Type of Passport Booklet <span class="mandatory">*</span></label>
           <div class="col-sm-9">
-            <label for="PBT36" class="radio-inline"><input type="radio" id="PBT36" value="36" {% set_attribute_named_when_autofill PassportBookletType%} /> 36 Pages</label>
-            <label for="PBT60" class="radio-inline"><input type="radio" id="PBT69" value="60" {% set_attribute_named_when_autofill PassportBookletType%} /> 60 Pages</label>
+            {%raw%}{{#locals.attr_list.PassportBookletType}}
+            <label for="PBT{{key}}" class="radio-inline"><input type="radio" id="PBT{{key}}" value="{{key}}" {%endraw%}{% set_attribute_named_when_autofill PassportBookletType%}{%raw%} /> {{value}}</label>
+            {{/locals.attr_list.PassportBookletType}}{%endraw%}
             <p class="help-block"></p>
           </div>
           <div class="clearfix"></div>
@@ -95,9 +63,9 @@ title: Passport Appliccation
         <div class="form-group">
           <label for="ValidityRequired" class="col-sm-3 control-label">Validity Required <span class="info-text">(For minors between 15 and 18)</span></label>
           <div class="col-sm-9">
-            <label for="VR10" class="radio-inline"><input type="radio" id="VR10" value="10" {% set_attribute_named_when_autofill ValidityRequired%} /> 10 years</label>
-            <label for="VR18" class="radio-inline"><input type="radio" id="VR18" value="18" {% set_attribute_named_when_autofill ValidityRequired%} /> Up to age 18</label>
-            <label for="VR0" class="radio-inline"><input type="radio" id="VR-" value="0" {% set_attribute_named_when_autofill ValidityRequired%} /> Not Applicable</label>
+            {%raw%}{{#locals.attr_list.ValidityRequired}}
+            <label for="VR{{key}}" class="radio-inline"><input type="radio" id="VR{{key}}" value="{{key}}" {%endraw%}{% set_attribute_named_when_autofill ValidityRequired%}{%raw%} /> {{value}}</label>
+            {{/locals.attr_list.ValidityRequired}}{%endraw%}
             <p class="help-block"></p>
           </div>
           <div class="clearfix"></div>
