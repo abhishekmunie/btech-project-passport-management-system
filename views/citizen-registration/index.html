@@ -21,7 +21,7 @@
 
     <script src="/bower_components/modernizr/modernizr.js" type="text/javascript"></script>
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-    <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+    <script>window.jQuery || document.write('<script src="/bower_components/jquery/dist/jquery.min.js"><\/script>')</script>
     <!-- <script src="/bower_components/jquery/dist/jquery.min.js"></script> -->
     <script src="/bower_components/webshim/js-webshim/minified/polyfiller.js"></script>
     <script type="text/javascript">
@@ -146,8 +146,8 @@
         <div class="form-group">
           <label class="col-sm-3 control-label" for="HasAliases">Are you known by any other names(aliases)?<span class="mandatory">*</span></label>
           <div class="col-sm-9">
-            <label for="HAYes" class="radio-inline"><input type="radio" id="HANo" value="y" name="HasAliases" {{#locals.autoFillUsingLocals}}{{#locals.HasAliases}}value="{{locals.HasAliases}}"{{/locals.HasAliases}}{{/locals.autoFillUsingLocals}} /> Yes</label>
-            <label for="HANo" class="radio-inline"><input type="radio" id="HAYes" value="n" name="HasAliases" {{#locals.autoFillUsingLocals}}{{#locals.HasAliases}}value="{{locals.HasAliases}}"{{/locals.HasAliases}}{{/locals.autoFillUsingLocals}} /> No</label>
+            <label for="HAYes" class="radio-inline"><input type="radio" id="HAYes" value="y" name="HasAliases" {{#locals.autoFillUsingLocals}}{{#locals.HasAliases}}value="{{locals.HasAliases}}"{{/locals.HasAliases}}{{/locals.autoFillUsingLocals}} /> Yes</label>
+            <label for="HANo" class="radio-inline"><input type="radio" id="HANo" value="n" name="HasAliases" {{#locals.autoFillUsingLocals}}{{#locals.HasAliases}}value="{{locals.HasAliases}}"{{/locals.HasAliases}}{{/locals.autoFillUsingLocals}} /> No</label>
             <p class="help-block"></p>
           </div>
           <div class="clearfix"></div>
@@ -155,8 +155,8 @@
         <div class="form-group">
           <label class="col-sm-3 control-label" for="HaveChangedName">Have you ever changed your name ?<span class="mandatory">*</span></label>
           <div class="col-sm-9">
-            <label for="HCNYes" class="radio-inline"><input type="radio" id="HCNNo" value="y" name="HaveChangedName" {{#locals.autoFillUsingLocals}}{{#locals.HaveChangedName}}value="{{locals.HaveChangedName}}"{{/locals.HaveChangedName}}{{/locals.autoFillUsingLocals}} /> Yes</label>
-            <label for="HCNNo" class="radio-inline"><input type="radio" id="HCNYes" value="n" name="HaveChangedName" {{#locals.autoFillUsingLocals}}{{#locals.HaveChangedName}}value="{{locals.HaveChangedName}}"{{/locals.HaveChangedName}}{{/locals.autoFillUsingLocals}} /> No</label>
+            <label for="HCNYes" class="radio-inline"><input type="radio" id="HCNYes" value="y" name="HaveChangedName" {{#locals.autoFillUsingLocals}}{{#locals.HaveChangedName}}value="{{locals.HaveChangedName}}"{{/locals.HaveChangedName}}{{/locals.autoFillUsingLocals}} /> Yes</label>
+            <label for="HCNNo" class="radio-inline"><input type="radio" id="HCNNo" value="n" name="HaveChangedName" {{#locals.autoFillUsingLocals}}{{#locals.HaveChangedName}}value="{{locals.HaveChangedName}}"{{/locals.HaveChangedName}}{{/locals.autoFillUsingLocals}} /> No</label>
             <p class="help-block"></p>
           </div>
           <div class="clearfix"></div>
@@ -222,11 +222,9 @@
           <div class="col-sm-9">
             <select id="MaritalStatus" name="MaritalStatus" {{#locals.autoFillUsingLocals}}{{#locals.MaritalStatus}}value="{{locals.MaritalStatus}}"{{/locals.MaritalStatus}}{{/locals.autoFillUsingLocals}} aria-required="true" required >
               <option disabled>----- Select -----</option>
-              <option value="s">Single</option>
-              <option value="m">Married</option>
-              <option value="d">Divorced</option>
-              <option value="w">Widow / Widower</option>
-              <option value="p">Seperated</option>
+              {{#locals.attr_list.MaritalStatus}}
+              <option value="{{key}}">{{value}}</option>
+              {{/locals.attr_list.MaritalStatus}}
             </select>
             <p class="help-block"></p>
           </div>
@@ -237,9 +235,9 @@
           <div class="col-sm-9">
             <select id="CitizenshipBy" name="CitizenshipBy" {{#locals.autoFillUsingLocals}}{{#locals.CitizenshipBy}}value="{{locals.CitizenshipBy}}"{{/locals.CitizenshipBy}}{{/locals.autoFillUsingLocals}} aria-required="true" required >
               <option disabled>----- Select -----</option>
-              <option value="b">Birth</option>
-              <option value="d">Descent</option>
-              <option value="r">Registration / Naturalization</option>
+              {{#locals.attr_list.CitizenshipBy}}
+              <option value="{{key}}">{{value}}</option>
+              {{/locals.attr_list.CitizenshipBy}}
             </select>
             <p class="help-block"></p>
           </div>
@@ -264,18 +262,9 @@
           <div class="col-sm-9">
             <select id="EmploymentType" name="EmploymentType" {{#locals.autoFillUsingLocals}}{{#locals.EmploymentType}}value="{{locals.EmploymentType}}"{{/locals.EmploymentType}}{{/locals.autoFillUsingLocals}} aria-required="true" required >
               <option disabled>----- Select -----</option>
-              <option value="a">Government</option>
-              <option value="b">Homemaker</option>
-              <option value="c">Not Employed</option>
-              <option value="d">Others</option>
-              <option value="e">Owners, Partners &amp; Directors of companies which are mambers of CII, FICCI &amp; ASSOCHAM</option>
-              <option value="f">Private</option>
-              <option value="g">PSU</option>
-              <option value="h">Retired - Government Servent</option>
-              <option value="i">Retired - Private Service</option>
-              <option value="j">Self Employed</option>
-              <option value="k">Statutory Body</option>
-              <option value="l">Student</option>
+              {{#locals.attr_list.EmploymentType}}
+              <option value="{{key}}">{{value}}</option>
+              {{/locals.attr_list.EmploymentType}}
             </select>
             <p class="help-block"></p>
           </div>
@@ -286,10 +275,9 @@
           <div class="col-sm-9">
             <select id="EducationalQualification" name="EducationalQualification" {{#locals.autoFillUsingLocals}}{{#locals.EducationalQualification}}value="{{locals.EducationalQualification}}"{{/locals.EducationalQualification}}{{/locals.autoFillUsingLocals}} aria-required="true" required >
               <option disabled>----- Select -----</option>
-              <option value="">5th pass or less</option>
-              <option value="">Between 6th and 9th standard</option>
-              <option value="">10th pass and above</option>
-              <option value="">Graduate and above</option>
+              {{#locals.attr_list.EducationalQualification}}
+              <option value="{{key}}">{{value}}</option>
+              {{/locals.attr_list.EducationalQualification}}
             </select>
             <p class="help-block"></p>
           </div>
@@ -357,8 +345,8 @@
         <div class="form-group">
           <label class="col-sm-3 control-label" for="PresentAddressOutOfCountry">Is your present address out of India? <span class="mandatory">*</span></label>
           <div class="col-sm-9">
-            <label for="PAOOCYes" class="radio-inline"><input type="radio" id="PAOOCNo" value="y" name="PresentAddressOutOfCountry" {{#locals.autoFillUsingLocals}}{{#locals.PresentAddressOutOfCountry}}value="{{locals.PresentAddressOutOfCountry}}"{{/locals.PresentAddressOutOfCountry}}{{/locals.autoFillUsingLocals}} /> Yes</label>
-            <label for="PAOOCNo" class="radio-inline"><input type="radio" id="PAOOCYes" value="n" name="PresentAddressOutOfCountry" {{#locals.autoFillUsingLocals}}{{#locals.PresentAddressOutOfCountry}}value="{{locals.PresentAddressOutOfCountry}}"{{/locals.PresentAddressOutOfCountry}}{{/locals.autoFillUsingLocals}} /> No</label>
+            <label for="PAOOCYes" class="radio-inline"><input type="radio" id="PAOOCYes" value="y" name="PresentAddressOutOfCountry" {{#locals.autoFillUsingLocals}}{{#locals.PresentAddressOutOfCountry}}value="{{locals.PresentAddressOutOfCountry}}"{{/locals.PresentAddressOutOfCountry}}{{/locals.autoFillUsingLocals}} /> Yes</label>
+            <label for="PAOOCNo" class="radio-inline"><input type="radio" id="PAOOCNo" value="n" name="PresentAddressOutOfCountry" {{#locals.autoFillUsingLocals}}{{#locals.PresentAddressOutOfCountry}}value="{{locals.PresentAddressOutOfCountry}}"{{/locals.PresentAddressOutOfCountry}}{{/locals.autoFillUsingLocals}} /> No</label>
             <p class="help-block"></p>
           </div>
           <div class="clearfix"></div>
@@ -419,8 +407,8 @@
         <div class="form-group">
           <label for="AppliedButNotIssued" class="col-sm-3 control-label">Have you ever applied for passport, but not issued?<span class="mandatory">*</span></label>
           <div class="col-sm-9">
-            <label for="ABNIYes" class="radio-inline"><input type="radio" id="ABNINo" value="y" name="AppliedButNotIssued" {{#locals.autoFillUsingLocals}}{{#locals.AppliedButNotIssued}}value="{{locals.AppliedButNotIssued}}"{{/locals.AppliedButNotIssued}}{{/locals.autoFillUsingLocals}} /> Yes</label>
-            <label for="ABNINo" class="radio-inline"><input type="radio" id="ABNIYes" value="n" name="AppliedButNotIssued" {{#locals.autoFillUsingLocals}}{{#locals.AppliedButNotIssued}}value="{{locals.AppliedButNotIssued}}"{{/locals.AppliedButNotIssued}}{{/locals.autoFillUsingLocals}} /> No</label>
+            <label for="ABNIYes" class="radio-inline"><input type="radio" id="ABNIYes" value="y" name="AppliedButNotIssued" {{#locals.autoFillUsingLocals}}{{#locals.AppliedButNotIssued}}value="{{locals.AppliedButNotIssued}}"{{/locals.AppliedButNotIssued}}{{/locals.autoFillUsingLocals}} /> Yes</label>
+            <label for="ABNINo" class="radio-inline"><input type="radio" id="ABNINo" value="n" name="AppliedButNotIssued" {{#locals.autoFillUsingLocals}}{{#locals.AppliedButNotIssued}}value="{{locals.AppliedButNotIssued}}"{{/locals.AppliedButNotIssued}}{{/locals.autoFillUsingLocals}} /> No</label>
             <p class="help-block"></p>
           </div>
           <div class="clearfix"></div>
@@ -440,8 +428,8 @@
         <div class="form-group">
           <label for="OtherDetails1" class="col-sm-10 control-label">1) Have you ever been charged with criminal proceedings or any arrest warrant/ summon pending before a court of India? <span class="mandatory">*</span></label>
           <div class="col-sm-2">
-            <label for="OD1Yes" class="radio-inline"><input type="radio" id="OD1No" value="y" name="OtherDetails1" {{#locals.autoFillUsingLocals}}{{#locals.OtherDetails1}}value="{{locals.OtherDetails1}}"{{/locals.OtherDetails1}}{{/locals.autoFillUsingLocals}} /> Yes</label>
-            <label for="OD1No" class="radio-inline"><input type="radio" id="OD1Yes" value="n" name="OtherDetails1" {{#locals.autoFillUsingLocals}}{{#locals.OtherDetails1}}value="{{locals.OtherDetails1}}"{{/locals.OtherDetails1}}{{/locals.autoFillUsingLocals}} /> No</label>
+            <label for="OD1Yes" class="radio-inline"><input type="radio" id="OD1Yes" value="y" name="OtherDetails1" {{#locals.autoFillUsingLocals}}{{#locals.OtherDetails1}}value="{{locals.OtherDetails1}}"{{/locals.OtherDetails1}}{{/locals.autoFillUsingLocals}} /> Yes</label>
+            <label for="OD1No" class="radio-inline"><input type="radio" id="OD1No" value="n" name="OtherDetails1" {{#locals.autoFillUsingLocals}}{{#locals.OtherDetails1}}value="{{locals.OtherDetails1}}"{{/locals.OtherDetails1}}{{/locals.autoFillUsingLocals}} /> No</label>
             <p class="help-block"></p>
           </div>
           <div class="clearfix"></div>
@@ -449,8 +437,8 @@
         <div class="form-group">
           <label for="OtherDetails2" class="col-sm-10 control-label">2) Have you at any time during the period of 5 years immediately preceding the date of this application been convicted by a court in India for any criminal offence and sentenced to imprisonment for two years or more? <span class="mandatory">*</span></label>
           <div class="col-sm-2">
-            <label for="OD2Yes" class="radio-inline"><input type="radio" id="OD2No" value="y" name="OtherDetails2" {{#locals.autoFillUsingLocals}}{{#locals.OtherDetails2}}value="{{locals.OtherDetails2}}"{{/locals.OtherDetails2}}{{/locals.autoFillUsingLocals}} /> Yes</label>
-            <label for="OD2No" class="radio-inline"><input type="radio" id="OD2Yes" value="n" name="OtherDetails2" {{#locals.autoFillUsingLocals}}{{#locals.OtherDetails2}}value="{{locals.OtherDetails2}}"{{/locals.OtherDetails2}}{{/locals.autoFillUsingLocals}} /> No</label>
+            <label for="OD2Yes" class="radio-inline"><input type="radio" id="OD2Yes" value="y" name="OtherDetails2" {{#locals.autoFillUsingLocals}}{{#locals.OtherDetails2}}value="{{locals.OtherDetails2}}"{{/locals.OtherDetails2}}{{/locals.autoFillUsingLocals}} /> Yes</label>
+            <label for="OD2No" class="radio-inline"><input type="radio" id="OD2No" value="n" name="OtherDetails2" {{#locals.autoFillUsingLocals}}{{#locals.OtherDetails2}}value="{{locals.OtherDetails2}}"{{/locals.OtherDetails2}}{{/locals.autoFillUsingLocals}} /> No</label>
             <p class="help-block"></p>
           </div>
           <div class="clearfix"></div>
@@ -458,8 +446,8 @@
         <div class="form-group">
           <label for="OtherDetails3" class="col-sm-10 control-label">3) Have you ever been refused or denied passport?  <span class="mandatory">*</span></label>
           <div class="col-sm-2">
-            <label for="OD3Yes" class="radio-inline"><input type="radio" id="OD3No" value="y" name="OtherDetails3" {{#locals.autoFillUsingLocals}}{{#locals.OtherDetails3}}value="{{locals.OtherDetails3}}"{{/locals.OtherDetails3}}{{/locals.autoFillUsingLocals}} /> Yes</label>
-            <label for="OD3No" class="radio-inline"><input type="radio" id="OD3Yes" value="n" name="OtherDetails3" {{#locals.autoFillUsingLocals}}{{#locals.OtherDetails3}}value="{{locals.OtherDetails3}}"{{/locals.OtherDetails3}}{{/locals.autoFillUsingLocals}} /> No</label>
+            <label for="OD3Yes" class="radio-inline"><input type="radio" id="OD3Yes" value="y" name="OtherDetails3" {{#locals.autoFillUsingLocals}}{{#locals.OtherDetails3}}value="{{locals.OtherDetails3}}"{{/locals.OtherDetails3}}{{/locals.autoFillUsingLocals}} /> Yes</label>
+            <label for="OD3No" class="radio-inline"><input type="radio" id="OD3No" value="n" name="OtherDetails3" {{#locals.autoFillUsingLocals}}{{#locals.OtherDetails3}}value="{{locals.OtherDetails3}}"{{/locals.OtherDetails3}}{{/locals.autoFillUsingLocals}} /> No</label>
             <p class="help-block"></p>
           </div>
           <div class="clearfix"></div>
@@ -467,8 +455,8 @@
         <div class="form-group">
           <label for="OtherDetails4" class="col-sm-10 control-label">4) Has your Passport ever been impounded or Revoked? <span class="mandatory">*</span></label>
           <div class="col-sm-2">
-            <label for="OD4Yes" class="radio-inline"><input type="radio" id="OD4No" value="y" name="OtherDetails4" {{#locals.autoFillUsingLocals}}{{#locals.OtherDetails4}}value="{{locals.OtherDetails4}}"{{/locals.OtherDetails4}}{{/locals.autoFillUsingLocals}} /> Yes</label>
-            <label for="OD4No" class="radio-inline"><input type="radio" id="OD4Yes" value="n" name="OtherDetails4" {{#locals.autoFillUsingLocals}}{{#locals.OtherDetails4}}value="{{locals.OtherDetails4}}"{{/locals.OtherDetails4}}{{/locals.autoFillUsingLocals}} /> No</label>
+            <label for="OD4Yes" class="radio-inline"><input type="radio" id="OD4Yes" value="y" name="OtherDetails4" {{#locals.autoFillUsingLocals}}{{#locals.OtherDetails4}}value="{{locals.OtherDetails4}}"{{/locals.OtherDetails4}}{{/locals.autoFillUsingLocals}} /> Yes</label>
+            <label for="OD4No" class="radio-inline"><input type="radio" id="OD4No" value="n" name="OtherDetails4" {{#locals.autoFillUsingLocals}}{{#locals.OtherDetails4}}value="{{locals.OtherDetails4}}"{{/locals.OtherDetails4}}{{/locals.autoFillUsingLocals}} /> No</label>
             <p class="help-block"></p>
           </div>
           <div class="clearfix"></div>
@@ -476,8 +464,8 @@
         <div class="form-group">
           <label for="OtherDetails5" class="col-sm-10 control-label">5) Have you ever applied for/been granted political asylum to/by any foreign country? <span class="mandatory">*</span></label>
           <div class="col-sm-2">
-            <label for="OD5Yes" class="radio-inline"><input type="radio" id="OD5No" value="y" name="OtherDetails5" {{#locals.autoFillUsingLocals}}{{#locals.OtherDetails5}}value="{{locals.OtherDetails5}}"{{/locals.OtherDetails5}}{{/locals.autoFillUsingLocals}} /> Yes</label>
-            <label for="OD5No" class="radio-inline"><input type="radio" id="OD5Yes" value="n" name="OtherDetails5" {{#locals.autoFillUsingLocals}}{{#locals.OtherDetails5}}value="{{locals.OtherDetails5}}"{{/locals.OtherDetails5}}{{/locals.autoFillUsingLocals}} /> No</label>
+            <label for="OD5Yes" class="radio-inline"><input type="radio" id="OD5Yes" value="y" name="OtherDetails5" {{#locals.autoFillUsingLocals}}{{#locals.OtherDetails5}}value="{{locals.OtherDetails5}}"{{/locals.OtherDetails5}}{{/locals.autoFillUsingLocals}} /> Yes</label>
+            <label for="OD5No" class="radio-inline"><input type="radio" id="OD5No" value="n" name="OtherDetails5" {{#locals.autoFillUsingLocals}}{{#locals.OtherDetails5}}value="{{locals.OtherDetails5}}"{{/locals.OtherDetails5}}{{/locals.autoFillUsingLocals}} /> No</label>
             <p class="help-block"></p>
           </div>
           <div class="clearfix"></div>
@@ -485,8 +473,8 @@
         <div class="form-group">
           <label for="OtherDetails6" class="col-sm-10 control-label">6) Have you ever returned to India on Emergency Certificate (EC) or were ever deported or repatriated? <span class="mandatory">*</span></label>
           <div class="col-sm-2">
-            <label for="OD6Yes" class="radio-inline"><input type="radio" id="OD6No" value="y" name="OtherDetails6" {{#locals.autoFillUsingLocals}}{{#locals.OtherDetails6}}value="{{locals.OtherDetails6}}"{{/locals.OtherDetails6}}{{/locals.autoFillUsingLocals}} /> Yes</label>
-            <label for="OD6No" class="radio-inline"><input type="radio" id="OD6Yes" value="n" name="OtherDetails6" {{#locals.autoFillUsingLocals}}{{#locals.OtherDetails6}}value="{{locals.OtherDetails6}}"{{/locals.OtherDetails6}}{{/locals.autoFillUsingLocals}} /> No</label>
+            <label for="OD6Yes" class="radio-inline"><input type="radio" id="OD6Yes" value="y" name="OtherDetails6" {{#locals.autoFillUsingLocals}}{{#locals.OtherDetails6}}value="{{locals.OtherDetails6}}"{{/locals.OtherDetails6}}{{/locals.autoFillUsingLocals}} /> Yes</label>
+            <label for="OD6No" class="radio-inline"><input type="radio" id="OD6No" value="n" name="OtherDetails6" {{#locals.autoFillUsingLocals}}{{#locals.OtherDetails6}}value="{{locals.OtherDetails6}}"{{/locals.OtherDetails6}}{{/locals.autoFillUsingLocals}} /> No</label>
             <p class="help-block"></p>
           </div>
           <div class="clearfix"></div>

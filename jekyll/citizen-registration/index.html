@@ -29,8 +29,8 @@ title: Citizen Registration
         <div class="form-group">
           <label class="col-sm-3 control-label" for="HasAliases">Are you known by any other names(aliases)?<span class="mandatory">*</span></label>
           <div class="col-sm-9">
-            <label for="HAYes" class="radio-inline"><input type="radio" id="HANo" value="y" {% set_attribute_named_when_autofill HasAliases%} /> Yes</label>
-            <label for="HANo" class="radio-inline"><input type="radio" id="HAYes" value="n" {% set_attribute_named_when_autofill HasAliases%} /> No</label>
+            <label for="HAYes" class="radio-inline"><input type="radio" id="HAYes" value="y" {% set_attribute_named_when_autofill HasAliases%} /> Yes</label>
+            <label for="HANo" class="radio-inline"><input type="radio" id="HANo" value="n" {% set_attribute_named_when_autofill HasAliases%} /> No</label>
             <p class="help-block"></p>
           </div>
           <div class="clearfix"></div>
@@ -38,8 +38,8 @@ title: Citizen Registration
         <div class="form-group">
           <label class="col-sm-3 control-label" for="HaveChangedName">Have you ever changed your name ?<span class="mandatory">*</span></label>
           <div class="col-sm-9">
-            <label for="HCNYes" class="radio-inline"><input type="radio" id="HCNNo" value="y" {% set_attribute_named_when_autofill HaveChangedName%} /> Yes</label>
-            <label for="HCNNo" class="radio-inline"><input type="radio" id="HCNYes" value="n" {% set_attribute_named_when_autofill HaveChangedName%} /> No</label>
+            <label for="HCNYes" class="radio-inline"><input type="radio" id="HCNYes" value="y" {% set_attribute_named_when_autofill HaveChangedName%} /> Yes</label>
+            <label for="HCNNo" class="radio-inline"><input type="radio" id="HCNNo" value="n" {% set_attribute_named_when_autofill HaveChangedName%} /> No</label>
             <p class="help-block"></p>
           </div>
           <div class="clearfix"></div>
@@ -105,11 +105,9 @@ title: Citizen Registration
           <div class="col-sm-9">
             <select id="MaritalStatus" {% set_attribute_named_when_autofill MaritalStatus%} aria-required="true" required >
               <option disabled>----- Select -----</option>
-              <option value="s">Single</option>
-              <option value="m">Married</option>
-              <option value="d">Divorced</option>
-              <option value="w">Widow / Widower</option>
-              <option value="p">Seperated</option>
+              {%raw%}{{#locals.attr_list.MaritalStatus}}
+              <option value="{{key}}">{{value}}</option>
+              {{/locals.attr_list.MaritalStatus}}{%endraw%}
             </select>
             <p class="help-block"></p>
           </div>
@@ -120,9 +118,9 @@ title: Citizen Registration
           <div class="col-sm-9">
             <select id="CitizenshipBy" {% set_attribute_named_when_autofill CitizenshipBy%} aria-required="true" required >
               <option disabled>----- Select -----</option>
-              <option value="b">Birth</option>
-              <option value="d">Descent</option>
-              <option value="r">Registration / Naturalization</option>
+              {%raw%}{{#locals.attr_list.CitizenshipBy}}
+              <option value="{{key}}">{{value}}</option>
+              {{/locals.attr_list.CitizenshipBy}}{%endraw%}
             </select>
             <p class="help-block"></p>
           </div>
@@ -147,18 +145,9 @@ title: Citizen Registration
           <div class="col-sm-9">
             <select id="EmploymentType" {% set_attribute_named_when_autofill EmploymentType%} aria-required="true" required >
               <option disabled>----- Select -----</option>
-              <option value="a">Government</option>
-              <option value="b">Homemaker</option>
-              <option value="c">Not Employed</option>
-              <option value="d">Others</option>
-              <option value="e">Owners, Partners &amp; Directors of companies which are mambers of CII, FICCI &amp; ASSOCHAM</option>
-              <option value="f">Private</option>
-              <option value="g">PSU</option>
-              <option value="h">Retired - Government Servent</option>
-              <option value="i">Retired - Private Service</option>
-              <option value="j">Self Employed</option>
-              <option value="k">Statutory Body</option>
-              <option value="l">Student</option>
+              {%raw%}{{#locals.attr_list.EmploymentType}}
+              <option value="{{key}}">{{value}}</option>
+              {{/locals.attr_list.EmploymentType}}{%endraw%}
             </select>
             <p class="help-block"></p>
           </div>
@@ -169,10 +158,9 @@ title: Citizen Registration
           <div class="col-sm-9">
             <select id="EducationalQualification" {% set_attribute_named_when_autofill EducationalQualification%} aria-required="true" required >
               <option disabled>----- Select -----</option>
-              <option value="">5th pass or less</option>
-              <option value="">Between 6th and 9th standard</option>
-              <option value="">10th pass and above</option>
-              <option value="">Graduate and above</option>
+              {%raw%}{{#locals.attr_list.EducationalQualification}}
+              <option value="{{key}}">{{value}}</option>
+              {{/locals.attr_list.EducationalQualification}}{%endraw%}
             </select>
             <p class="help-block"></p>
           </div>
@@ -240,8 +228,8 @@ title: Citizen Registration
         <div class="form-group">
           <label class="col-sm-3 control-label" for="PresentAddressOutOfCountry">Is your present address out of India? <span class="mandatory">*</span></label>
           <div class="col-sm-9">
-            <label for="PAOOCYes" class="radio-inline"><input type="radio" id="PAOOCNo" value="y" {% set_attribute_named_when_autofill PresentAddressOutOfCountry%} /> Yes</label>
-            <label for="PAOOCNo" class="radio-inline"><input type="radio" id="PAOOCYes" value="n" {% set_attribute_named_when_autofill PresentAddressOutOfCountry%} /> No</label>
+            <label for="PAOOCYes" class="radio-inline"><input type="radio" id="PAOOCYes" value="y" {% set_attribute_named_when_autofill PresentAddressOutOfCountry%} /> Yes</label>
+            <label for="PAOOCNo" class="radio-inline"><input type="radio" id="PAOOCNo" value="n" {% set_attribute_named_when_autofill PresentAddressOutOfCountry%} /> No</label>
             <p class="help-block"></p>
           </div>
           <div class="clearfix"></div>
@@ -302,8 +290,8 @@ title: Citizen Registration
         <div class="form-group">
           <label for="AppliedButNotIssued" class="col-sm-3 control-label">Have you ever applied for passport, but not issued?<span class="mandatory">*</span></label>
           <div class="col-sm-9">
-            <label for="ABNIYes" class="radio-inline"><input type="radio" id="ABNINo" value="y" {% set_attribute_named_when_autofill AppliedButNotIssued%} /> Yes</label>
-            <label for="ABNINo" class="radio-inline"><input type="radio" id="ABNIYes" value="n" {% set_attribute_named_when_autofill AppliedButNotIssued%} /> No</label>
+            <label for="ABNIYes" class="radio-inline"><input type="radio" id="ABNIYes" value="y" {% set_attribute_named_when_autofill AppliedButNotIssued%} /> Yes</label>
+            <label for="ABNINo" class="radio-inline"><input type="radio" id="ABNINo" value="n" {% set_attribute_named_when_autofill AppliedButNotIssued%} /> No</label>
             <p class="help-block"></p>
           </div>
           <div class="clearfix"></div>
@@ -323,8 +311,8 @@ title: Citizen Registration
         <div class="form-group">
           <label for="OtherDetails1" class="col-sm-10 control-label">1) Have you ever been charged with criminal proceedings or any arrest warrant/ summon pending before a court of India? <span class="mandatory">*</span></label>
           <div class="col-sm-2">
-            <label for="OD1Yes" class="radio-inline"><input type="radio" id="OD1No" value="y" {% set_attribute_named_when_autofill OtherDetails1%} /> Yes</label>
-            <label for="OD1No" class="radio-inline"><input type="radio" id="OD1Yes" value="n" {% set_attribute_named_when_autofill OtherDetails1%} /> No</label>
+            <label for="OD1Yes" class="radio-inline"><input type="radio" id="OD1Yes" value="y" {% set_attribute_named_when_autofill OtherDetails1%} /> Yes</label>
+            <label for="OD1No" class="radio-inline"><input type="radio" id="OD1No" value="n" {% set_attribute_named_when_autofill OtherDetails1%} /> No</label>
             <p class="help-block"></p>
           </div>
           <div class="clearfix"></div>
@@ -332,8 +320,8 @@ title: Citizen Registration
         <div class="form-group">
           <label for="OtherDetails2" class="col-sm-10 control-label">2) Have you at any time during the period of 5 years immediately preceding the date of this application been convicted by a court in India for any criminal offence and sentenced to imprisonment for two years or more? <span class="mandatory">*</span></label>
           <div class="col-sm-2">
-            <label for="OD2Yes" class="radio-inline"><input type="radio" id="OD2No" value="y" {% set_attribute_named_when_autofill OtherDetails2%} /> Yes</label>
-            <label for="OD2No" class="radio-inline"><input type="radio" id="OD2Yes" value="n" {% set_attribute_named_when_autofill OtherDetails2%} /> No</label>
+            <label for="OD2Yes" class="radio-inline"><input type="radio" id="OD2Yes" value="y" {% set_attribute_named_when_autofill OtherDetails2%} /> Yes</label>
+            <label for="OD2No" class="radio-inline"><input type="radio" id="OD2No" value="n" {% set_attribute_named_when_autofill OtherDetails2%} /> No</label>
             <p class="help-block"></p>
           </div>
           <div class="clearfix"></div>
@@ -341,8 +329,8 @@ title: Citizen Registration
         <div class="form-group">
           <label for="OtherDetails3" class="col-sm-10 control-label">3) Have you ever been refused or denied passport?  <span class="mandatory">*</span></label>
           <div class="col-sm-2">
-            <label for="OD3Yes" class="radio-inline"><input type="radio" id="OD3No" value="y" {% set_attribute_named_when_autofill OtherDetails3%} /> Yes</label>
-            <label for="OD3No" class="radio-inline"><input type="radio" id="OD3Yes" value="n" {% set_attribute_named_when_autofill OtherDetails3%} /> No</label>
+            <label for="OD3Yes" class="radio-inline"><input type="radio" id="OD3Yes" value="y" {% set_attribute_named_when_autofill OtherDetails3%} /> Yes</label>
+            <label for="OD3No" class="radio-inline"><input type="radio" id="OD3No" value="n" {% set_attribute_named_when_autofill OtherDetails3%} /> No</label>
             <p class="help-block"></p>
           </div>
           <div class="clearfix"></div>
@@ -350,8 +338,8 @@ title: Citizen Registration
         <div class="form-group">
           <label for="OtherDetails4" class="col-sm-10 control-label">4) Has your Passport ever been impounded or Revoked? <span class="mandatory">*</span></label>
           <div class="col-sm-2">
-            <label for="OD4Yes" class="radio-inline"><input type="radio" id="OD4No" value="y" {% set_attribute_named_when_autofill OtherDetails4%} /> Yes</label>
-            <label for="OD4No" class="radio-inline"><input type="radio" id="OD4Yes" value="n" {% set_attribute_named_when_autofill OtherDetails4%} /> No</label>
+            <label for="OD4Yes" class="radio-inline"><input type="radio" id="OD4Yes" value="y" {% set_attribute_named_when_autofill OtherDetails4%} /> Yes</label>
+            <label for="OD4No" class="radio-inline"><input type="radio" id="OD4No" value="n" {% set_attribute_named_when_autofill OtherDetails4%} /> No</label>
             <p class="help-block"></p>
           </div>
           <div class="clearfix"></div>
@@ -359,8 +347,8 @@ title: Citizen Registration
         <div class="form-group">
           <label for="OtherDetails5" class="col-sm-10 control-label">5) Have you ever applied for/been granted political asylum to/by any foreign country? <span class="mandatory">*</span></label>
           <div class="col-sm-2">
-            <label for="OD5Yes" class="radio-inline"><input type="radio" id="OD5No" value="y" {% set_attribute_named_when_autofill OtherDetails5%} /> Yes</label>
-            <label for="OD5No" class="radio-inline"><input type="radio" id="OD5Yes" value="n" {% set_attribute_named_when_autofill OtherDetails5%} /> No</label>
+            <label for="OD5Yes" class="radio-inline"><input type="radio" id="OD5Yes" value="y" {% set_attribute_named_when_autofill OtherDetails5%} /> Yes</label>
+            <label for="OD5No" class="radio-inline"><input type="radio" id="OD5No" value="n" {% set_attribute_named_when_autofill OtherDetails5%} /> No</label>
             <p class="help-block"></p>
           </div>
           <div class="clearfix"></div>
@@ -368,8 +356,8 @@ title: Citizen Registration
         <div class="form-group">
           <label for="OtherDetails6" class="col-sm-10 control-label">6) Have you ever returned to India on Emergency Certificate (EC) or were ever deported or repatriated? <span class="mandatory">*</span></label>
           <div class="col-sm-2">
-            <label for="OD6Yes" class="radio-inline"><input type="radio" id="OD6No" value="y" {% set_attribute_named_when_autofill OtherDetails6%} /> Yes</label>
-            <label for="OD6No" class="radio-inline"><input type="radio" id="OD6Yes" value="n" {% set_attribute_named_when_autofill OtherDetails6%} /> No</label>
+            <label for="OD6Yes" class="radio-inline"><input type="radio" id="OD6Yes" value="y" {% set_attribute_named_when_autofill OtherDetails6%} /> Yes</label>
+            <label for="OD6No" class="radio-inline"><input type="radio" id="OD6No" value="n" {% set_attribute_named_when_autofill OtherDetails6%} /> No</label>
             <p class="help-block"></p>
           </div>
           <div class="clearfix"></div>
