@@ -12,6 +12,7 @@ class Application
     switch source
       when 'db'
         row = data
+        @Id = row.Id
         @CitizenEmail = row.CitizenEmail
         @ApplyingFor = row.ApplyingFor
         @ApplicationType = row.ApplicationType
@@ -30,7 +31,6 @@ class Application
         @ValidityRequired = req.param 'ValidityRequired'
         @GrantingOfficerEmail = req.param 'GrantingOfficerEmail'
         @RegionId = req.param 'RegionId'
-        console.log @
 
   insertQuery: (client, done, callback) ->
     client.query

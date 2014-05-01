@@ -23,10 +23,18 @@ router.all '/profile', (req, res, next) ->
 
 router.all '/status', (req, res, next) ->
   res.locals.attr_list = citizen.attr_list
-  application.getAllForEmail req.session.user.email, (err, applications) ->
+  application.getAllForEmail req.session.user.email, (err, allApplications) ->
     return next err if err
-    res.locals.applications = (application.expandValueUsingMap app for app in applications)
-    next()
+    region.getRegions (err, regions) ->
+      return next err if err
+      regionsMap = {}
+      regionsMap[r.Id] = r.Name for r in regions
+      for app in allApplications
+        application.expandValueUsingMap app
+        app.Region = regionsMap[app.RegionId]
+      res.locals.applications = allApplications
+      next()
+      return
     return
   return
 

@@ -1,0 +1,68 @@
+---
+layout: user
+title: Passport Applications Status
+---
+
+<div class="row">
+  <div class="col-md-4">
+    <!-- Nav tabs -->
+    <ul class="nav nav-pills nav-stacked">
+      {%raw%}{{#locals.applications}}
+      <li><a href="#PassportApplication{{Id}}" data-toggle="tab">Passport Application: {{Id}}</a></li>
+      {{/locals.applications}}{%endraw%}
+    </ul>
+  </div>
+
+  <div class="col-md-8">
+    <div class="tab-content">
+    <!-- Tab panes -->
+    {%raw%}{{#locals.applications}}{%endraw%}
+      <div class="tab-pane fade" id="{%raw%}PassportApplication{{Id}}{%endraw%}">
+        <div class="panel panel-default">
+          <div class="panel-heading"><h3 class="panel-title text-center">Passport Application</h3></div>
+          <div class="panel-body">
+            <div class="form-horizontal">
+              <div class="form-group has-feedback">
+                <label class="col-sm-3 control-label" for="RegionId">Passport Office <span class="mandatory">*</span> <span class="info-text">(As per Present Address)</span></label>
+                <div class="col-sm-9">
+                  <div class="form-control-static">{%raw%}{{Region}}{%endraw%}</div>
+                </div>
+              </div>
+              <div class="form-group has-feedback">
+                <label for="PassportType" class="col-sm-3 control-label">Passport Type <span class="mandatory">*</span></label>
+                <div class="col-sm-9">
+                  <div class="form-control-static">{%raw%}{{PassportType}}{%endraw%}</div>
+                </div>
+              </div>
+              <div class="form-group has-feedback">
+                <label for="ApplyingFor" class="col-sm-3 control-label">Applying for <span class="mandatory">*</span></label>
+                <div class="col-sm-9">
+                  <div class="form-control-static">{%raw%}{{ApplyingFor}}{%endraw%}</div>
+                </div>
+              </div>
+              <div class="form-group has-feedback">
+                <label for="ApplicationType" class="col-sm-3 control-label">Type of Application <span class="mandatory">*</span></label>
+                <div class="col-sm-9">
+                  <div class="form-control-static">{%raw%}{{ApplicationType}}{%endraw%}</div>
+                </div>
+              </div>
+              <div class="form-group has-feedback">
+                <label for="PassportBookletType" class="col-sm-3 control-label">Type of Passport Booklet <span class="mandatory">*</span></label>
+                <div class="col-sm-9">
+                  <div class="form-control-static">{%raw%}{{PassportBookletType}}{%endraw%}</div>
+                </div>
+              </div>
+              <div class="form-group has-feedback">
+                <label for="ValidityRequired" class="col-sm-3 control-label">Validity Required <span class="info-text">(For minors between 15 and 18)</span></label>
+                <div class="col-sm-9">
+                  <div class="form-control-static">{%raw%}{{ValidityRequired}}{%endraw%}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    {%raw%}{{/locals.applications}}{%endraw%}
+    </div>
+  </div>
+</div>
