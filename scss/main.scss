@@ -37,14 +37,14 @@
 }
 
 input[type=date],
-input.ws-date,
-input#DateOfBirth {
+input.ws-date {
   ~ .form-control-feedback {
-    right: 2.7em;
+    right: 2.7em !important;
   }
 }
 
-select {
+select,
+input[type=number] {
   ~ .form-control-feedback {
     right: 2.2em !important;
   }

@@ -12,7 +12,7 @@ router.post '/', (req, res, next) ->
       console.error err
       next()
       return
-    res.redirect req.url.replace /^\//, "/dashboard"
+    res.redirect "/dashboard"
     return
   return
 

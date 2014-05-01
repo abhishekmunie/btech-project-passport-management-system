@@ -40,3 +40,5 @@ static/bower_components/modernizr/media/
 static/bower_components/modernizr/test/
 static/bower_components/webshim/js-webshim/dev/
 static/bower_components/webshim/grunt-tasks/
+
+.pgexports/

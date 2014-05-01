@@ -227,14 +227,14 @@ h1[id] {
 .has-error .glyphicon-remove {
   visibility: visible; }
 
-/* line 42, ../../scss/main.scss */
+/* line 41, ../../scss/main.scss */
 input[type=date] ~ .form-control-feedback,
-input.ws-date ~ .form-control-feedback,
-input#DateOfBirth ~ .form-control-feedback {
-  right: 2.7em; }
+input.ws-date ~ .form-control-feedback {
+  right: 2.7em !important; }
 
 /* line 48, ../../scss/main.scss */
-select ~ .form-control-feedback {
+select ~ .form-control-feedback,
+input[type=number] ~ .form-control-feedback {
   right: 2.2em !important; }
 
 /* line 55, ../../scss/main.scss */
