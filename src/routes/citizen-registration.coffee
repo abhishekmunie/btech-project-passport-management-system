@@ -5,13 +5,13 @@ citizen = require '../user/citizen'
 
 router.post '/', (req, res, next) ->
   newCitizen = new citizen.Citizen('req', req)
-  console.log newCitizen
   citizen.addCitizen newCitizen, (err) ->
     if err
       res.locals.error = err
       console.error err
       next()
       return
+    req.session.user = newCitizen
     res.redirect "/dashboard"
     return
   return
