@@ -30,7 +30,18 @@ router.all '/status', (req, res, next) ->
     return
   return
 
-router.all '/application', (req, res, next) ->
+router.post '/application', (req, res, next) ->
+  newApplication = new application.Application('req', req)
+  application.addApplication newApplication, (err) ->
+    if err
+      res.locals.error = err
+      console.error err
+      next()
+      return
+    res.locals.success = message: 'You passport request has been successfully registered.'
+    next()
+    return
+  return
   next()
 
 router.all '/application', (req, res, next) ->

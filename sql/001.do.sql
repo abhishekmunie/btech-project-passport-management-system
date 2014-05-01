@@ -76,7 +76,7 @@ CREATE TABLE IF NOT EXISTS "passport"."PassportApplication" (
 "ApplicationType" char NOT NULL,
 "PassportType" char NOT NULL,
 "PassportBookletType" char NOT NULL,
-"ValidityRequired" int,
+"ValidityRequired" char,
 "GrantingOfficerEmail" varchar(255),
 "RegionId" int NOT NULL,
 PRIMARY KEY ("Id")

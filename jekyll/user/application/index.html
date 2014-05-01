@@ -6,12 +6,13 @@ title: Passport Application
 <div class="container-fluid">
   <div class="panel panel-default">
     <div class="panel-heading"><h3 class="panel-title text-center">Passport Appliccation</h3></div>
+    {% include success-error.html %}
     <div class="panel-body">
       <form role="form" action="/user/application/" method="post" class="form-horizontal ws-validate">
         <div class="form-group has-feedback">
-          <label class="col-sm-3 control-label" for="Region">Passport Office <span class="mandatory">*</span> <span class="info-text">(As per Present Address)</span></label>
+          <label class="col-sm-3 control-label" for="RegionId">Passport Office <span class="mandatory">*</span> <span class="info-text">(As per Present Address)</span></label>
           <div class="col-sm-9">
-            <select name="Region" id="Region" class="form-control input-sm" aria-required="true" required="" />
+            <select name="RegionId" id="RegionId" class="form-control input-sm" aria-required="true" required="" />
               <option disabled>----- Select -----</option>
               {% raw %}{{#locals.regions}}
               <option value="{{Id}}">{{Name}}</option>

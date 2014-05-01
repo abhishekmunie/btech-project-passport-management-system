@@ -57,7 +57,7 @@ title: Citizen Registration
           </div>
         </div>
         <div class="form-group has-feedback">
-          <label class="col-sm-3 control-label" for="DateOfBirth">Date of Birth (MM/DD/YYYY)<span class="mandatory">*</span></label>
+          <label class="col-sm-3 control-label" for="DateOfBirth">Date of Birth&nbsp;<span class="info-text">(MM/DD/YYYY)</span><span class="mandatory">*</span></label>
           <div class="col-sm-9">
             <input type="date" class="form-control inputbtns-outside hide-spinbtns max-today" {%raw%}max="{{locals.today}}"{%endraw%} data-date='{"openOnMouseFocus": true, "updateOnInput": true}' {% set_attribute_named_when_autofill DateOfBirth%} maxlength="255" id="DateOfBirth" aria-required="true" required="" title="Date of Birth">
             <span class="glyphicon glyphicon-ok form-control-feedback"></span><span class="glyphicon glyphicon-remove form-control-feedback"></span>

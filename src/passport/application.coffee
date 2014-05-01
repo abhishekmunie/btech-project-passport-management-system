@@ -11,45 +11,61 @@ class Application
   constructor: (source, data) ->
     switch source
       when 'db'
-        result = data
-        @email = result.rows[0].email
+        row = data
+        @CitizenEmail = row.CitizenEmail
+        @ApplyingFor = row.ApplyingFor
+        @ApplicationType = row.ApplicationType
+        @PassportType = row.PassportType
+        @PassportBookletType = row.PassportBookletType
+        @ValidityRequired = row.ValidityRequired
+        @GrantingOfficerEmail = row.GrantingOfficerEmail
+        @RegionId = row.RegionId
       when 'req'
         req = data
-        @email = req.param 'email'
+        @CitizenEmail = req.session.user.email
+        @ApplyingFor = req.param 'ApplyingFor'
+        @ApplicationType = req.param 'ApplicationType'
+        @PassportType = req.param 'PassportType'
+        @PassportBookletType = req.param 'PassportBookletType'
+        @ValidityRequired = req.param 'ValidityRequired'
+        @GrantingOfficerEmail = req.param 'GrantingOfficerEmail'
+        @RegionId = req.param 'RegionId'
+        console.log @
 
-insertQuery = (client, done, callback) ->
-  client.query
-    name: "citizen_insert"
-    text: "INSERT INTO #{EntityName} VALUES ( " +
-      '$1::varchar , '  +  # email
-      " ) "
-    values: [
-      @email
-    ]
-  , (err, result) ->
-    if err
-      done? client
-      callback? err
-      return
-    done?()
-    callback?()
+  insertQuery: (client, done, callback) ->
+    client.query
+      name: "citizen_insert"
+      text: "INSERT INTO #{EntityName} " +
+        '("CitizenEmail" , "ApplyingFor" , "ApplicationType" , "PassportType" , "PassportBookletType" , "ValidityRequired" , "GrantingOfficerEmail" , "RegionId") ' +
+        'VALUES ( $1::varchar , $2::char , $3::char , $4::char , $5::char , $6::char , $7::varchar , $8::int ) '
+      values: [
+        @CitizenEmail , @ApplyingFor , @ApplicationType , @PassportType , @PassportBookletType , @ValidityRequired , @GrantingOfficerEmail , @RegionId
+      ]
+    , (err, result) ->
+      if err
+        done? client
+        callback? err
+        return
+      done?()
+      callback?()
 
-insertIntoDatabase: (client, callback) ->
-  if typeof client is "function"
-    callback = client
-    client = undefined
+  insertIntoDatabase: (client, callback) ->
+    if typeof client is "function"
+      callback = client
+      client = undefined
 
-    if client?
-      insertQuery client, null, callback
-    else
-      PGConnect (err, client, done) ->
-        if err
-          done? client
-          callback? err
-          return
-        insertQuery client, done, callback
+      if client?
+        @insertQuery client, null, callback
+      else
+        PGConnect (err, client, done) =>
+          if err
+            done? client
+            callback? err
+            return
+          @insertQuery client, done, callback
 
-addApplication = (client, callback) ->
+addApplication = (application, client, callback) ->
+  application.insertIntoDatabase client, callback
 
 attr_maps =
   PassportType:
