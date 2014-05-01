@@ -32,7 +32,7 @@ getForEmail = (email, callback) ->
 
 filter = (req, res, next) ->
   debug "Admin Auth Filter: #{req.url}"
-  res.redirect "/auth/signin?redirect=#{encodeURIComponent req.url}" unless req.session.user
+  return res.redirect "/auth/signin?redirect=#{encodeURIComponent req.url}" unless req.session.user
   isAdmin req.session.user.email, (err, adminValidity) ->
     unless adminValidity
       if req.session.user

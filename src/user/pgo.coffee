@@ -116,7 +116,7 @@ removePassportGrantingOfficer = (email, client, callback) ->
 
 filter = (req, res, next) ->
   debug "Passport Granting Officer Auth Filter: #{req.url}"
-  res.redirect "/auth/signin?redirect=#{encodeURIComponent req.url}" unless req.session.user?
+  return res.redirect "/auth/signin?redirect=#{encodeURIComponent req.url}" unless req.session.user
   isPassportGrantingOfficer req.session.user.email, (err, pgoValidity) ->
     unless pgoValidity
       if req.session.user

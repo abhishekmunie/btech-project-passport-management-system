@@ -330,7 +330,7 @@ expandValueUsingMap = (hash) ->
 
 filter = (req, res, next) ->
   debug "Citizen Auth Filter: #{req.url}"
-  res.redirect "/auth/signin?redirect=#{encodeURIComponent req.url}" unless req.session.user?
+  return res.redirect "/auth/signin?redirect=#{encodeURIComponent req.url}" unless req.session.user
   isCitizen req.session.user.email, (err, citizenValidity) ->
     unless citizenValidity
       if req.session.user
