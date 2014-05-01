@@ -69,11 +69,8 @@ CREATE TABLE IF NOT EXISTS "passport"."Citizen" (
 PRIMARY KEY ("email")
 );
 
-DROP SEQUENCE IF EXISTS "passport_id_seq";
-CREATE SEQUENCE "passport_id_seq";
-
 CREATE TABLE IF NOT EXISTS "passport"."PassportApplication" (
-"Id" int NOT NULL default nextval("passport_id_seq"),
+"Id" BIGSERIAL NOT NULL,
 "CitizenEmail" varchar(225) NOT NULL,
 "ApplyingFor" char NOT NULL,
 "ApplicationType" char NOT NULL,
@@ -84,8 +81,6 @@ CREATE TABLE IF NOT EXISTS "passport"."PassportApplication" (
 "RegionId" int NOT NULL,
 PRIMARY KEY ("Id")
 );
-
-ALTER SEQUENCE "passport_id_seq" owned by "passport"."PassportApplication"."Id";
 
 CREATE TABLE IF NOT EXISTS "passport"."Validation" (
 "ApplicationId" int NOT NULL,
