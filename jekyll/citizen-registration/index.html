@@ -317,7 +317,7 @@ title: Citizen Registration
         <div class="form-group has-feedback">
           <label for="PreviousPassportNumber" class="col-sm-3 control-label">Previous Passport Number</label>
           <div class="col-sm-9">
-            <input type="text" id="PreviousPassportNumber" {% set_attribute_named_when_autofill PreviousPassportNumber%} data-dependent-validation="{"from":}" maxlength="255" class="form-control">
+            <input type="text" id="PreviousPassportNumber" {% set_attribute_named_when_autofill PreviousPassportNumber%} data-dependent-validation='{"from":"ABNIy", "prop": "required"}' maxlength="255" class="form-control">
             <p class="help-block"></p>
           </div>
         </div>
