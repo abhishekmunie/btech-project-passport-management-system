@@ -11,7 +11,6 @@ getRegions = (callback) ->
   PGConnect (err, client, done) ->
     if err
       done? client
-      console.error 'error fetching client from pool', err
       callback? err
       return
     client.query
@@ -21,7 +20,6 @@ getRegions = (callback) ->
     , (err, result) ->
       if err
         done? client
-        console.error 'error running query', err
         callback? err
         return
       done?()
@@ -31,7 +29,6 @@ getPGOForRegionWithId = (id, callback) ->
   PGConnect (err, client, done) ->
     if err
       done? client
-      console.error 'error fetching client from pool', err
       callback? err
       return
     client.query
@@ -41,7 +38,6 @@ getPGOForRegionWithId = (id, callback) ->
     , (err, result) ->
       if err
         done? client
-        console.error 'error running query', err
         callback? err
         return
       done?()

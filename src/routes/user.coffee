@@ -6,8 +6,7 @@ citizen = require '../user/citizen'
 application = require '../passport/application'
 region = require '../passport/region'
 
-# globals = require '../globals'
-# PGConnect = globals.PGConnect
+globals = require '../globals'
 
 
 router.all '/profile', (req, res, next) ->

@@ -19,7 +19,6 @@ getPassportGrantingOfficers = (callback) ->
   PGConnect (err, client, done) ->
     if err
       done? client
-      console.error 'error fetching client from pool', err
       callback? err
       return
     client.query
@@ -29,7 +28,6 @@ getPassportGrantingOfficers = (callback) ->
     , (err, result) ->
       if err
         done? client
-        console.error 'error running query', err
         callback? err
         return
       done?()
@@ -43,7 +41,6 @@ insertQuery = (values, client, done, callback) ->
   , (err, result) ->
     if err
       done? client
-      console.error 'error running query', err
       callback? err
       return
     done?()
@@ -60,7 +57,6 @@ insertPassportGrantingOfficerIntoDatabase = (email, Name, client, callback) ->
     PGConnect (err, client, done) ->
       if err
         done? client
-        console.error 'error fetching client from pool', err
         callback? err
         return
       insertQuery [email, Name], client, done, callback
@@ -71,9 +67,8 @@ addPassportGrantingOfficer = (email, Name, client, callback) ->
   debug "Adding PGO with email: #{email}"
   tempPassword = crypto.createHash('sha1').update(crypto.randomBytes 256).digest 'hex'
   user.addUser email, tempPassword, client, (err) ->
-    user.resetPasswordForUserWithEmail email, (err, res) ->
+    user.resetPasswordForUserWithEmail email, client, (err, res) ->
       return callback? err if err
-      console.log res
       insertPassportGrantingOfficerIntoDatabase email, Name, client, callback
 
 deleteQuery = (values, client, done, callback) ->
@@ -84,7 +79,6 @@ deleteQuery = (values, client, done, callback) ->
   , (err, result) ->
     if err
       done? client
-      console.error 'error running query', err
       callback? err
       return
     done?()
@@ -101,7 +95,6 @@ deletePassportGrantingOfficerFromDatabase = (email, client, callback) ->
     PGConnect (err, client, done) ->
       if err
         done? client
-        console.error 'error fetching client from pool', err
         callback? err
         return
       deleteQuery [email], client, done, callback
@@ -140,7 +133,6 @@ module.exports =
     PGConnect (err, client, done) ->
       if err
         done? client
-        console.error 'error fetching client from pool', err
         callback? err
         return
       client.query
@@ -150,7 +142,6 @@ module.exports =
       , (err, result) ->
         if err
           done? client
-          console.error 'error running query', err
           callback? err
           return
         done?()
@@ -160,7 +151,6 @@ module.exports =
     PGConnect (err, client, done) ->
       if err
         done? client
-        console.error 'error fetching client from pool', err
         callback? err
         return
       client.query
@@ -170,7 +160,6 @@ module.exports =
       , (err, result) ->
         if err
           done? client
-          console.error 'error running query', err
           callback? err
           return
         done?()

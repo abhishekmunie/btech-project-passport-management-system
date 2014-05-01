@@ -16,7 +16,6 @@ isValidationAuthority = (email, callback) ->
   PGConnect (err, client, done) ->
     if err
       done? client
-      console.error 'error fetching client from pool', err
       callback? err
       return
     client.query
@@ -26,7 +25,6 @@ isValidationAuthority = (email, callback) ->
     , (err, result) ->
       if err
         done? client
-        console.error 'error running query', err
         callback? err
         return
       done?()
@@ -55,7 +53,6 @@ module.exports =
     PGConnect (err, client, done) ->
       if err
         done? client
-        console.error 'error fetching client from pool', err
         callback? err
         return
       client.query
@@ -65,7 +62,6 @@ module.exports =
       , (err, result) ->
         if err
           done? client
-          console.error 'error running query', err
           callback? err
           return
         done?()

@@ -1,6 +1,6 @@
 ---
 layout: auth
-title: Email Verification
+title: Password Reset
 ---
 <div class="container-fluid">
   {% include success-error.html %}
@@ -8,10 +8,10 @@ title: Email Verification
   {{^locals.hideForm}}
   <div class="panel panel-default center-block auth-panel">
     <div class="panel-heading">
-      <h3 class="panel-title">Please create credentials for your account</h3>
+      <h3 class="panel-title">Please create new credentials for your account</h3>
     </div>
     <div class="panel-body">
-      <form action="/auth/verification/{{locals.encodedVerificationKey}}" method="post" class="form-signin ws-validate" role="form">
+      <form action="/auth/reset/{{locals.encodedResetKey}}" method="post" class="form-signin ws-validate" role="form">
         <div class="form-group has-feedback">
           <label class="control-label" for="email">Email</label>
           <input type="email" class="form-control form-control-static" name="email" id="email" value="{{locals.email}}" placeholder="Enter your email" disabled />
@@ -34,7 +34,7 @@ title: Email Verification
           <p data-errortype="dependent">you have to confirm your password!</p>
         </div>
         {{#query.redirect}}<input type="hidden" name="redirect" value="{{query.redirect}}">{{/query.redirect}}
-        <input class="btn btn-primary btn-block" type="submit" value="Sign in" />
+        <input class="btn btn-primary btn-block" type="submit" value="Reset Password" />
       </form>
     </div>
   </div>

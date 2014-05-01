@@ -23,7 +23,6 @@ insertQuery = (values, client, done, callback) ->
   , (err, result) ->
     if err
       done? client
-      console.error 'error running query', err
       callback? err
       return
     done?()
@@ -40,7 +39,6 @@ insertIntoDatabase = (email, verificationKey, client, callback) ->
     PGConnect (err, client, done) ->
       if err
         done? client
-        console.error 'error fetching client from pool', err
         callback? err
         return
       insertQuery [email, verificationKey], client, done, callback
@@ -54,7 +52,7 @@ getEmailForVerificationKey = (verificationKey, callback) ->
       callback? err
       return
     client.query
-      name: "unverifieduser_verification"
+      name: "unverifieduser_get_for_key"
       text: "SELECT email FROM #{EntityName} WHERE \"VerificationKey\" = $1::varchar "
       values: [verificationKey]
     , (err, result) ->
@@ -81,7 +79,6 @@ verifyVerificationKey = (email, verificationKey, callback) ->
         callback? err
         return
       done?()
-      console.log email, verificationKey, result
       callback? null, result.rows[0].exists is '1'
 
 addUnverifiedUser = (email, name, client, callback) ->
@@ -105,7 +102,6 @@ deleteQuery = (values, client, done, callback) ->
   , (err, result) ->
     if err
       done? client
-      console.error 'error running query', err
       callback? err
       return
     done?()
@@ -122,7 +118,6 @@ deleteFromDatabaseUnverifiedUserForVerificationKey = (verificationKey, client, c
     PGConnect (err, client, done) ->
       if err
         done? client
-        console.error 'error fetching client from pool', err
         callback? err
         return
       deleteQuery [verificationKey], client, done, callback

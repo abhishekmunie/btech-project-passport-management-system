@@ -14,6 +14,7 @@ smtpTransport = nodemailer.createTransport "SMTP",
       pass: config.email.pass
 
 sendMail = (to, subject, body, callback) ->
+  debug "Sending email to #{to} with subject #{subject} and body: #{body}"
   if config.env is 'production'
     smtpTransport.sendMail
         from: "#{config.email.name} <#{config.email.user}>"
@@ -42,9 +43,7 @@ fs.readFile passwordResetTemplateFile, (err, data) ->
 
 module.exports =
   sendVerificationEMail: (to, verificationKey, callback) ->
-    debug "Sending Verification email to #{to} with key: #{verificationKey}"
     sendMail to, 'Email Verification', verificationMailTemplate.render(key: encodeURIComponent(verificationKey)), callback
 
   sendPasswordResetEMail: (to, resetKey, callback) ->
-    debug "Sending Reset email to #{to} with key: #{resetKey}"
     sendMail to, 'Password Reset', passwordResetTemplate.render(key: encodeURIComponent(resetKey)), callback

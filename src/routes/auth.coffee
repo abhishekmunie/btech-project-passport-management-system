@@ -3,6 +3,7 @@ express = require 'express'
 router  = express.Router()
 
 auth           = require '../user/authentication'
+reset          = require '../user/reset'
 user           = require '../user/user'
 unverifiedUser = require '../user/unverifiedUser'
 citizen        = require '../user/citizen'
@@ -60,7 +61,7 @@ router.post '/signup', (req, res, next) ->
     res.locals.email = email
     next()
     return
-  unverifiedUser.addUnverifiedUser email, name, (err) ->
+  user.getForEmail email, (err, existingUser) ->
     if err
       res.locals.error = err
       res.locals.autoFillUsingLocals = true
@@ -68,14 +69,26 @@ router.post '/signup', (req, res, next) ->
       res.locals.email = email
       next()
       return
-    res.locals.success = message: 'You have been sent a verification email. Please check your inbox/spam and click verify to activate your account.'
-    next()
-  return
+    if existingUser
+      res.locals.error = new Error("An account with email #{email} already exist. Try resetting password.")
+      next()
+      return
+    unverifiedUser.addUnverifiedUser email, name, (err) ->
+      if err
+        res.locals.error = err
+        res.locals.autoFillUsingLocals = true
+        res.locals.name = name
+        res.locals.email = email
+        next()
+        return
+      res.locals.success = message: 'You have been sent a verification email. Please check your inbox/spam and click verify to activate your account.'
+      next()
+    return
 
 rollback = (client, done) -> client.query 'ROLLBACK', (err) -> done? err
 
 router.all '/verification', (req, res, next) ->
-  res.locals.error = new Error('Invalid Verification Link')
+  res.locals.error = new Error('Invalid Link')
   res.locals.hideForm = true
   next()
   return
@@ -84,6 +97,9 @@ router.all '/verification/:verificationKey', (req, res, next) ->
   verificationKey = req.param 'verificationKey'
   req.url = '/verification'
   unverifiedUser.getEmailForVerificationKey verificationKey, (err, email) ->
+    if err
+      next(err)
+      return
     unless email
       res.locals.error = new Error('Invalid Verification Link')
       res.locals.hideForm = true
@@ -99,8 +115,6 @@ router.post '/verification', (req, res, next) ->
   if res.locals.error
     next()
     return
-  verificationKey = req.param 'verificationKey'
-  console.log 'verificationKey', verificationKey
   password = req.param 'password'
   confirmPassword = req.param 'confirmPassword'
   if password isnt confirmPassword
@@ -125,7 +139,7 @@ router.post '/verification', (req, res, next) ->
           res.locals.error = err
           next()
           return
-        unverifiedUser.removeUnverifiedUser verificationKey, client, (err) ->
+        unverifiedUser.removeUnverifiedUser res.locals.verificationKey, client, (err) ->
           if err
             rollback client, done
             res.locals.error = err
@@ -145,69 +159,89 @@ router.post '/verification', (req, res, next) ->
               res.redirect '/dashboard/'
 
 
-# router.all '/reset', (req, res, next) ->
-#   verificationKey = req.param 'verificationKey'
-#   if not verificationKey or verificationKey is ''
-#     res.locals.error = new Error('Invalid Verification Link')
-#     res.locals.hideForm = true
-#     next()
-#     return
-#   unverifiedUser.getEmailForVerificationKey verificationKey, (err, email) ->
-#     unless email
-#       res.locals.error = new Error('Invalid Verification Link')
-#       res.locals.hideForm = true
-#       next()
-#       return
-#     res.locals.email = email
-#     res.locals.verificationKey = verificationKey
-#     next()
-#     return
+router.post '/forgot', (req, res, next) ->
+  if res.locals.error
+    next()
+    return
+  email = req.param 'email'
+  user.resetPasswordForUserWithEmail email, (err) ->
+    if err
+      res.locals.error = err
+      next()
+      return
+    res.locals.success = message: 'A passort reset link has been sent to your email.'
+    next()
+    return
 
-# router.post '/reset', (req, res, next) ->
-#   if res.locals.error
-#     next()
-#     return
-#   verificationKey = req.param 'verificationKey'
-#   password = req.param 'password'
-#   confirmPassword = req.param 'confirmPassword'
-#   if password isnt confirmPassword
-#     res.locals.error = new Error('Password and Confirmation Password didn\'t match.')
-#     next()
-#     return
+router.all '/reset', (req, res, next) ->
+  res.locals.error = new Error('Invalid Link')
+  res.locals.hideForm = true
+  next()
+  return
 
-#   PGConnect (err, client, done) ->
-#     if err
-#       done? client
-#       callback? err
-#       return
-#     client.query 'BEGIN', (err) ->
-#       if err
-#         rollback client, done
-#         res.locals.error = err
-#         next()
-#         return
-#       user.addUser res.locals.email, password, client, (err) ->
-#         if err
-#           rollback client, done
-#           res.locals.error = err
-#           next()
-#           return
-#         unverifiedUser.removeUnverifiedUser verificationKey, client, (err) ->
-#           if err
-#             rollback client, done
-#             res.locals.error = err
-#             next()
-#             return
-#           client.query 'COMMIT', (err) ->
-#             if err
-#               done? client
-#               res.locals.error = err
-#               next()
-#               return
-#             done?()
-#             if req.param 'redirect'
-#               res.redirect req.param 'redirect'
-#             else
-#               res.redirect '/dashboard/'
+router.all '/reset/:resetKey', (req, res, next) ->
+  resetKey = req.param 'resetKey'
+  req.url = '/reset'
+  reset.getEmailForResetKey resetKey, (err, email) ->
+    if err
+      next(err)
+      return
+    unless email
+      res.locals.error = new Error('Invalid Reset Link')
+      res.locals.hideForm = true
+      next()
+      return
+    res.locals.email = email
+    res.locals.resetKey = resetKey
+    res.locals.encodedResetKey = encodeURIComponent(resetKey)
+    next()
+    return
+  return
+
+router.post '/reset', (req, res, next) ->
+  if res.locals.error
+    next()
+    return
+  password = req.param 'password'
+  confirmPassword = req.param 'confirmPassword'
+  if password isnt confirmPassword
+    res.locals.error = new Error('Password and Confirmation Password didn\'t match.')
+    next()
+    return
+
+  PGConnect (err, client, done) ->
+    if err
+      done? client
+      callback? err
+      return
+    client.query 'BEGIN', (err) ->
+      if err
+        rollback client, done
+        res.locals.error = err
+        next()
+        return
+      user.setPasswordForUserWithEmail res.locals.email, password, client, (err) ->
+        if err
+          rollback client, done
+          res.locals.error = err
+          next()
+          return
+        reset.removeResetKey res.locals.resetKey, client, (err) ->
+          if err
+            rollback client, done
+            res.locals.error = err
+            next()
+            return
+          client.query 'COMMIT', (err) ->
+            if err
+              done? client
+              res.locals.error = err
+              next()
+              return
+            done?()
+            if req.param 'redirect'
+              res.redirect req.param 'redirect'
+            else
+              res.redirect '/auth/signin/'
 
 module.exports = router

@@ -32,8 +32,7 @@ router.post '/reset', (req, res, next) ->
         next()
         return
       debug migrations
-      res.locals.success =
-        message: "App was successfully reset"
+      res.locals.success = message: "App was successfully reset"
       next()
       return
     return
