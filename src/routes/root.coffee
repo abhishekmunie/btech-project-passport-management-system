@@ -12,7 +12,7 @@ config  = globals.config
 debug   = globals.debug
 
 router.all /^\/dashboard/, (req, res, next) ->
-  res.redirect "/auth/signin?redirect=#{encodeURIComponent req.url}" unless req.session.user
+  return res.redirect "/auth/signin?redirect=#{encodeURIComponent req.url}" unless req.session.user
   switch req.session.user.type
     when citizen.type
       res.redirect req.url.replace /^\/dashboard/, "/user"
