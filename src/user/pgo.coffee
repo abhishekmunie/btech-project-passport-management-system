@@ -120,10 +120,12 @@ filter = (req, res, next) ->
   isPassportGrantingOfficer req.session.user.email, (err, pgoValidity) ->
     unless pgoValidity
       if req.session.user
-        res.redirect "/auth/signin"
+        res.redirect "/auth/dashboard"
+        return
       else
-        res.redirect "/auth/signin?redirect=#{encodeURIComponent req.url}"
+        req.url = "/auth/signin/pgo"
     next()
+  return
 
 module.exports =
   PassportGrantingOfficer: PassportGrantingOfficer

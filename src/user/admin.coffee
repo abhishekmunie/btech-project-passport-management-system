@@ -36,10 +36,12 @@ filter = (req, res, next) ->
   isAdmin req.session.user.email, (err, adminValidity) ->
     unless adminValidity
       if req.session.user
-        res.redirect "/auth/signin"
+        res.redirect "/auth/dashboard"
+        return
       else
-        res.redirect "/auth/signin?redirect=#{encodeURIComponent req.url}"
+        req.url = "/auth/signin/admin"
     next()
+  return
 
 module.exports =
   Admin: Admin
