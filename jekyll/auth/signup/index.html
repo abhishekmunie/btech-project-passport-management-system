@@ -13,7 +13,7 @@ title: Signup
         <div class="form-group has-feedback">
           <label class="col-sm-3 control-label" for="name">Name<span class="mandatory">*</span></label>
           <div class="col-sm-9">
-            <input class="form-control" type="text" {% set_attribute_named_when_autofill name%} maxlength="255" id="name" aria-required="true" required="" />
+            <input class="form-control" type="text" pattern="[^0-9!@#$%^*\(\)\\\[\]\{\}\<\>\?/]+" {% set_attribute_named_when_autofill name%} maxlength="255" id="name" aria-required="true" required="" />
             <span class="glyphicon glyphicon-ok form-control-feedback"></span><span class="glyphicon glyphicon-remove form-control-feedback"></span>
             <p class="help-block"></p>
           </div>

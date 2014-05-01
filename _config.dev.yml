@@ -41,13 +41,16 @@ imports :
   css :
     normalize:       /css/normalize.css
     bootstrap:       /bower_components/bootstrap/dist/css/bootstrap.min.css
-    bootstrap-theme: /bower_components/bootstrap/dist/css/bootstrap-theme.css
-    font-awesome:    /bower_components/font-awesome/css/font-awesome.min.css
+    bootstrap_theme: /bower_components/bootstrap/dist/css/bootstrap-theme.css
+    font_awesome:    /bower_components/font-awesome/css/font-awesome.min.css
     main:            /css/main.css
   modernizr: /bower_components/modernizr/modernizr.js
   js :
     bootstrap: /bower_components/bootstrap/dist/js/bootstrap.min.js
     # angular:   /bower_components/angular/angular.min.js
+    jquery_ui_autocomplete: /components/selectToAutocomplete/jquery-ui-autocomplete.js
+    selectToAutocomplete: /components/selectToAutocomplete/jquery.select-to-autocomplete.min.js
+    country_region_selector: /bower_components/country-region-selector/source/crs.min.js
     plugins:   /js/plugins.js
     main :     /js/main.js
 

@@ -20,6 +20,8 @@
 -- DROP TABLE IF EXISTS "passport"."Region";
 -- DROP TABLE IF EXISTS "passport"."UnverifiedUser";
 
+TRUNCATE "session";
+
 DROP SCHEMA IF EXISTS "passport" CASCADE ;
 CREATE SCHEMA IF NOT EXISTS "passport" ;
 
@@ -29,7 +31,7 @@ CREATE TABLE IF NOT EXISTS "passport"."Citizen" (
 "Surname" varchar(255),
 "HasAliases" char NOT NULL,
 "HaveChangedName" char NOT NULL,
-"ContactNumber" int,
+"ContactNumber" varchar(20),
 "DateOfBirth" date NOT NULL,
 "City" varchar(255) NOT NULL,
 "Country" varchar(255) NOT NULL,
@@ -42,7 +44,7 @@ CREATE TABLE IF NOT EXISTS "passport"."Citizen" (
 "VoterID" varchar(255),
 "EmploymentType" varchar(255) NOT NULL,
 "EducationalQualification" varchar(255) NOT NULL,
-"AadhaarNumber" int,
+"AadhaarNumber"  varchar(20),
 "FatherGivenName" varchar(255),
 "FatherSurname" varchar(255),
 "MotherGivenName" varchar(255),
@@ -51,13 +53,13 @@ CREATE TABLE IF NOT EXISTS "passport"."Citizen" (
 "LegalGuardianSurname" varchar(255),
 "PresentAddressOutOfCountry" char NOT NULL,
 "FirstReferenceNameandAddress" varchar(255) NOT NULL,
-"FirstReferenceMobileNumber" int,
+"FirstReferenceMobileNumber"  varchar(20),
 "SecondReferenceNameandAddress" varchar(255) NOT NULL,
-"SecondReferenceMobileNumber" int,
+"SecondReferenceMobileNumber"  varchar(20),
 "EmergencyNameAndAddress" varchar(255) NOT NULL,
-"EmergencyMobileNumber" int,
+"EmergencyMobileNumber"  varchar(20),
 "AppliedButNotIssued" char,
-"PreviousPassportNumber" int,
+"PreviousPassportNumber"  varchar(20),
 "OtherDetails1" char NOT NULL,
 "OtherDetails2" char NOT NULL,
 "OtherDetails3" char NOT NULL,
@@ -67,8 +69,11 @@ CREATE TABLE IF NOT EXISTS "passport"."Citizen" (
 PRIMARY KEY ("email")
 );
 
+DROP SEQUENCE IF EXISTS "passport_id_seq";
+CREATE SEQUENCE "passport_id_seq";
+
 CREATE TABLE IF NOT EXISTS "passport"."PassportApplication" (
-"Id" int NOT NULL,
+"Id" int NOT NULL default nextval("passport_id_seq"),
 "CitizenEmail" varchar(225) NOT NULL,
 "ApplyingFor" char NOT NULL,
 "ApplicationType" char NOT NULL,
@@ -79,6 +84,8 @@ CREATE TABLE IF NOT EXISTS "passport"."PassportApplication" (
 "RegionId" int NOT NULL,
 PRIMARY KEY ("Id")
 );
+
+ALTER SEQUENCE "passport_id_seq" owned by "passport"."PassportApplication"."Id";
 
 CREATE TABLE IF NOT EXISTS "passport"."Validation" (
 "ApplicationId" int NOT NULL,
@@ -130,6 +137,13 @@ CREATE TABLE IF NOT EXISTS "passport"."UnverifiedUser" (
 "VerificationKey" varchar(255) NOT NULL,
 PRIMARY KEY ("VerificationKey")
 );
+
+CREATE TABLE IF NOT EXISTS "passport"."ResetKey" (
+"resetKey" varchar(255) NOT NULL,
+"email" varchar(255) NOT NULL,
+PRIMARY KEY ("resetKey")
+);
+
 
 CREATE TABLE IF NOT EXISTS "Setting" (
 "key" varchar(255) NOT NULL,

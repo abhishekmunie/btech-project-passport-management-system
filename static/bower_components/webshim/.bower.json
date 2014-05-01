@@ -53,7 +53,6 @@
     "commit": "02368d2eb30f056de8f0cb2029c96024a932b8c8"
   },
   "_source": "git://github.com/aFarkas/webshim.git",
-  "_target": "~1.12.7",
-  "_originalSource": "webshim",
-  "_direct": true
+  "_target": "*",
+  "_originalSource": "webshim"
 }

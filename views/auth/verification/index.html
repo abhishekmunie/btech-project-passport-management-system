@@ -47,6 +47,21 @@
        'js-bootstrap',
         null);
       
+      importScript('/components/selectToAutocomplete/jquery-ui-autocomplete.js',
+        false,
+       'js-jquery_ui_autocomplete',
+        null);
+      
+      importScript('/components/selectToAutocomplete/jquery.select-to-autocomplete.min.js',
+        false,
+       'js-selectToAutocomplete',
+        null);
+      
+      importScript('/bower_components/country-region-selector/source/crs.min.js',
+        false,
+       'js-country_region_selector',
+        null);
+      
       importScript('/js/plugins.js',
         false,
        'js-plugins',
@@ -162,33 +177,25 @@
     <div class="panel-body">
       <form action="/auth/verification/{{locals.encodedVerificationKey}}" method="post" class="form-signin ws-validate" role="form">
         <div class="form-group has-feedback">
-          <label class="control-label" for="inputEmail">Email</label>
-          <input type="email" class="form-control form-control-static" name="email" id="inputEmail" value="{{locals.email}}" placeholder="Enter your email" disabled />
+          <label class="control-label" for="email">Email</label>
+          <input type="email" class="form-control form-control-static" name="email" id="email" value="{{locals.email}}" placeholder="Enter your email" disabled />
             <span class="glyphicon glyphicon-ok form-control-feedback"></span><span class="glyphicon glyphicon-remove form-control-feedback"></span>
         </div>
         <div class="form-group has-feedback">
-          <label class="control-label" for="pwd">Password<span class="mandatory">*</span></label>
-          <input class="form-control" type="password" name="password" pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" minlength="8" maxlength="255" id="pwd" aria-required="true" autofocus="" required="" />
+          <label class="control-label" for="password">Password<span class="mandatory">*</span></label>
+          <input class="form-control new-password" type="password" name="password" id="password" pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" minlength="8" maxlength="255" aria-required="true" autofocus="" required="" />
             <span class="glyphicon glyphicon-ok form-control-feedback"></span><span class="glyphicon glyphicon-remove form-control-feedback"></span>
           <p class="help-block"><a data-toggle="modal" data-target="#PasswordPolicyModal" title="Password Policy">Password Policy</a></p>
         </div>
-        <!-- using the data-errormessage[errortype] -->
-        <div>
-            <input data-dependent-validation="password" type="password" placeholder="repeat password" data-errormessage-dependent="you have to confirm your password!" />
-        </div>
         <div class="form-group has-feedback">
           <label class="control-label" for="confirmPassword">Confirm Password<span class="mandatory">*</span></label>
-          <input class="form-control" type="password" name="confirmPassword" pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" minlength="8" maxlength="255" id="confirmPassword" aria-required="true" required="" />
+          <input class="form-control confirm-password" type="password" name="confirmPassword" data-dependent-validation="password" pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" minlength="8" maxlength="255" id="confirmPassword" aria-required="true" required="" data-errormessage-dependent="Confirmation Password should be same as Password!" />
             <span class="glyphicon glyphicon-ok form-control-feedback"></span><span class="glyphicon glyphicon-remove form-control-feedback"></span>
           <p class="help-block"></p>
           <div class="clearfix"></div>
         </div>
-        <!-- using the ival feature -->
-        <div>
-            <input data-dependent-validation="password2" type="password" placeholder="repeat password" required="" />
-            <div class="ws-errorbox" hidden="">
-                <p data-errortype="dependent">you have to confirm your password!</p>
-            </div>
+        <div class="ws-errorbox" hidden="">
+          <p data-errortype="dependent">you have to confirm your password!</p>
         </div>
         {{#query.redirect}}<input type="hidden" name="redirect" value="{{query.redirect}}">{{/query.redirect}}
         <input class="btn btn-primary btn-block" type="submit" value="Sign in" />

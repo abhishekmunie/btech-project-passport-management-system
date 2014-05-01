@@ -18,6 +18,9 @@ router.all '/profile', (req, res, next) ->
   return
 
 router.all '/application', (req, res, next) ->
+  next()
+
+router.all '/application', (req, res, next) ->
   res.locals.attr_list = application.attr_list
   region.getRegions (err, regions) ->
     return next err if err

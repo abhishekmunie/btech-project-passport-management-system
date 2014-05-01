@@ -11,9 +11,11 @@ $ ->
       lazyCustomMessages: false
 
   webshims.setOptions 'forms',
+    addValidators: true
     iVal:
       # handleBubble: 'hide'
-      recheckDelay: 400
+      recheckDelay: 300
+      submitCheck: true
       # the class of the errorbox, which is normally appended to the fieldWrapper
       errorBoxClass: 'ws-errorbox col-sm-offset-3 col-sm-9'
       # classes to adjust to your CSS/CSS-framework
@@ -27,3 +29,5 @@ $ ->
   # webshims will implement those features in all browsers/devices
   # but will only enhance capable browsers on desktop with custom styleable mediaelement controls and form widgets
   webshims.polyfill 'forms forms-ext details'
+
+  $('.select-to-autocomplete').selectToAutocomplete()

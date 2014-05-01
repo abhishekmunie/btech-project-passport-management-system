@@ -14,19 +14,19 @@ class User
   constructor: (@email) ->
     @type = TYPE
 
-  insertQuery = (values, client, done, callback) ->
-    client.query
-      name: "user_insert"
-      text: "INSERT INTO #{EntityName} VALUES ( $1::varchar , $2::varchar , $3::varchar ) "
-      values: values
-    , (err, result) ->
-      if err
-        done? client
-        console.error 'error running query', err
-        callback? err
-        return
-      done?()
-      callback?()
+insertQuery = (values, client, done, callback) ->
+  client.query
+    name: "user_insert"
+    text: "INSERT INTO #{EntityName} VALUES ( $1::varchar , $2::varchar , $3::varchar ) "
+    values: values
+  , (err, result) ->
+    if err
+      done? client
+      console.error 'error running query', err
+      callback? err
+      return
+    done?()
+    callback?()
 
 insertIntoDatabase = (email, password, client, callback) ->
   if typeof client is "function"

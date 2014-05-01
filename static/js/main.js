@@ -8,8 +8,10 @@ $(function() {
     }
   });
   webshims.setOptions('forms', {
+    addValidators: true,
     iVal: {
-      recheckDelay: 400,
+      recheckDelay: 300,
+      submitCheck: true,
       errorBoxClass: 'ws-errorbox col-sm-offset-3 col-sm-9',
       errorMessageClass: 'help-block',
       successWrapperClass: 'has-success',
@@ -18,5 +20,6 @@ $(function() {
       fieldWrapper: '.form-group'
     }
   });
-  return webshims.polyfill('forms forms-ext details');
+  webshims.polyfill('forms forms-ext details');
+  return $('.select-to-autocomplete').selectToAutocomplete();
 });

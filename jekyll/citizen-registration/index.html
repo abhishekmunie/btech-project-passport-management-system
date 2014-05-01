@@ -6,6 +6,7 @@ title: Citizen Registration
   <div class="page-header">
     <h1 class="text-muted text-center">New User Registration</h1>
   </div>
+  {% include success-error.html %}
   <div class="panel panel-default">
     <div class="panel-heading">Please enter your details:</div>
     <div class="panel-body">
@@ -74,23 +75,25 @@ title: Citizen Registration
           </div>
         </div>
         <div class="form-group has-feedback">
-          <label for="Country" class="col-sm-3 control-label">Country&nbsp;<span class="info-text" >(If abroad)</span><span class="mandatory">*</span></label>
+          <label for="Country" class="col-sm-3 control-label">Country <span class="mandatory">*</span></label>
           <div class="col-sm-9">
-            <input type="text" id="Country" {% set_attribute_named_when_autofill Country%} maxlength="255" class="form-control" required="" />
+            <select class="form-control input-sm crs-country select-to-autocomplete" id="Country" {% set_attribute_named_when_autofill Country%} data-region-id="State" data-default-value="India" required="" />
+            </select>
             <span class="glyphicon glyphicon-ok form-control-feedback"></span><span class="glyphicon glyphicon-remove form-control-feedback"></span>
             <p class="help-block"></p>
           </div>
         </div>
         <div class="form-group has-feedback">
-          <label for="State" class="col-sm-3 control-label">State&nbsp;<span class="info-text" >(If in India)</span><span class="mandatory">*</span></label>
+          <label for="State" class="col-sm-3 control-label">State </span><span class="mandatory">*</span></label>
           <div class="col-sm-9">
-            <input type="text" id="State" {% set_attribute_named_when_autofill State%} maxlength="255" class="form-control" required="" />
+            <select class="form-control input-sm select-to-autocomplete" id="State" {% set_attribute_named_when_autofill State%} maxlength="255" required="" >
+            </select>
             <span class="glyphicon glyphicon-ok form-control-feedback"></span><span class="glyphicon glyphicon-remove form-control-feedback"></span>
-            <p class="help-block">If born before 15/08/1947 in a place now in Pakistan or Bangladesh, select "Undivided India".</p>
+            <!-- <p class="help-block">If born before 15/08/1947 in a place now in Pakistan or Bangladesh, select "Undivided India".</p> -->
           </div>
         </div>
         <div class="form-group has-feedback">
-          <label for="District" class="col-sm-3 control-label">District&nbsp;<span class="info-text" >(If in India)</span><span class="mandatory">*</span></label>
+          <label for="District" class="col-sm-3 control-label">District </span><span class="mandatory">*</span></label>
           <div class="col-sm-9">
             <input type="text" id="District" {% set_attribute_named_when_autofill District%} maxlength="255" class="form-control" required="" />
             <span class="glyphicon glyphicon-ok form-control-feedback"></span><span class="glyphicon glyphicon-remove form-control-feedback"></span>
@@ -109,7 +112,7 @@ title: Citizen Registration
         <div class="form-group has-feedback">
           <label for="MaritalStatus" class="col-sm-3 control-label">Marital Status<span class="mandatory">*</span></label>
           <div class="col-sm-9">
-            <select id="MaritalStatus" {% set_attribute_named_when_autofill MaritalStatus%} aria-required="true" required="" />
+            <select class="form-control input-sm" id="MaritalStatus" {% set_attribute_named_when_autofill MaritalStatus%} aria-required="true" required="" />
               <option disabled>----- Select -----</option>
               {%raw%}{{#locals.attr_list.MaritalStatus}}
               <option value="{{key}}">{{value}}</option>
@@ -121,7 +124,7 @@ title: Citizen Registration
         <div class="form-group has-feedback">
           <label for="CitizenshipBy" class="col-sm-3 control-label">Citizenship of India by<span class="mandatory">*</span></label>
           <div class="col-sm-9">
-            <select id="CitizenshipBy" {% set_attribute_named_when_autofill CitizenshipBy%} aria-required="true" required="" />
+            <select class="form-control input-sm" id="CitizenshipBy" {% set_attribute_named_when_autofill CitizenshipBy%} aria-required="true" required="" />
               <option disabled>----- Select -----</option>
               {%raw%}{{#locals.attr_list.CitizenshipBy}}
               <option value="{{key}}">{{value}}</option>
@@ -149,7 +152,7 @@ title: Citizen Registration
         <div class="form-group has-feedback">
           <label for="EmploymentType" class="col-sm-3 control-label">Employment Type<span class="mandatory">*</span></label>
           <div class="col-sm-9">
-            <select id="EmploymentType" {% set_attribute_named_when_autofill EmploymentType%} aria-required="true" required="" />
+            <select class="form-control input-sm" id="EmploymentType" {% set_attribute_named_when_autofill EmploymentType%} aria-required="true" required="" />
               <option disabled>----- Select -----</option>
               {%raw%}{{#locals.attr_list.EmploymentType}}
               <option value="{{key}}">{{value}}</option>
@@ -161,7 +164,7 @@ title: Citizen Registration
         <div class="form-group has-feedback">
           <label for="EducationalQualification" class="col-sm-3 control-label">Educational Qualification<span class="mandatory">*</span></label>
           <div class="col-sm-9">
-            <select id="EducationalQualification" {% set_attribute_named_when_autofill EducationalQualification%} aria-required="true" required="" />
+            <select class="form-control input-sm" id="EducationalQualification" {% set_attribute_named_when_autofill EducationalQualification%} aria-required="true" required="" />
               <option disabled>----- Select -----</option>
               {%raw%}{{#locals.attr_list.EducationalQualification}}
               <option value="{{key}}">{{value}}</option>
@@ -314,7 +317,7 @@ title: Citizen Registration
         <div class="form-group has-feedback">
           <label for="PreviousPassportNumber" class="col-sm-3 control-label">Previous Passport Number</label>
           <div class="col-sm-9">
-            <input type="text" id="PreviousPassportNumber" {% set_attribute_named_when_autofill PreviousPassportNumber%} maxlength="255" class="form-control">
+            <input type="text" id="PreviousPassportNumber" {% set_attribute_named_when_autofill PreviousPassportNumber%} data-dependent-validation="{"from":}" maxlength="255" class="form-control">
             <p class="help-block"></p>
           </div>
         </div>
@@ -383,7 +386,7 @@ title: Citizen Registration
             </div>
             <div class="panel-footer">
               <label class="checkbox-inline">
-                <input type="checkbox" id="inlineCheckbox1" value="option1"> I Agree
+                <input type="checkbox" id="inlineCheckbox1" value="option1" data-grouprequired="" required="" > I Agree
               </label>
             </div>
           </div>

@@ -44,6 +44,12 @@ input#DateOfBirth {
   }
 }
 
+select {
+  ~ .form-control-feedback {
+    right: 2.2em !important;
+  }
+}
+
 .input-group {
   ~ .form-control-feedback,
   .form-control-feedback {

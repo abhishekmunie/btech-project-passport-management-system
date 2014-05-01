@@ -20,7 +20,8 @@
     "angular": "latest",
     "bootstrap": "latest",
     "font-awesome": "latest",
-    "webshim": "latest"
+    "webshim": "latest",
+    "country-region-selector": "~0.1.1"
   },
   "private": "true"
 }

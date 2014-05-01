@@ -233,40 +233,44 @@ input.ws-date ~ .form-control-feedback,
 input#DateOfBirth ~ .form-control-feedback {
   right: 2.7em; }
 
-/* line 49, ../../scss/main.scss */
+/* line 48, ../../scss/main.scss */
+select ~ .form-control-feedback {
+  right: 2.2em !important; }
+
+/* line 55, ../../scss/main.scss */
 .input-group ~ .form-control-feedback,
 .input-group .form-control-feedback {
   z-index: 3; }
 
-/* line 54, ../../scss/main.scss */
+/* line 60, ../../scss/main.scss */
 #dev-warning {
   margin-bottom: 0; }
 
-/* line 58, ../../scss/main.scss */
+/* line 64, ../../scss/main.scss */
 nav.navbar {
   margin-bottom: 0; }
 
-/* line 63, ../../scss/main.scss */
+/* line 69, ../../scss/main.scss */
 .auth-panel {
   max-width: 33em; }
 
-/* line 67, ../../scss/main.scss */
+/* line 73, ../../scss/main.scss */
 form label .info-text {
   font-size: 0.7em; }
 
 /* Sticky footer styles
 -------------------------------------------------- */
-/* line 73, ../../scss/main.scss */
+/* line 79, ../../scss/main.scss */
 html {
   position: relative;
   min-height: 100%; }
 
-/* line 77, ../../scss/main.scss */
+/* line 83, ../../scss/main.scss */
 body {
   /* Margin bottom by footer height */
   margin-bottom: 60px; }
 
-/* line 81, ../../scss/main.scss */
+/* line 87, ../../scss/main.scss */
 #footer {
   position: absolute;
   bottom: 0;
@@ -274,24 +278,24 @@ body {
   /* Set the fixed height of the footer here */
   height: 60px;
   background-color: #f5f5f5; }
-  /* line 88, ../../scss/main.scss */
+  /* line 94, ../../scss/main.scss */
   #footer #heroku-powered {
     display: inline-block;
     height: 100%;
     color: #6763a1; }
-  /* line 93, ../../scss/main.scss */
+  /* line 99, ../../scss/main.scss */
   #footer #mac-logo {
     color: silver;
     text-shadow: 0 0 3px rgba(33, 33, 33, 0.5); }
-  /* line 98, ../../scss/main.scss */
+  /* line 104, ../../scss/main.scss */
   #footer a:hover #mac-logo {
     color: lightgrey; }
-  /* line 102, ../../scss/main.scss */
+  /* line 108, ../../scss/main.scss */
   #footer a, #footer span {
     padding-top: 5px;
     height: 100%;
     display: inline-block; }
-  /* line 107, ../../scss/main.scss */
+  /* line 113, ../../scss/main.scss */
   #footer span {
     line-height: 100%;
     vertical-align: bottom; }

@@ -1,6 +1,7 @@
 user = require './user'
 
 globals = require '../globals'
+debug = globals.debug
 PGConnect = globals.PGConnect
 
 EntityName = '"passport"."Citizen"'
@@ -13,7 +14,7 @@ class Citizen extends user.User
     switch source
       when 'db'
         result = data
-        @email = result.rows[0].email
+        super result.rows[0].email
         @GivenName = result.rows[0].GivenName
         @Surname = result.rows[0].Surname
         @HasAliases = result.rows[0].HasAliases
@@ -55,7 +56,7 @@ class Citizen extends user.User
         @OtherDetails6 = result.rows[0].OtherDetails6
       when 'req'
         req = data
-        @email = req.param 'email'
+        super req.session.user.email
         @GivenName = req.param 'GivenName'
         @Surname = req.param 'Surname'
         @HasAliases = req.param 'HasAliases'
@@ -98,7 +99,7 @@ class Citizen extends user.User
     @name = @GivenName + ' ' + @Surname
     @type = TYPE
 
-  insertQuery = (client, done, callback) ->
+  insertQuery: (client, done, callback) ->
     client.query
       name: "citizen_insert"
       text: "INSERT INTO #{EntityName} VALUES ( " +
@@ -107,7 +108,7 @@ class Citizen extends user.User
         '$3::varchar , '  +  # Surname
         '$4::char , '     +  # HasAliases
         '$5::char , '     +  # HaveChangedName
-        '$6::int , '      +  # ContactNumber
+        '$6::varchar , '  +  # ContactNumber
         '$7::date , '     +  # DateOfBirth
         '$8::varchar , '  +  # City
         '$9::varchar , '  +  # Country
@@ -120,7 +121,7 @@ class Citizen extends user.User
         '$16::varchar , ' + # VoterID
         '$17::varchar , ' + # EmploymentType
         '$18::varchar , ' + # EducationalQualification
-        '$19::int , '     + # AadhaarNumber
+        '$19::varchar , ' + # AadhaarNumber
         '$20::varchar , ' + # FatherGivenName
         '$21::varchar , ' + # FatherSurname
         '$22::varchar , ' + # MotherGivenName
@@ -129,13 +130,13 @@ class Citizen extends user.User
         '$25::varchar , ' + # LegalGuardianSurname
         '$26::char , '    + # PresentAddressOutOfCountry
         '$27::varchar , ' + # FirstReferenceNameandAddress
-        '$28::int , '     + # FirstReferenceMobileNumber
+        '$28::varchar , ' + # FirstReferenceMobileNumber
         '$29::varchar , ' + # SecondReferenceNameandAddress
-        '$30::int , '     + # SecondReferenceMobileNumber
+        '$30::varchar , ' + # SecondReferenceMobileNumber
         '$31::varchar , ' + # EmergencyNameAndAddress
-        '$32::int , '     + # EmergencyMobileNumber
+        '$32::varchar , ' + # EmergencyMobileNumber
         '$33::char , '    + # AppliedButNotIssued
-        '$34::int , '     + # PreviousPassportNumber
+        '$34::varchar , ' + # PreviousPassportNumber
         '$35::char , '    + # OtherDetails1
         '$36::char , '    + # OtherDetails2
         '$37::char , '    + # OtherDetails3
@@ -199,15 +200,18 @@ class Citizen extends user.User
       client = undefined
 
     if client?
-      insertQuery client, null, callback
+      @insertQuery client, null, callback
     else
-      PGConnect (err, client, done) ->
+      PGConnect (err, client, done) =>
         if err
           done? client
           callback? err
           return
-        insertQuery client, done, callback
+        @insertQuery client, done, callback
 
+addCitizen = (citizen, client, callback) ->
+  debug "Adding Cititzen #{citizen.email}"
+  citizen.insertIntoDatabase client, callback
 
 getForEmail = (email, callback) ->
   PGConnect (err, client, done) ->
@@ -345,4 +349,5 @@ module.exports =
   expandValueUsingMap: expandValueUsingMap
   filter: filter
   isCitizen: isCitizen
+  addCitizen: addCitizen
   getForEmail: getForEmail
