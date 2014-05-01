@@ -12,9 +12,22 @@ region = require '../passport/region'
 
 router.all '/profile', (req, res, next) ->
   res.locals.attr_list = citizen.attr_list
-  application.getAllForEmail req.session.user.email, (err, application) ->
+  citizen.getForEmail req.session.user.email, (err, citizenData) ->
+    return next err if err
+    citizen.expandValueUsingMap citizenData
+    citizenData[attr] = value.toDateString() for attr, value of citizenData when value instanceof Date
+    res.locals.citizen = citizenData
+    next()
+    return
+  return
+
+router.all '/status', (req, res, next) ->
+  res.locals.attr_list = citizen.attr_list
+  application.getAllForEmail req.session.user.email, (err, applications) ->
     return next err if err
     res.locals.applications = (application.expandValueUsingMap app for app in applications)
+    next()
+    return
   return
 
 router.all '/application', (req, res, next) ->

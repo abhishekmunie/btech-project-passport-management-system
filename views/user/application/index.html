@@ -143,6 +143,7 @@
       <ul class="nav nav-pills nav-stacked nav-sidebar">
         <li class="" ><a href="/user" >Dashboard</a></li>
         <li role="presentation" class="divider"></li>
+        <li class="" ><a href="/user/profile/" >Profile</a></li>
         <li class="active" ><a href="/user/application/" >Application</a></li>
         <li class="" ><a href="/user/status/" >Status</a></li>
         <li class="" ><a href="/user/settings/" >Settings</a></li>
@@ -154,11 +155,11 @@
   <div class="panel panel-default">
     <div class="panel-heading"><h3 class="panel-title text-center">Passport Appliccation</h3></div>
     <div class="panel-body">
-      <form role="form" action="/user/application/" method="post">
-        <div class="form-group">
+      <form role="form" action="/user/application/" method="post" class="form-horizontal ws-validate">
+        <div class="form-group has-feedback">
           <label class="col-sm-3 control-label" for="Region">Passport Office <span class="mandatory">*</span> <span class="info-text">(As per Present Address)</span></label>
           <div class="col-sm-9">
-            <select name="Region" id="Region" class="form-control" aria-required="true" required="" />
+            <select name="Region" id="Region" class="form-control input-sm" aria-required="true" required="" />
               <option disabled>----- Select -----</option>
               {{#locals.regions}}
               <option value="{{Id}}">{{Name}}</option>
@@ -167,7 +168,7 @@
             <p class="help-block">Tibetan Refugees applying for Identity Certificate must register with 'Delhi' Passport Office.</p>
           </div>
         </div>
-        <div class="form-group">
+        <div class="form-group has-feedback">
           <label for="PassportType" class="col-sm-3 control-label">Passport Type <span class="mandatory">*</span></label>
           <div class="col-sm-9">
             {{#locals.attr_list.PassportType}}
@@ -175,9 +176,8 @@
             {{/locals.attr_list.PassportType}}
             <p class="help-block"></p>
           </div>
-          <div class="clearfix"></div>
         </div>
-        <div class="form-group">
+        <div class="form-group has-feedback">
           <label for="ApplyingFor" class="col-sm-3 control-label">Applying for <span class="mandatory">*</span></label>
           <div class="col-sm-9">
             {{#locals.attr_list.ApplyingFor}}
@@ -185,9 +185,8 @@
             {{/locals.attr_list.ApplyingFor}}
             <p class="help-block"></p>
           </div>
-          <div class="clearfix"></div>
         </div>
-        <div class="form-group">
+        <div class="form-group has-feedback">
           <label for="ApplicationType" class="col-sm-3 control-label">Type of Application <span class="mandatory">*</span></label>
           <div class="col-sm-9">
             {{#locals.attr_list.ApplicationType}}
@@ -195,9 +194,8 @@
             {{/locals.attr_list.ApplicationType}}
             <p class="help-block"></p>
           </div>
-          <div class="clearfix"></div>
         </div>
-        <div class="form-group">
+        <div class="form-group has-feedback">
           <label for="PassportBookletType" class="col-sm-3 control-label">Type of Passport Booklet <span class="mandatory">*</span></label>
           <div class="col-sm-9">
             {{#locals.attr_list.PassportBookletType}}
@@ -205,9 +203,8 @@
             {{/locals.attr_list.PassportBookletType}}
             <p class="help-block"></p>
           </div>
-          <div class="clearfix"></div>
         </div>
-        <div class="form-group">
+        <div class="form-group has-feedback">
           <label for="ValidityRequired" class="col-sm-3 control-label">Validity Required <span class="info-text">(For minors between 15 and 18)</span></label>
           <div class="col-sm-9">
             {{#locals.attr_list.ValidityRequired}}
@@ -215,7 +212,6 @@
             {{/locals.attr_list.ValidityRequired}}
             <p class="help-block"></p>
           </div>
-          <div class="clearfix"></div>
         </div>
         <div class="form-group">
           <div class="col-sm-offset-3 col-sm-9">

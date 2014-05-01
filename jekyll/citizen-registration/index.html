@@ -12,9 +12,9 @@ title: Citizen Registration
     <div class="panel-body">
       <form role="form" action="/citizen-registration/" method="post" data-enable-shim="true" class="form-horizontal ws-validate">
         <div class="form-group has-feedback">
-          <label class="col-sm-3 control-label" for="givenName">Given Name&nbsp;<span class="info-text">(Max 45 Characters) </span><span class="mandatory">*</span></label>
+          <label class="col-sm-3 control-label" for="GivenName">Given Name&nbsp;<span class="info-text">(Max 45 Characters) </span><span class="mandatory">*</span></label>
           <div class="col-sm-9">
-            <input class="form-control" autocapitalize="on" type="text" spellcheck="false" pattern="^[^0-9\-]*$" {% set_attribute_named_when_autofill GivenName%} maxlength="255" id="givenName" aria-required="true" autofocus="" required="" />
+            <input class="form-control" autocapitalize="on" type="text" spellcheck="false" pattern="^[^0-9\-]*$" {% set_attribute_named_when_autofill GivenName%} maxlength="255" id="GivenName" aria-required="true" autofocus="" required="" />
             <span class="glyphicon glyphicon-ok form-control-feedback"></span><span class="glyphicon glyphicon-remove form-control-feedback"></span>
             <p class="help-block"><strong>First Name + Middle Name</strong>. Initials and honorifics (e.g. Dr.,Col.,etc.) are not allowed.</p>
           </div>
