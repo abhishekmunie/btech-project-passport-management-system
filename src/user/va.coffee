@@ -30,6 +30,27 @@ isValidationAuthority = (email, callback) ->
       done?()
       callback? null, result.rows[0].exists is '1'
 
+getForEmail = (email, callback) ->
+  PGConnect (err, client, done) ->
+    if err
+      done? client
+      callback? err
+      return
+    client.query
+      name: "get_validation_authority_for_email"
+      text: "SELECT * FROM #{EntityName} WHERE email = $1::varchar"
+      values: [email]
+    , (err, result) ->
+      if err
+        done? client
+        callback? err
+        return
+      done?()
+      if result.rows[0]
+        callback? null, new ValidationAuthority(result.rows[0].email, result.rows[0].Name)
+      else
+        callback? null, null
+
 filter = (req, res, next) ->
   debug "Validation Authority Auth Filter: #{req.url}"
   return res.redirect "/auth/signin?redirect=#{encodeURIComponent req.url}" unless req.session.user
@@ -52,23 +73,4 @@ module.exports =
 
   filter: filter
   isValidationAuthority: isValidationAuthority
-  getForEmail: (email, callback) ->
-    PGConnect (err, client, done) ->
-      if err
-        done? client
-        callback? err
-        return
-      client.query
-        name: "get_validation_authority_for_email"
-        text: "SELECT * FROM #{EntityName} WHERE email = $1::varchar"
-        values: [email]
-      , (err, result) ->
-        if err
-          done? client
-          callback? err
-          return
-        done?()
-        if result.rows[0]
-          callback? null, new ValidationAuthority(result.rows[0].email, result.rows[0].Name)
-        else
-          callback? null, null
+  getForEmail: getForEmail

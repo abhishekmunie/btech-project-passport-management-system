@@ -106,6 +106,44 @@ removePassportGrantingOfficer = (email, client, callback) ->
   deletePassportGrantingOfficerFromDatabase email, client, (err) ->
     user.removeUser email, client, callback
 
+getForEmail = (email, callback) ->
+  PGConnect (err, client, done) ->
+    if err
+      done? client
+      callback? err
+      return
+    client.query
+      name: "get_passport_granting_officer_for_email"
+      text: "SELECT * FROM #{EntityName} WHERE email = $1::varchar"
+      values: [email]
+    , (err, result) ->
+      if err
+        done? client
+        callback? err
+        return
+      done?()
+      if result.rows[0]
+        callback? null, new PassportGrantingOfficer(result.rows[0].email, result.rows[0].Name)
+      else
+        callback? null, null
+
+isPassportGrantingOfficer = (email, callback) ->
+  PGConnect (err, client, done) ->
+    if err
+      done? client
+      callback? err
+      return
+    client.query
+      name: "is_passport_granting_officer"
+      text: "SELECT count(*) AS exists FROM #{EntityName} WHERE email = $1::varchar"
+      values: [email]
+    , (err, result) ->
+      if err
+        done? client
+        callback? err
+        return
+      done?()
+      callback? null, result.rows[0].exists is '1'
 
 filter = (req, res, next) ->
   debug "Passport Granting Officer Auth Filter: #{req.url}"
@@ -131,42 +169,7 @@ module.exports =
   getPassportGrantingOfficers: getPassportGrantingOfficers
   addPassportGrantingOfficer: addPassportGrantingOfficer
   removePassportGrantingOfficer: removePassportGrantingOfficer
+  isPassportGrantingOfficer: isPassportGrantingOfficer
+  getForEmail: getForEmail
 
-  isPassportGrantingOfficer: (email, callback) ->
-    PGConnect (err, client, done) ->
-      if err
-        done? client
-        callback? err
-        return
-      client.query
-        name: "is_passport_granting_officer"
-        text: "SELECT count(*) AS exists FROM #{EntityName} WHERE email = $1::varchar"
-        values: [email]
-      , (err, result) ->
-        if err
-          done? client
-          callback? err
-          return
-        done?()
-        callback? null, result.rows[0].exists is '1'
 
-  getForEmail: (email, callback) ->
-    PGConnect (err, client, done) ->
-      if err
-        done? client
-        callback? err
-        return
-      client.query
-        name: "get_passport_granting_officer_for_email"
-        text: "SELECT * FROM #{EntityName} WHERE email = $1::varchar"
-        values: [email]
-      , (err, result) ->
-        if err
-          done? client
-          callback? err
-          return
-        done?()
-        if result.rows[0]
-          callback? null, new PassportGrantingOfficer(result.rows[0].email, result.rows[0].Name)
-        else
-          callback? null, null

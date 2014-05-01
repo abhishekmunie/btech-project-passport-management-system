@@ -28,7 +28,7 @@ router.all /^\/dashboard/, (req, res, next) ->
       res.redirect "/auth/signin?redirect=#{encodeURIComponent req.url}"
   return
 
-if config.env is 'production'
+if true # config.env is 'production'
   router.all /^\/admin/, admin.filter
   router.all /^\/pgo/, pgo.filter
   router.all /^\/va/, va.filter
@@ -56,7 +56,7 @@ router.get '/signup', (req, res, next) ->
 router.get '/_dismiss-warning', (req, res, next) ->
   req.session.dont_warn = true
   if req.param 'redirect'
-    res.redirect req.param 'redirect'
+    res.redirect encodeURI req.param 'redirect'
   else
     res.redirect '/'
 
