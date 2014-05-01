@@ -334,9 +334,13 @@ filter = (req, res, next) ->
   isCitizen req.session.user.email, (err, citizenValidity) ->
     unless citizenValidity
       if req.session.user
-        res.redirect "/auth/signin"
+        if req.session.user.type is TYPE
+          req.session.user = null
+          return res.redirect "/auth/signin"
+        else
+          return res.redirect "/dashboard"
       else
-        res.redirect "/auth/signin?redirect=#{encodeURIComponent req.url}"
+        return res.redirect "/auth/signin?redirect=#{encodeURIComponent req.url}"
     next()
 
 module.exports =

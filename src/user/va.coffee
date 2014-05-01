@@ -36,8 +36,11 @@ filter = (req, res, next) ->
   isValidationAuthority req.session.user.email, (err, vaValidity) ->
     unless vaValidity
       if req.session.user
-        res.redirect "/auth/dashboard"
-        return
+        if req.session.user.type is TYPE
+          req.session.user = null
+          return res.redirect "/auth/signin"
+        else
+          return res.redirect "/dashboard"
       else
         req.url = "/auth/signin/va"
     next()
