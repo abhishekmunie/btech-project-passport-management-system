@@ -185,6 +185,7 @@ setPasswordForUserWithEmail = (email, newPassword, client, callback) ->
 module.exports =
   User: User
   type: TYPE
+  EntityName: EntityName
 
   addUser: addUser
   removeUser: removeUser

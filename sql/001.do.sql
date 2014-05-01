@@ -92,8 +92,8 @@ PRIMARY KEY ("ApplicationId", "ValidationType")
 );
 
 CREATE TABLE IF NOT EXISTS "passport"."ValidationAuthority" (
-"Name" varchar(255) NOT NULL,
 "email" varchar(255) NOT NULL,
+"Name" varchar(255) NOT NULL,
 "RegionId" int NOT NULL,
 PRIMARY KEY ("email")
 );

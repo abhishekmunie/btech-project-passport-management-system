@@ -10,7 +10,7 @@
 {% raw %}{{^session.dont_warn}}{% endraw %}
 <div id="dev-warning" class="alert alert-warning alert-dismissable">
   <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-  <a href="/_dismiss-warning?redirect={% raw %}{{originalUrl}}{% endraw %}" class="alert-link pull-right" >Dont show again</a>
+  <a href="/_dismiss-warning?redirect={% raw %}{{encodedOriginalUrl}}{% endraw %}" class="alert-link pull-right" >Dont show again</a>
   <strong>Warning!</strong> This is an academic project, not the official page.
   It's available under <a href="{{ site.licenses.url }}" target="_blank" class="alert-link">{{ site.licenses.type }} Licence</a> at <a href="{{ site.repository }}" target="_blank" class="alert-link">GitHub</a>
 </div>

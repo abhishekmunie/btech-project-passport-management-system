@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Manage Verification Authorities · Passpot Management System</title>
+    <title>Manage Validation Authorities · Passpot Management System</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
 
@@ -88,7 +88,7 @@
 {{^session.dont_warn}}
 <div id="dev-warning" class="alert alert-warning alert-dismissable">
   <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-  <a href="/_dismiss-warning?redirect={{originalUrl}}" class="alert-link pull-right" >Dont show again</a>
+  <a href="/_dismiss-warning?redirect={{encodedOriginalUrl}}" class="alert-link pull-right" >Dont show again</a>
   <strong>Warning!</strong> This is an academic project, not the official page.
   It's available under <a href="https://raw.github.com/abhishekmunie/btech-project-passport-management-system/master/LICENSE" target="_blank" class="alert-link">MIT Licence</a> at <a href="https://github.com/abhishekmunie/btech-project-passport-management-system" target="_blank" class="alert-link">GitHub</a>
 </div>
@@ -143,7 +143,8 @@
       <ul class="nav nav-pills nav-stacked nav-sidebar">
         <li class="" ><a href="/pgo" >Dashboard</a></li>
         <li role="presentation" class="divider"></li>
-        <li class="" ><a href="/pgo/reset/" >Reset</a></li>
+        <li class="" ><a href="/pgo/application/list/" >Validated Application List</a></li>
+        <li class="active" ><a href="/pgo/va-management/" >Manage Validation Authorities</a></li>
         <li class="" ><a href="/pgo/settings/" >Settings</a></li>
       </ul>
     </div>
@@ -151,7 +152,7 @@
       <div class="container-fluid">
         <div class="panel panel-default">
   <div class="panel-heading">
-    <h3 class="panel-title">Verification Authorities</h3>
+    <h3 class="panel-title">Validation Authorities</h3>
   </div>
   
 {{#locals.success}}
@@ -185,31 +186,31 @@
   
   <div class="panel-body">
     <ul class="list-group">
-    {{#locals.vas}}
+    {{#locals.validationAuthorities}}
       <li class="list-group-item">
         {{email}}
         <form action="/pgo/va-management/" method="post" class="form-inline pull-right" role="form">
           <input type="hidden" name="emailid" value="{{email}}" />
-          <input type="hidden" name="action" value="remove" />
+          <input type="hidden" name="action" value="unsetValidationAuthorityEmail" />
           <button type="submit" class="btn-link" ><i class="fa fa-ban text-danger"></i></button>
         </form>
       </li>
-    {{/locals.vas}}
+    {{/locals.validationAuthorities}}
     </ul>
   </div>
+  
   <div class="panel-footer">
-    <form action="/pgo/va-management/" method="post" class="form-horizontal" role="form">
-      <input type="hidden" name="action" value="add" />
+    <form action="/pgo/va-management/" method="post" class="form-horizontal ws-validate" role="form">
+      <input type="hidden" name="action" value="setValidationAuthorityEmail" />
       <div class="input-group">
-        <label for="inputEmail" class="input-group-addon hidden-xs control-label" >Staff Email address</label>
-        <input type="email" class="form-control" id="inputEmail"  {% set_attribute_named_when_autofill emailid%} placeholder="Email address of Staff Member you want to add. e.g.: staff@gmail.com" />
+        <label for="inputEmail" class="input-group-addon hidden-xs control-label" >Validation Authority Email</label>
+        <input type="email" class="form-control" id="inputEmail"  name="email" {{#locals.autoFillUsingLocals}}{{#locals.email}}value="{{locals.email}}"{{/locals.email}}{{/locals.autoFillUsingLocals}} placeholder="Email address of Validation Authority you want to add." required="" />
         <span class="input-group-btn">
           <input type="submit" class="btn btn-primary col-sx-12" value="Add" />
         </span>
       </div>
     </form>
   </div>
-  
 </div>
 
       </div>

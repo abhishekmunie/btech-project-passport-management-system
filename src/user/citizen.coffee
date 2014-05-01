@@ -346,6 +346,7 @@ filter = (req, res, next) ->
 module.exports =
   Citizen: Citizen
   type: TYPE
+  EntityName: EntityName
 
   attr_maps: attr_maps
   attr_list: attr_list

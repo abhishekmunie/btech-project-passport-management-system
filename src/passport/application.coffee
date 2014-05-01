@@ -143,6 +143,7 @@ getForId = (Id, callback) ->
 module.exports =
   Application: Application
   type: TYPE
+  EntityName: EntityName
 
   attr_maps: attr_maps
   attr_list: attr_list

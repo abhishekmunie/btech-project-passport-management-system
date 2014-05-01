@@ -15,7 +15,7 @@ class Reset
 
 insertQuery = (values, client, done, callback) ->
   client.query
-    name: "reset_insert"
+    name: "resetKey_insert"
     text: "INSERT INTO #{EntityName} VALUES ( $1::varchar , $2::varchar ) "
     values: values
   , (err, result) ->
@@ -31,7 +31,7 @@ insertIntoDatabase = (email, resetKey, client, callback) ->
     callback = client
     client = undefined
 
-  if client?
+  if client
     insertQuery [resetKey, email], client, null, callback
   else
     PGConnect (err, client, done) ->
@@ -129,6 +129,7 @@ removeResetKey = (resetKey, client, callback) ->
 
 module.exports =
   Reset: Reset
+  EntityName: EntityName
 
   addResetKeyForEmail: addResetKeyForEmail
   getEmailForResetKey: getEmailForResetKey

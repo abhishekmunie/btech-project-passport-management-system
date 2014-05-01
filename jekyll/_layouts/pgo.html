@@ -11,7 +11,8 @@ layout: default
       <ul class="nav nav-pills nav-stacked nav-sidebar">
         <li class="{% is_active /pgo/index.html%}" ><a href="/pgo" >Dashboard</a></li>
         <li role="presentation" class="divider"></li>
-        <li class="{% is_active_level /pgo/reset%}" ><a href="/pgo/reset/" >Reset</a></li>
+        <li class="{% is_active_level /pgo/application/list/%}" ><a href="/pgo/application/list/" >Validated Application List</a></li>
+        <li class="{% is_active_level /pgo/va-management/%}" ><a href="/pgo/va-management/" >Manage Validation Authorities</a></li>
         <li class="{% is_active_level /pgo/settings%}" ><a href="/pgo/settings/" >Settings</a></li>
       </ul>
     </div>

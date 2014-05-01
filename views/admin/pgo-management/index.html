@@ -88,7 +88,7 @@
 {{^session.dont_warn}}
 <div id="dev-warning" class="alert alert-warning alert-dismissable">
   <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-  <a href="/_dismiss-warning?redirect={{originalUrl}}" class="alert-link pull-right" >Dont show again</a>
+  <a href="/_dismiss-warning?redirect={{encodedOriginalUrl}}" class="alert-link pull-right" >Dont show again</a>
   <strong>Warning!</strong> This is an academic project, not the official page.
   It's available under <a href="https://raw.github.com/abhishekmunie/btech-project-passport-management-system/master/LICENSE" target="_blank" class="alert-link">MIT Licence</a> at <a href="https://github.com/abhishekmunie/btech-project-passport-management-system" target="_blank" class="alert-link">GitHub</a>
 </div>
@@ -196,17 +196,17 @@
           <td>{{Name}}</td>
           <td>
             {{#GrantingOfficerEmail}}
-            <form action="/admin/pgo-management" method="post" class="form-inline" role="form">
+            <form action="/admin/pgo-management" method="post" class="form-inline ws-validate" role="form">
               <input type="hidden" name="action" value="unsetGrantingOfficerEmail" />
               <input type="hidden" name="Id" value="{{Id}}" />
-              <input type="email" value="{{GrantingOfficerEmail}}" disabled class="form-control" />
+              <input type="email" value="{{GrantingOfficerEmail}}" disabled class="form-control" required="" />
               <input type="submit" class="btn btn-danger" value="Unauthorize" />
             </form>
             {{/GrantingOfficerEmail}}{{^GrantingOfficerEmail}}
-            <form action="/admin/pgo-management" method="post" class="form-inline" role="form">
+            <form action="/admin/pgo-management" method="post" class="form-inline ws-validate" role="form">
               <input type="hidden" name="action" value="setGrantingOfficerEmail" />
               <input type="hidden" name="Id" value="{{Id}}" />
-              <input type="email" name="GrantingOfficerEmail" value="{{GrantingOfficerEmail}}" placeholder="Passport Granting Officer's Email" class="form-control" />
+              <input type="email" name="GrantingOfficerEmail" value="{{GrantingOfficerEmail}}" placeholder="Passport Granting Officer's Email" class="form-control" required="" />
               <input type="submit" class="btn btn-primary" value="Authorize" />
             </form>
             {{/GrantingOfficerEmail}}

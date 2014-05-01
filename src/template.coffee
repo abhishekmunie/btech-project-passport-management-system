@@ -14,7 +14,9 @@ cache = {}
 renderEJS = (template, req, res) ->
   template
     url: req.url
+    encodedUrl: encodeURIComponent(req.url)
     originalUrl: req.originalUrl
+    encodedOriginalUrl: encodeURIComponent(req.originalUrl)
     query: req.query
     param: req.params
     session: req.session
@@ -22,6 +24,10 @@ renderEJS = (template, req, res) ->
 
 renderHogan = (template, req, res) ->
   template.render
+    url: req.url
+    encodedUrl: encodeURIComponent(req.url)
+    originalUrl: req.originalUrl
+    encodedOriginalUrl: encodeURIComponent(req.originalUrl)
     url: req.url
     originalUrl: req.originalUrl
     query: req.query

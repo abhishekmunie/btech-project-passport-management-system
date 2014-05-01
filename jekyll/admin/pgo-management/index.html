@@ -20,17 +20,17 @@ title: Passport Granting Officers Management
           <td>{{Name}}</td>
           <td>
             {{#GrantingOfficerEmail}}
-            <form action="/admin/pgo-management" method="post" class="form-inline" role="form">
+            <form action="/admin/pgo-management" method="post" class="form-inline ws-validate" role="form">
               <input type="hidden" name="action" value="unsetGrantingOfficerEmail" />
               <input type="hidden" name="Id" value="{{Id}}" />
-              <input type="email" value="{{GrantingOfficerEmail}}" disabled class="form-control" />
+              <input type="email" value="{{GrantingOfficerEmail}}" disabled class="form-control" required="" />
               <input type="submit" class="btn btn-danger" value="Unauthorize" />
             </form>
             {{/GrantingOfficerEmail}}{{^GrantingOfficerEmail}}
-            <form action="/admin/pgo-management" method="post" class="form-inline" role="form">
+            <form action="/admin/pgo-management" method="post" class="form-inline ws-validate" role="form">
               <input type="hidden" name="action" value="setGrantingOfficerEmail" />
               <input type="hidden" name="Id" value="{{Id}}" />
-              <input type="email" name="GrantingOfficerEmail" value="{{GrantingOfficerEmail}}" placeholder="Passport Granting Officer's Email" class="form-control" />
+              <input type="email" name="GrantingOfficerEmail" value="{{GrantingOfficerEmail}}" placeholder="Passport Granting Officer's Email" class="form-control" required="" />
               <input type="submit" class="btn btn-primary" value="Authorize" />
             </form>
             {{/GrantingOfficerEmail}}

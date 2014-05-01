@@ -1,6 +1,9 @@
+crypto = require 'crypto'
+
 user = require './user'
 
 globals = require '../globals'
+debug = globals.debug
 PGConnect = globals.PGConnect
 
 EntityName = '"passport"."ValidationAuthority"'
@@ -51,6 +54,126 @@ getForEmail = (email, callback) ->
       else
         callback? null, null
 
+
+insertQuery = (values, client, done, callback) ->
+  client.query
+    name: "va_insert"
+    text: "INSERT INTO #{EntityName} VALUES ( $1::varchar , $2::varchar , $3::int ) "
+    values: values
+  , (err, result) ->
+    if err
+      done? client
+      callback? err
+      return
+    done?()
+    callback? null, result.rows
+
+insertValidationAuthorityIntoDatabase = (email, Name, regionId, client, callback) ->
+  if typeof client is "function"
+    callback = client
+    client = undefined
+
+  if client?
+    insertQuery [email, Name, regionId], client, null, callback
+  else
+    PGConnect (err, client, done) ->
+      if err
+        done? client
+        callback? err
+        return
+      insertQuery [email, Name, regionId], client, done, callback
+      return
+  return
+
+addValidationAuthority = (email, Name, regionId, client, callback) ->
+  if typeof client is "function"
+    callback = client
+    client = undefined
+  debug "Adding VA with email: #{email}"
+  tempPassword = crypto.createHash('sha1').update(crypto.randomBytes 256).digest 'hex'
+  user.addUser email, tempPassword, client, (err) ->
+    user.resetPasswordForUserWithEmail email, client, (err, res) ->
+      return callback? err if err
+      console.log 'ok'
+      insertValidationAuthorityIntoDatabase email, Name, regionId, client, callback
+      return
+    return
+  return
+
+rollback = (client, done) -> client.query 'ROLLBACK', (err) -> done? err
+
+addVAForRegionId = (email, regionId, callback) ->
+  PGConnect (err, client, done) ->
+    if err
+      done? client
+      callback? err
+      return
+    client.query 'BEGIN', (err) ->
+      if err
+        rollback client, done
+        callback? err
+        return
+      addValidationAuthority email, "A Validation Authority of Region #{regionId}", regionId, client, (err) ->
+        if err
+          rollback client, done
+          callback? err
+          return
+        client.query 'COMMIT', (err) ->
+          if err
+            done? client
+            callback? err
+            return
+          done?()
+          callback?()
+          return
+        return
+      return
+    return
+  return
+
+removeVAWthEmail = (Id, callback) ->
+  getPGOForRegionWithId Id, (err, GrantingOfficerEmail) ->
+    return callback? err if err
+    PGConnect (err, client, done) ->
+      if err
+        done? client
+        callback? err
+        return
+      client.query 'BEGIN', (err) ->
+        if err
+          rollback client, done
+          callback? err
+          return
+        debug "Unauthorizing PGO for region id #{Id}"
+        client.query
+          name: "region_unset_pgo"
+          text: "UPDATE #{EntityName} SET \"GrantingOfficerEmail\" = null WHERE \"Id\" = $1::int "
+          values: [Id]
+        , (err, result) ->
+          if err
+            rollback client, done
+            callback? err
+            return
+          pgo.removePassportGrantingOfficer GrantingOfficerEmail, client, (err) ->
+            if err
+              rollback client, done
+              callback? err
+              return
+            client.query 'COMMIT', (err) ->
+              if err
+                done? client
+                callback? err
+                return
+              done?()
+              callback? null, result.rows
+              return
+            return
+          return
+        return
+      return
+    return
+  return
+
 filter = (req, res, next) ->
   debug "Validation Authority Auth Filter: #{req.url}"
   return res.redirect "/auth/signin?redirect=#{encodeURIComponent req.url}" unless req.session.user
@@ -70,7 +193,10 @@ filter = (req, res, next) ->
 module.exports =
   ValidationAuthority: ValidationAuthority
   type: TYPE
+  EntityName: EntityName
 
   filter: filter
   isValidationAuthority: isValidationAuthority
   getForEmail: getForEmail
+  addVAForRegionId: addVAForRegionId
+  addValidationAuthority: addValidationAuthority

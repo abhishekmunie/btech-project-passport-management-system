@@ -5,6 +5,9 @@ globals = require '../globals'
 debug = globals.debug
 PGConnect = globals.PGConnect
 
+region = require '../passport/region'
+va = require './va'
+
 EntityName = '"passport"."PassportGrantingOfficer"'
 
 TYPE = 'PassportGrantingOfficer'
@@ -64,6 +67,9 @@ insertPassportGrantingOfficerIntoDatabase = (email, Name, client, callback) ->
   return
 
 addPassportGrantingOfficer = (email, Name, client, callback) ->
+  if typeof client is "function"
+    callback = client
+    client = undefined
   debug "Adding PGO with email: #{email}"
   tempPassword = crypto.createHash('sha1').update(crypto.randomBytes 256).digest 'hex'
   user.addUser email, tempPassword, client, (err) ->
@@ -145,6 +151,27 @@ isPassportGrantingOfficer = (email, callback) ->
       done?()
       callback? null, result.rows[0].exists is '1'
 
+getRegionIdForPGOWithEmail = region.getRegionIdForPGOWithEmail
+
+getValidationAuthorititesUnderPGOWithEmail = (email, callback) ->
+  PGConnect (err, client, done) ->
+    if err
+      done? client
+      callback? err
+      return
+    client.query
+      name: "get_vas_under_pgo"
+      text: "SELECT * FROM #{region.EntityName} , #{va.EntityName} WHERE \"GrantingOfficerEmail\" = $1::varchar AND \"RegionId\" = \"Id\" "
+      values: [email]
+    , (err, result) ->
+      if err
+        done? client
+        callback? err
+        return
+      done?()
+      callback? null, result.rows
+
+
 filter = (req, res, next) ->
   debug "Passport Granting Officer Auth Filter: #{req.url}"
   return res.redirect "/auth/signin?redirect=#{encodeURIComponent req.url}" unless req.session.user
@@ -161,9 +188,11 @@ filter = (req, res, next) ->
     next()
   return
 
+
 module.exports =
   PassportGrantingOfficer: PassportGrantingOfficer
   type: TYPE
+  EntityName: EntityName
 
   filter: filter
   getPassportGrantingOfficers: getPassportGrantingOfficers
@@ -171,5 +200,5 @@ module.exports =
   removePassportGrantingOfficer: removePassportGrantingOfficer
   isPassportGrantingOfficer: isPassportGrantingOfficer
   getForEmail: getForEmail
-
-
+  getValidationAuthorititesUnderPGOWithEmail: getValidationAuthorititesUnderPGOWithEmail
+  getRegionIdForPGOWithEmail: getRegionIdForPGOWithEmail

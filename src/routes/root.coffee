@@ -28,15 +28,14 @@ router.all /^\/dashboard/, (req, res, next) ->
       res.redirect "/auth/signin?redirect=#{encodeURIComponent req.url}"
   return
 
-if true # config.env is 'production'
-  router.all /^\/admin/, admin.filter
-  router.all /^\/pgo/, pgo.filter
-  router.all /^\/va/, va.filter
-  router.all /^\/user/, citizen.filter
-  router.all /^\/citizen-registration/, (req, res, next) ->
-     debug "Citizen Registration Auth Filter: #{req.url}"
-     return res.redirect "/auth/signin?redirect=#{encodeURIComponent req.url}" unless req.session.user? and req.session.user.type is user.type
-     next()
+router.all /^\/admin/, admin.filter
+router.all /^\/pgo/, pgo.filter
+router.all /^\/va/, va.filter
+router.all /^\/user/, citizen.filter
+router.all /^\/citizen-registration/, (req, res, next) ->
+   debug "Citizen Registration Auth Filter: #{req.url}"
+   return res.redirect "/auth/signin?redirect=#{encodeURIComponent req.url}" unless req.session.user? and req.session.user.type is user.type
+   next()
 
 router.get '/login', (req, res, next) ->
   res.redirect req.url.replace /^\/login/, "/auth/signin"
@@ -56,7 +55,7 @@ router.get '/signup', (req, res, next) ->
 router.get '/_dismiss-warning', (req, res, next) ->
   req.session.dont_warn = true
   if req.param 'redirect'
-    res.redirect encodeURI req.param 'redirect'
+    res.redirect req.param 'redirect'
   else
     res.redirect '/'
 
