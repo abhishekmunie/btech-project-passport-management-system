@@ -194,9 +194,9 @@
         <tr>
           <td>{{Id}}</td>
           <td>{{Name}}</td>
+          {{#GrantingOfficerEmail}}
           <td>
-            {{#GrantingOfficerEmail}}
-            <form action="/admin/pgo-management" method="post" class="ws-validate" role="form">
+            <form action="/admin/pgo-management" method="post" class="form-inline ws-validate" role="form">
               <input type="hidden" name="action" value="unsetGrantingOfficerEmail" />
               <input type="hidden" name="Id" value="{{Id}}" />
               <div class="form-group">
@@ -208,7 +208,9 @@
                 </div>
               </div>
             </form>
-            {{/GrantingOfficerEmail}}{{^GrantingOfficerEmail}}
+          </td>
+          {{/GrantingOfficerEmail}}{{^GrantingOfficerEmail}}
+          <td>
             <form action="/admin/pgo-management" method="post" class="form-inline ws-validate" role="form">
               <input type="hidden" name="action" value="setGrantingOfficerEmail" />
               <input type="hidden" name="Id" value="{{Id}}" />
@@ -221,8 +223,8 @@
                 </div>
               </div>
             </form>
-            {{/GrantingOfficerEmail}}
           </td>
+          {{/GrantingOfficerEmail}}
         </tr>
       {{/locals.regions}}
       
