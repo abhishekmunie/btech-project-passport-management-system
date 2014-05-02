@@ -54,6 +54,27 @@ insertIntoDatabase = (email, password, client, callback) ->
     return
   return
 
+getForEmail = (email, callback) ->
+  PGConnect (err, client, done) ->
+    if err
+      done? client
+      callback? err
+      return
+    client.query
+      name: "get_citizen_for_email"
+      text: "SELECT * FROM #{EntityName} WHERE \"email\" = $1::varchar"
+      values: [email]
+    , (err, result) ->
+      if err
+        done? client
+        callback? err
+        return
+      done?()
+      if result.rows[0]
+        callback? null, new User(result.rows[0].email)
+      else
+        callback? null, null
+
 getSaltForEmail = (email, callback) ->
   PGConnect (err, client, done) ->
     if err
