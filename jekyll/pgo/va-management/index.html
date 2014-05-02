@@ -1,0 +1,39 @@
+---
+layout: pgo
+title: Manage Validation Authorities
+---
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Validation Authorities</h3>
+  </div>
+  {% include success-error.html %}
+  {% raw %}
+  <div class="panel-body">
+    <ul class="list-group">
+    {{#locals.validationAuthorities}}
+      <li class="list-group-item">
+        {{email}}
+        <form action="/pgo/va-management/" method="post" class="form-inline pull-right" role="form">
+          <input type="hidden" name="email" value="{{email}}" />
+          <input type="hidden" name="action" value="unsetValidationAuthorityEmail" />
+          <button type="submit" class="btn-link" title="Deauthorize" ><i class="fa fa-ban text-danger"></i></button>
+        </form>
+      </li>
+    {{/locals.validationAuthorities}}
+    </ul>
+  </div>
+  {% endraw %}
+  <div class="panel-footer">
+    <form action="/pgo/va-management/" method="post" class="form-horizontal ws-validate" role="form">
+      <input type="hidden" name="action" value="setValidationAuthorityEmail" />
+      <div class="input-group">
+        <label for="inputEmail" class="input-group-addon hidden-xs control-label" >Validation Authority Email</label>
+        <input type="email" class="form-control" id="inputEmail"  {% set_attribute_named_when_autofill email%} placeholder="Email address of Validation Authority you want to add." required="" />
+        <span class="input-group-btn">
+          <input type="submit" class="btn btn-primary col-sx-12" value="Add" />
+        </span>
+      </div>
+    </form>
+  </div>
+</div>

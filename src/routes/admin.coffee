@@ -53,7 +53,7 @@ router.post '/pgo-management', (req, res, next) ->
           res.locals.error = err
           next()
           return
-        res.locals.success = message: "Granting Officer's Email was successfully Authorize."
+        res.locals.success = message: "Granting Officer's Email was successfully Authorized."
         next()
         return
     when 'unsetGrantingOfficerEmail'
@@ -64,7 +64,7 @@ router.post '/pgo-management', (req, res, next) ->
           next()
           return
         console.log row
-        res.locals.success = message: "Granting Officer's Email was successfully Unauthorize."
+        res.locals.success = message: "Granting Officer's Email was successfully Deauthorized."
         next()
         return
     else

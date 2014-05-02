@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Passport Applications · Passpot Management System</title>
+    <title>Passport Granting Officer's Dashboard · Passpot Management System</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
 
@@ -136,81 +136,21 @@
 
     <div class="container-fluid">
   <div class="page-header">
-      <h1 class="text-muted text-center">Validation Authority Portal</h1>
+      <h1 class="text-muted text-center">Passport Granting Officer Portal</h1>
   </div>
   <div class="row">
     <div class="col-sm-3 col-md-2">
       <ul class="nav nav-pills nav-stacked nav-sidebar">
-        <li class="" ><a href="/va" >Dashboard</a></li>
+        <li class="active" ><a href="/pgo" >Dashboard</a></li>
         <li role="presentation" class="divider"></li>
-        <li class="active" ><a href="/va/application/list/" >Application List</a></li>
-        <li class="" ><a href="/va/settings/" >Settings</a></li>
+        <li class="" ><a href="/pgo/application/list/" >Validated Application List</a></li>
+        <li class="" ><a href="/pgo/va-management/" >Manage Validation Authorities</a></li>
+        <li class="" ><a href="/pgo/settings/" >Settings</a></li>
       </ul>
     </div>
     <div class="col-sm-9 col-md-10 main">
       <div class="container-fluid">
         
-<div id="books-list" class="container-fluid">
-  <!-- <div class="text-center">
-    <ul class="pagination">
-      <li <%= (current > 0) ? "><a href=\"?currentPage="+(current-1)+"&amp;resultsPerPage="+length+((detailsISBN!=null)?"&autoSelectFirst":"")+"\">&laquo;</a" : "class=\"disabled\"><span>&laquo;</span"%>></li>
-      <%
-        for (int i = 0; i < totalPages; i++) {
-          if (i == current) {
-      %>
-      <li class="active"><span> <%=i+1%> <span class="sr-only">(current) </span></span></li>
-      <%  } else { %>
-      <li><a href="?currentPage=<%=""+i+"&amp;resultsPerPage="+length+((detailsISBN!=null)?"&autoSelectFirst":"")+"\"> "+(i+1)%> </a></li>
-      <%
-          }
-        }
-      %>
-      <li <%= (current < totalPages-1) ? "><a href=\"?currentPage="+(current+1)+"&amp;resultsPerPage="+length+((detailsISBN!=null)?"&autoSelectFirst":"")+"\">&raquo;</a" : "class=\"disabled\"><span>&raquo;</span"%>></li>
-    </ul>
-  </div> -->
-  <table class="table table-striped table-hover table-responsive">
-    <thead>
-      <tr>
-        <th>Id</th>
-        <th>Given Name</th>
-        <th>Surname</th>
-        <th>Passport Type</th>
-        <th>Applying for</th>
-        <th>Type of Application</th>
-      </tr>
-    </thead>
-    <tbody>
-      {{#locals.applications}}
-      <tr>
-        <td><a href="details/{{Id}}">{{Id}}</a></td>
-        <td><a href="details/{{Id}}">{{GivenName}}</a></td>
-        <td><a href="details/{{Id}}">{{Surname}}</a></td>
-        <td><a href="details/{{Id}}">{{PassportType}}</a></td>
-        <td><a href="details/{{Id}}">{{ApplyingFor}}</a></td>
-        <td><a href="details/{{Id}}">{{ApplicationType}}</a></td>
-      </tr>
-      {{/locals.applications}}
-    </tbody>
-  </table>
-  <!-- <div class="text-center">
-    <ul class="pagination">
-      <li <%= (current > 0) ? "><a href=\"?currentPage="+(current-1)+"&amp;resultsPerPage="+length+((detailsISBN!=null)?"&autoSelectFirst":"")+"\">&laquo;</a" : "class=\"disabled\"><span>&laquo;</span"%>></li>
-      <%
-        for (int i = 0; i < totalPages; i++) {
-          if (i == current) {
-      %>
-      <li class="active"><span> <%=i+1%> <span class="sr-only">(current) </span></span></li>
-      <%  } else { %>
-      <li><a href="?currentPage=<%=""+i+"&amp;resultsPerPage="+length+((detailsISBN!=null)?"&autoSelectFirst":"")+"\"> "+(i+1)%> </a></li>
-      <%
-          }
-        }
-      %>
-      <li <%= (current < totalPages-1) ? "><a href=\"?currentPage="+(current+1)+"&amp;resultsPerPage="+length+((detailsISBN!=null)?"&autoSelectFirst":"")+"\">&raquo;</a" : "class=\"disabled\"><span>&raquo;</span"%>></li>
-    </ul>
-  </div> -->
-</div>
-
       </div>
     </div>
   </div>

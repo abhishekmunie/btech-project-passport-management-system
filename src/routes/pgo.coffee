@@ -34,18 +34,18 @@ router.post '/va-management', (req, res, next) ->
             res.locals.error = err
             next()
             return
-          res.locals.success = message: "validation Authority's Email was successfully Authorize."
+          res.locals.success = message: "validation Authority's Email was successfully Authorized."
           next()
           return
     when 'unsetValidationAuthorityEmail'
       VAEmail = req.param 'email'
-      region.unsetPGOForRegionId Id, (err, row) ->
+      va.removeVAWthEmail VAEmail, (err, row) ->
         if err
           res.locals.error = err
           next()
           return
         console.log row
-        res.locals.success = message: "validation Authority's Email was successfully Unauthorize."
+        res.locals.success = message: "validation Authority's Email was successfully Deauthorized."
         next()
         return
     else

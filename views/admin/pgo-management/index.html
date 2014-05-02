@@ -200,7 +200,7 @@
               <input type="hidden" name="action" value="unsetGrantingOfficerEmail" />
               <input type="hidden" name="Id" value="{{Id}}" />
               <input type="email" value="{{GrantingOfficerEmail}}" disabled class="form-control" required="" />
-              <input type="submit" class="btn btn-danger" value="Unauthorize" />
+              <input type="submit" class="btn btn-danger" value="Deauthorize" />
             </form>
             {{/GrantingOfficerEmail}}{{^GrantingOfficerEmail}}
             <form action="/admin/pgo-management" method="post" class="form-inline ws-validate" role="form">

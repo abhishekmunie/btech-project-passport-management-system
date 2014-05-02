@@ -1,6 +1,8 @@
 crypto = require 'crypto'
 
 user = require './user'
+citizen = require './citizen'
+application = require '../passport/application'
 
 globals = require '../globals'
 debug = globals.debug
@@ -100,7 +102,9 @@ addValidationAuthority = (email, Name, regionId, client, callback) ->
     return
   return
 
-rollback = (client, done) -> client.query 'ROLLBACK', (err) -> done? err
+rollback = (client, done) ->
+  client.query 'ROLLBACK', (err) ->
+    done? err
 
 addVAForRegionId = (email, regionId, callback) ->
   PGConnect (err, client, done) ->
@@ -131,7 +135,6 @@ addVAForRegionId = (email, regionId, callback) ->
     return
   return
 
-
 deleteQuery = (email, client, done, callback) ->
   client.query
     name: "va_delete"
@@ -151,14 +154,14 @@ deleteValidationAuthorityFromDatabase = (email, client, callback) ->
     client = undefined
 
   if client?
-    insertQuery email, client, null, callback
+    deleteQuery email, client, null, callback
   else
     PGConnect (err, client, done) ->
       if err
         done? client
         callback? err
         return
-      insertQuery email, client, done, callback
+      deleteQuery email, client, done, callback
       return
   return
 
@@ -193,12 +196,31 @@ removeVAWthEmail = (email, callback) ->
             callback? err
             return
           done?()
-          callback? null, result.rows
+          callback?()
           return
         return
       return
     return
   return
+
+getApplicationsWithProfileForVAWithEmail = (email, callback) ->
+   PGConnect (err, client, done) ->
+     if err
+       done? client
+       callback? err
+       return
+     client.query
+       name: "pgo_get_all"
+       text: "SELECT * FROM #{EntityName} va NATURAL JOIN #{application.EntityName} a , #{citizen.EntityName} c WHERE c.\"email\" = a.\"CitizenEmail\" AND va.\"email\" = $1::varchar "
+       values: [email]
+     , (err, result) ->
+       if err
+         done? client
+         callback? err
+         return
+       done?()
+       callback? null, result.rows
+
 
 filter = (req, res, next) ->
   debug "Validation Authority Auth Filter: #{req.url}"
@@ -226,3 +248,5 @@ module.exports =
   getForEmail: getForEmail
   addVAForRegionId: addVAForRegionId
   addValidationAuthority: addValidationAuthority
+  removeVAWthEmail: removeVAWthEmail
+  getApplicationsWithProfileForVAWithEmail: getApplicationsWithProfileForVAWithEmail
