@@ -108,6 +108,9 @@ deletePassportGrantingOfficerFromDatabase = (email, client, callback) ->
   return
 
 removePassportGrantingOfficer = (email, client, callback) ->
+  if typeof client is "function"
+    callback = client
+    client = undefined
   debug "Removing PGO with email: #{email}"
   deletePassportGrantingOfficerFromDatabase email, client, (err) ->
     user.removeUser email, client, callback

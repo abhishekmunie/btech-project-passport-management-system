@@ -1,25 +1,4 @@
 
--- ALTER TABLE IF EXISTS "passport"."Validation" DROP CONSTRAINT "fk_Validations_AppId";
--- ALTER TABLE IF EXISTS "passport"."Passport" DROP CONSTRAINT "fk_Passport_Application";
--- ALTER TABLE IF EXISTS "passport"."Citizen" DROP CONSTRAINT "fk_Citizen_user";
--- ALTER TABLE IF EXISTS "passport"."ValidationAuthority" DROP CONSTRAINT "fk_ValidationAuthority_VAemail";
--- ALTER TABLE IF EXISTS "passport"."PassportGrantingOfficer" DROP CONSTRAINT "fk_PassportGrantingOfficer_user";
--- ALTER TABLE IF EXISTS "passport"."PassportApplication" DROP CONSTRAINT "fk_PassportApplication";
--- ALTER TABLE IF EXISTS "passport"."Validation" DROP CONSTRAINT "fk_Validation";
--- ALTER TABLE IF EXISTS "passport"."PassportApplication" DROP CONSTRAINT "fk_PassportApplication_1";
--- ALTER TABLE IF EXISTS "passport"."PassportApplication" DROP CONSTRAINT "fk_PassportApplication_2";
--- ALTER TABLE IF EXISTS "passport"."Region" DROP CONSTRAINT "fk_Region";
-
--- DROP TABLE IF EXISTS "passport"."Citizen";
--- DROP TABLE IF EXISTS "passport"."PassportApplication";
--- DROP TABLE IF EXISTS "passport"."Validation";
--- DROP TABLE IF EXISTS "passport"."ValidationAuthority";
--- DROP TABLE IF EXISTS "passport"."Passport";
--- DROP TABLE IF EXISTS "passport"."PassportGrantingOfficer";
--- DROP TABLE IF EXISTS "passport"."User";
--- DROP TABLE IF EXISTS "passport"."Region";
--- DROP TABLE IF EXISTS "passport"."UnverifiedUser";
-
 TRUNCATE "session";
 
 DROP SCHEMA IF EXISTS "passport" CASCADE ;

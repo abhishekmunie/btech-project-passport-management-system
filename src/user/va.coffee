@@ -131,43 +131,69 @@ addVAForRegionId = (email, regionId, callback) ->
     return
   return
 
-removeVAWthEmail = (Id, callback) ->
-  getPGOForRegionWithId Id, (err, GrantingOfficerEmail) ->
-    return callback? err if err
+
+deleteQuery = (email, client, done, callback) ->
+  client.query
+    name: "va_delete"
+    text: "DELETE FROM #{EntityName} WHERE \"email\" = $1::varchar "
+    values: [email]
+  , (err, result) ->
+    if err
+      done? client
+      callback? err
+      return
+    done?()
+    callback? null, result.rows
+
+deleteValidationAuthorityFromDatabase = (email, client, callback) ->
+  if typeof client is "function"
+    callback = client
+    client = undefined
+
+  if client?
+    insertQuery email, client, null, callback
+  else
     PGConnect (err, client, done) ->
       if err
         done? client
         callback? err
         return
-      client.query 'BEGIN', (err) ->
+      insertQuery email, client, done, callback
+      return
+  return
+
+removeValidationAuthority = (email, client, callback) ->
+  if typeof client is "function"
+    callback = client
+    client = undefined
+  debug "Removing PGO with email: #{email}"
+  deleteValidationAuthorityFromDatabase email, client, (err) ->
+    user.removeUser email, client, callback
+
+
+removeVAWthEmail = (email, callback) ->
+  PGConnect (err, client, done) ->
+    if err
+      done? client
+      callback? err
+      return
+    client.query 'BEGIN', (err) ->
+      if err
+        rollback client, done
+        callback? err
+        return
+      removeValidationAuthority email, client, (err) ->
         if err
           rollback client, done
           callback? err
           return
-        debug "Unauthorizing PGO for region id #{Id}"
-        client.query
-          name: "region_unset_pgo"
-          text: "UPDATE #{EntityName} SET \"GrantingOfficerEmail\" = null WHERE \"Id\" = $1::int "
-          values: [Id]
-        , (err, result) ->
+        client.query 'COMMIT', (err) ->
           if err
-            rollback client, done
+            done? client
             callback? err
             return
-          pgo.removePassportGrantingOfficer GrantingOfficerEmail, client, (err) ->
-            if err
-              rollback client, done
-              callback? err
-              return
-            client.query 'COMMIT', (err) ->
-              if err
-                done? client
-                callback? err
-                return
-              done?()
-              callback? null, result.rows
-              return
-            return
+          done?()
+          callback? null, result.rows
           return
         return
       return
