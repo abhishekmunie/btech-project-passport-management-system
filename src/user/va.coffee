@@ -210,7 +210,7 @@ getApplicationsWithProfileForVAWithEmail = (email, callback) ->
        callback? err
        return
      client.query
-       name: "pgo_get_all"
+       name: "va_get_apps_profile_for_email"
        text: "SELECT * FROM #{EntityName} va NATURAL JOIN #{application.EntityName} a , #{citizen.EntityName} c WHERE c.\"email\" = a.\"CitizenEmail\" AND va.\"email\" = $1::varchar "
        values: [email]
      , (err, result) ->

@@ -4,7 +4,7 @@ PGConnect = globals.PGConnect
 
 EntityName = '"passport"."PassportApplication"'
 
-TYPE = 'Citizen'
+citizen = require '../user/citizen'
 
 class Application
 
@@ -126,7 +126,7 @@ getForId = (Id, callback) ->
       callback? err
       return
     client.query
-      name: "get_citizen_for_email"
+      name: "get_application_for_id"
       text: "SELECT * FROM #{EntityName} WHERE \"Id\" = $1::varchar"
       values: [Id]
     , (err, result) ->
@@ -140,16 +140,37 @@ getForId = (Id, callback) ->
       else
         callback? null, null
 
+getApplicationsWithProfileForId = (Id, callback) ->
+   PGConnect (err, client, done) ->
+     if err
+       done? client
+       callback? err
+       return
+     client.query
+       name: "get_application_with_profile_for_id"
+       text: "SELECT * FROM #{EntityName} a , #{citizen.EntityName} c WHERE c.\"email\" = a.\"CitizenEmail\" AND a.\"Id\" = $1::int "
+       values: [Id]
+     , (err, result) ->
+       if err
+         done? client
+         callback? err
+         return
+       done?()
+       if result.rows[0]
+         callback? null, result.rows[0]
+       else
+         callback? null, null
+
 module.exports =
   Application: Application
-  type: TYPE
   EntityName: EntityName
 
   attr_maps: attr_maps
   attr_list: attr_list
 
-  expandValueUsingMap:expandValueUsingMap
+  expandValueUsingMap: expandValueUsingMap
   addApplication: addApplication
   getAllForEmail: getAllForEmail
-  getForId:getForId
+  getForId: getForId
+  getApplicationsWithProfileForId: getApplicationsWithProfileForId
 

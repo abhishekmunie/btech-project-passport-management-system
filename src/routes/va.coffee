@@ -15,7 +15,18 @@ router.all '/application/list', (req, res, next) ->
       application.expandValueUsingMap app
       citizen.expandValueUsingMap app
     res.locals.applications = applications
-    console.log applications
+    next()
+    return
+  return
+
+router.all '/application/details/:Id', (req, res, next) ->
+  applicationId = req.param 'Id'
+  application.getApplicationsWithProfileForId applicationId, (err, applicationForId) ->
+    return next err if err
+    application.expandValueUsingMap applicationForId
+    citizen.expandValueUsingMap applicationForId
+    res.locals.application = applicationForId
+    req.url = '/application/details/'
     next()
     return
   return
