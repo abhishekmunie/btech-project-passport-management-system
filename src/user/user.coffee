@@ -210,6 +210,7 @@ module.exports =
 
   addUser: addUser
   removeUser: removeUser
+  getForEmail: getForEmail
   getSaltForEmail: getSaltForEmail
   verifyCredentials: verifyCredentials
   resetPasswordForUserWithEmail: resetPasswordForUserWithEmail
