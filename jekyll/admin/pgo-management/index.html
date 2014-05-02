@@ -20,18 +20,30 @@ title: Passport Granting Officers Management
           <td>{{Name}}</td>
           <td>
             {{#GrantingOfficerEmail}}
-            <form action="/admin/pgo-management" method="post" class="form-inline ws-validate" role="form">
+            <form action="/admin/pgo-management" method="post" class="ws-validate" role="form">
               <input type="hidden" name="action" value="unsetGrantingOfficerEmail" />
               <input type="hidden" name="Id" value="{{Id}}" />
-              <input type="email" value="{{GrantingOfficerEmail}}" disabled class="form-control" required="" />
-              <input type="submit" class="btn btn-danger" value="Deauthorize" />
+              <div class="form-group">
+                <div class="input-group">
+                  <input type="email" value="{{GrantingOfficerEmail}}" disabled class="form-control" required="" />
+                  <span class="input-group-btn">
+                    <input type="submit" class="btn btn-danger" value="Deauthorize" />
+                  </span>
+                </div>
+              </div>
             </form>
             {{/GrantingOfficerEmail}}{{^GrantingOfficerEmail}}
             <form action="/admin/pgo-management" method="post" class="form-inline ws-validate" role="form">
               <input type="hidden" name="action" value="setGrantingOfficerEmail" />
               <input type="hidden" name="Id" value="{{Id}}" />
-              <input type="email" name="GrantingOfficerEmail" value="{{GrantingOfficerEmail}}" placeholder="Passport Granting Officer's Email" class="form-control" required="" />
-              <input type="submit" class="btn btn-primary" value="Authorize" />
+              <div class="form-group">
+                <div class="input-group">
+                  <input type="email" name="GrantingOfficerEmail" value="{{GrantingOfficerEmail}}" placeholder="Passport Granting Officer's Email" class="form-control" required="" />
+                  <span class="input-group-btn">
+                    <input type="submit" class="btn btn-primary" value="Authorize" />
+                  </span>
+                </div>
+              </div>
             </form>
             {{/GrantingOfficerEmail}}
           </td>

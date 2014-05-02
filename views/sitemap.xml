@@ -2,14 +2,14 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>/</loc>
-    <lastmod>2014-05-02T16:25:51+05:30</lastmod>
+    <lastmod>2014-05-02T17:53:40+05:30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   
   <url>
     <loc>/about/index.html</loc>
-    <lastmod>2014-05-02T16:25:51+05:30</lastmod>
+    <lastmod>2014-05-02T17:53:40+05:30</lastmod>
     
     <changefreq>monthly</changefreq>
     
@@ -19,7 +19,7 @@
   
   <url>
     <loc>/admin/index.html</loc>
-    <lastmod>2014-05-02T16:25:51+05:30</lastmod>
+    <lastmod>2014-05-02T17:53:40+05:30</lastmod>
     
     <changefreq>monthly</changefreq>
     
@@ -29,7 +29,7 @@
   
   <url>
     <loc>/admin/pgo-management/index.html</loc>
-    <lastmod>2014-05-02T16:25:51+05:30</lastmod>
+    <lastmod>2014-05-02T17:53:40+05:30</lastmod>
     
     <changefreq>monthly</changefreq>
     
@@ -39,7 +39,7 @@
   
   <url>
     <loc>/admin/reset/index.html</loc>
-    <lastmod>2014-05-02T16:25:51+05:30</lastmod>
+    <lastmod>2014-05-02T17:53:40+05:30</lastmod>
     
     <changefreq>monthly</changefreq>
     
@@ -49,7 +49,7 @@
   
   <url>
     <loc>/admin/settings/index.html</loc>
-    <lastmod>2014-05-02T16:25:51+05:30</lastmod>
+    <lastmod>2014-05-02T17:53:40+05:30</lastmod>
     
     <changefreq>monthly</changefreq>
     
@@ -59,7 +59,7 @@
   
   <url>
     <loc>/auth/forgot/index.html</loc>
-    <lastmod>2014-05-02T16:25:51+05:30</lastmod>
+    <lastmod>2014-05-02T17:53:40+05:30</lastmod>
     
     <changefreq>monthly</changefreq>
     
@@ -69,7 +69,7 @@
   
   <url>
     <loc>/auth/reset/index.html</loc>
-    <lastmod>2014-05-02T16:25:51+05:30</lastmod>
+    <lastmod>2014-05-02T17:53:40+05:30</lastmod>
     
     <changefreq>monthly</changefreq>
     
@@ -79,7 +79,7 @@
   
   <url>
     <loc>/auth/signin/admin/index.html</loc>
-    <lastmod>2014-05-02T16:25:51+05:30</lastmod>
+    <lastmod>2014-05-02T17:53:40+05:30</lastmod>
     
     <changefreq>monthly</changefreq>
     
@@ -89,7 +89,7 @@
   
   <url>
     <loc>/auth/signin/index.html</loc>
-    <lastmod>2014-05-02T16:25:51+05:30</lastmod>
+    <lastmod>2014-05-02T17:53:40+05:30</lastmod>
     
     <changefreq>monthly</changefreq>
     
@@ -99,7 +99,7 @@
   
   <url>
     <loc>/auth/signin/pgo/index.html</loc>
-    <lastmod>2014-05-02T16:25:51+05:30</lastmod>
+    <lastmod>2014-05-02T17:53:40+05:30</lastmod>
     
     <changefreq>monthly</changefreq>
     
@@ -109,7 +109,7 @@
   
   <url>
     <loc>/auth/signin/va/index.html</loc>
-    <lastmod>2014-05-02T16:25:51+05:30</lastmod>
+    <lastmod>2014-05-02T17:53:40+05:30</lastmod>
     
     <changefreq>monthly</changefreq>
     
@@ -119,7 +119,7 @@
   
   <url>
     <loc>/auth/signout/index.html</loc>
-    <lastmod>2014-05-02T16:25:51+05:30</lastmod>
+    <lastmod>2014-05-02T17:53:40+05:30</lastmod>
     
     <changefreq>monthly</changefreq>
     
@@ -129,7 +129,7 @@
   
   <url>
     <loc>/auth/signup/index.html</loc>
-    <lastmod>2014-05-02T16:25:51+05:30</lastmod>
+    <lastmod>2014-05-02T17:53:40+05:30</lastmod>
     
     <changefreq>monthly</changefreq>
     
@@ -139,7 +139,7 @@
   
   <url>
     <loc>/auth/verification/index.html</loc>
-    <lastmod>2014-05-02T16:25:51+05:30</lastmod>
+    <lastmod>2014-05-02T17:53:40+05:30</lastmod>
     
     <changefreq>monthly</changefreq>
     
@@ -149,7 +149,7 @@
   
   <url>
     <loc>/citizen-registration/index.html</loc>
-    <lastmod>2014-05-02T16:25:51+05:30</lastmod>
+    <lastmod>2014-05-02T17:53:40+05:30</lastmod>
     
     <changefreq>monthly</changefreq>
     
@@ -159,7 +159,7 @@
   
   <url>
     <loc>/contact/index.html</loc>
-    <lastmod>2014-05-02T16:25:51+05:30</lastmod>
+    <lastmod>2014-05-02T17:53:40+05:30</lastmod>
     
     <changefreq>monthly</changefreq>
     
@@ -169,7 +169,7 @@
   
   <url>
     <loc>/index.html</loc>
-    <lastmod>2014-05-02T16:25:51+05:30</lastmod>
+    <lastmod>2014-05-02T17:53:40+05:30</lastmod>
     
     <changefreq>monthly</changefreq>
     
@@ -179,7 +179,7 @@
   
   <url>
     <loc>/pgo/application/details/index.html</loc>
-    <lastmod>2014-05-02T16:25:51+05:30</lastmod>
+    <lastmod>2014-05-02T17:53:40+05:30</lastmod>
     
     <changefreq>monthly</changefreq>
     
@@ -189,7 +189,7 @@
   
   <url>
     <loc>/pgo/application/list/index.html</loc>
-    <lastmod>2014-05-02T16:25:51+05:30</lastmod>
+    <lastmod>2014-05-02T17:53:40+05:30</lastmod>
     
     <changefreq>monthly</changefreq>
     
@@ -199,7 +199,7 @@
   
   <url>
     <loc>/pgo/index.html</loc>
-    <lastmod>2014-05-02T16:25:51+05:30</lastmod>
+    <lastmod>2014-05-02T17:53:40+05:30</lastmod>
     
     <changefreq>monthly</changefreq>
     
@@ -209,7 +209,7 @@
   
   <url>
     <loc>/pgo/settings/index.html</loc>
-    <lastmod>2014-05-02T16:25:51+05:30</lastmod>
+    <lastmod>2014-05-02T17:53:40+05:30</lastmod>
     
     <changefreq>monthly</changefreq>
     
@@ -219,7 +219,7 @@
   
   <url>
     <loc>/pgo/va-management/index.html</loc>
-    <lastmod>2014-05-02T16:25:51+05:30</lastmod>
+    <lastmod>2014-05-02T17:53:40+05:30</lastmod>
     
     <changefreq>monthly</changefreq>
     
@@ -229,7 +229,7 @@
   
   <url>
     <loc>/sitemap.xml</loc>
-    <lastmod>2014-05-02T16:25:51+05:30</lastmod>
+    <lastmod>2014-05-02T17:53:40+05:30</lastmod>
     
     <changefreq>monthly</changefreq>
     
@@ -239,7 +239,7 @@
   
   <url>
     <loc>/user/application/index.html</loc>
-    <lastmod>2014-05-02T16:25:51+05:30</lastmod>
+    <lastmod>2014-05-02T17:53:40+05:30</lastmod>
     
     <changefreq>monthly</changefreq>
     
@@ -249,7 +249,7 @@
   
   <url>
     <loc>/user/index.html</loc>
-    <lastmod>2014-05-02T16:25:51+05:30</lastmod>
+    <lastmod>2014-05-02T17:53:40+05:30</lastmod>
     
     <changefreq>monthly</changefreq>
     
@@ -259,7 +259,7 @@
   
   <url>
     <loc>/user/profile/index.html</loc>
-    <lastmod>2014-05-02T16:25:51+05:30</lastmod>
+    <lastmod>2014-05-02T17:53:40+05:30</lastmod>
     
     <changefreq>monthly</changefreq>
     
@@ -269,7 +269,7 @@
   
   <url>
     <loc>/user/settings/index.html</loc>
-    <lastmod>2014-05-02T16:25:51+05:30</lastmod>
+    <lastmod>2014-05-02T17:53:40+05:30</lastmod>
     
     <changefreq>monthly</changefreq>
     
@@ -279,7 +279,7 @@
   
   <url>
     <loc>/user/status/index.html</loc>
-    <lastmod>2014-05-02T16:25:51+05:30</lastmod>
+    <lastmod>2014-05-02T17:53:40+05:30</lastmod>
     
     <changefreq>monthly</changefreq>
     
@@ -289,7 +289,7 @@
   
   <url>
     <loc>/va/application/details/index.html</loc>
-    <lastmod>2014-05-02T16:25:51+05:30</lastmod>
+    <lastmod>2014-05-02T17:53:40+05:30</lastmod>
     
     <changefreq>monthly</changefreq>
     
@@ -299,7 +299,7 @@
   
   <url>
     <loc>/va/application/list/index.html</loc>
-    <lastmod>2014-05-02T16:25:51+05:30</lastmod>
+    <lastmod>2014-05-02T17:53:40+05:30</lastmod>
     
     <changefreq>monthly</changefreq>
     
@@ -309,7 +309,17 @@
   
   <url>
     <loc>/va/index.html</loc>
-    <lastmod>2014-05-02T16:25:51+05:30</lastmod>
+    <lastmod>2014-05-02T17:53:40+05:30</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    
+    <priority>0.3</priority>
+    
+  </url>
+  
+  <url>
+    <loc>/va/settings/index.html</loc>
+    <lastmod>2014-05-02T17:53:40+05:30</lastmod>
     
     <changefreq>monthly</changefreq>
     

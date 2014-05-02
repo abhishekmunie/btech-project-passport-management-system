@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Passport Granting Officers Management · Passpot Management System</title>
+    <title>Validation Authority's Settings · Passpot Management System</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
 
@@ -136,105 +136,24 @@
 
     <div class="container-fluid">
   <div class="page-header">
-      <h1 class="text-muted text-center">Admin Portal</h1>
+      <h1 class="text-muted text-center">Validation Authority Portal</h1>
   </div>
   <div class="row">
     <div class="col-sm-3 col-md-2">
       <ul class="nav nav-pills nav-stacked nav-sidebar">
-        <li class="" ><a href="/admin" >Dashboard</a></li>
+        <li class="" ><a href="/va" >Dashboard</a></li>
         <li role="presentation" class="divider"></li>
-        <li class="" ><a href="/admin/reset/" >Reset</a></li>
-        <li class="active" ><a href="/admin/pgo-management/" >Manage Granting Officers</a></li>
-        <li class="" ><a href="/admin/settings/" >Settings</a></li>
+        <li class="" ><a href="/va/application/list/" >Application List</a></li>
+        <li class="active" ><a href="/va/settings/" >Settings</a></li>
       </ul>
     </div>
     <div class="col-sm-9 col-md-10 main">
       <div class="container-fluid">
-        <div class="panel panel-default">
-  <div class="panel-heading">
-    <h3 class="panel-title">Passport Granting Officers Management</h3>
-  </div>
-  
-{{#locals.success}}
-<div class="alert alert-success alert-dismissable">
-  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-  {{#locals.success.details}}
-  <details>
-    <summary><strong>Success!</strong> {{locals.success.message}}</summary>
-    <p>{{{locals.success.details}}}</p>
-  </details>
-  {{/locals.success.details}}{{^locals.success.details}}
-  <strong>Success!</strong> {{locals.success.message}}</summary>
-  {{/locals.success.details}}
-</div>
-{{/locals.success}}
-{{#locals.error}}
-<div class="alert alert-danger alert-dismissable">
-  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-  {{#locals.error.details}}
-  <details>
-    <summary><strong>Error!</strong> {{locals.error.message}}</summary>
-    <p>{{{locals.error.details}}}</p>
-  </details>
-  {{/locals.error.details}}{{^locals.error.details}}
-  <strong>Error!</strong> {{locals.error.message}}</summary>
-  {{/locals.error.details}}
-</div>
-{{/locals.error}}
-
-
-  <div class="panel-body">
-    <table class="table table-striped table-hover">
-      <thead>
-        <tr><th>ID</th><th>Region</th><th>Passport Granting Officers</th></tr>
-      </thead>
-      <tbody>
-      
-      {{#locals.regions}}
-        <tr>
-          <td>{{Id}}</td>
-          <td>{{Name}}</td>
-          <td>
-            {{#GrantingOfficerEmail}}
-            <form action="/admin/pgo-management" method="post" class="ws-validate" role="form">
-              <input type="hidden" name="action" value="unsetGrantingOfficerEmail" />
-              <input type="hidden" name="Id" value="{{Id}}" />
-              <div class="form-group">
-                <div class="input-group">
-                  <input type="email" value="{{GrantingOfficerEmail}}" disabled class="form-control" required="" />
-                  <span class="input-group-btn">
-                    <input type="submit" class="btn btn-danger" value="Deauthorize" />
-                  </span>
-                </div>
-              </div>
-            </form>
-            {{/GrantingOfficerEmail}}{{^GrantingOfficerEmail}}
-            <form action="/admin/pgo-management" method="post" class="form-inline ws-validate" role="form">
-              <input type="hidden" name="action" value="setGrantingOfficerEmail" />
-              <input type="hidden" name="Id" value="{{Id}}" />
-              <div class="form-group">
-                <div class="input-group">
-                  <input type="email" name="GrantingOfficerEmail" value="{{GrantingOfficerEmail}}" placeholder="Passport Granting Officer's Email" class="form-control" required="" />
-                  <span class="input-group-btn">
-                    <input type="submit" class="btn btn-primary" value="Authorize" />
-                  </span>
-                </div>
-              </div>
-            </form>
-            {{/GrantingOfficerEmail}}
-          </td>
-        </tr>
-      {{/locals.regions}}
-      
-      </tbody>
-    </table>
-  </div>
-</div>
+        
       </div>
     </div>
   </div>
 </div>
-
 
     <!-- FOOTER -->
     <footer id="footer">
