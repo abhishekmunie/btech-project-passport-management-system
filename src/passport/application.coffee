@@ -34,7 +34,7 @@ class Application
 
   insertQuery: (client, done, callback) ->
     client.query
-      name: "citizen_insert"
+      name: "application_insert"
       text: "INSERT INTO #{EntityName} " +
         '("CitizenEmail" , "ApplyingFor" , "ApplicationType" , "PassportType" , "PassportBookletType" , "ValidityRequired" , "GrantingOfficerEmail" , "RegionId") ' +
         'VALUES ( $1::varchar , $2::char , $3::char , $4::char , $5::char , $6::char , $7::varchar , $8::int ) '
@@ -105,7 +105,7 @@ getAllForEmail = (CitizenEmail, callback) ->
       callback? err
       return
     client.query
-      name: "get_citizen_for_email"
+      name: "get_application_for_email"
       text: "SELECT * FROM #{EntityName} WHERE \"CitizenEmail\" = $1::varchar"
       values: [CitizenEmail]
     , (err, result) ->

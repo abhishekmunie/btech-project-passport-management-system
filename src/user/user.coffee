@@ -61,7 +61,7 @@ getForEmail = (email, callback) ->
       callback? err
       return
     client.query
-      name: "get_citizen_for_email"
+      name: "get_user_for_email"
       text: "SELECT * FROM #{EntityName} WHERE \"email\" = $1::varchar"
       values: [email]
     , (err, result) ->
