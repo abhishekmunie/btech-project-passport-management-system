@@ -63,7 +63,6 @@ router.post '/pgo-management', (req, res, next) ->
           res.locals.error = err
           next()
           return
-        console.log row
         res.locals.success = message: "Granting Officer's Email was successfully Deauthorized."
         next()
         return

@@ -44,7 +44,6 @@ router.post '/va-management', (req, res, next) ->
           res.locals.error = err
           next()
           return
-        console.log row
         res.locals.success = message: "validation Authority's Email was successfully Deauthorized."
         next()
         return

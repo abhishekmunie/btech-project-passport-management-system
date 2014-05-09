@@ -93,7 +93,6 @@ verifyResetKey = (email, resetKey, callback) ->
       callback? null, result.rows[0].exists is '1'
 
 deleteQuery = (values, client, done, callback) ->
-  console.log values
   client.query
     name: "reset_delete"
     text: "DELETE FROM #{EntityName} WHERE \"resetKey\" = $1::varchar "
@@ -124,7 +123,6 @@ deleteFromDatabaseResetKey = (resetKey, client, callback) ->
   return
 
 removeResetKey = (resetKey, client, callback) ->
-  console.log resetKey
   deleteFromDatabaseResetKey resetKey, client, callback
 
 module.exports =
