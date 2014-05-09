@@ -4,6 +4,7 @@ debug = globals.debug
 PGConnect = globals.PGConnect
 
 pgo = require '../user/pgo'
+va = require '../user/va'
 
 EntityName = '"passport"."Region"'
 
@@ -146,6 +147,24 @@ unsetPGOForRegionId = (Id, callback) ->
     return
   return
 
+getValidationAuthorititesUnderPGOWithEmail = (email, callback) ->
+  PGConnect (err, client, done) ->
+    if err
+      done? client
+      callback? err
+      return
+    client.query
+      name: "get_vas_under_pgo"
+      text: "SELECT * FROM #{region.EntityName} , #{va.EntityName} WHERE \"GrantingOfficerEmail\" = $1::varchar AND \"RegionId\" = \"Id\" "
+      values: [email]
+    , (err, result) ->
+      if err
+        done? client
+        callback? err
+        return
+      done?()
+      callback? null, result.rows
+
 module.exports =
 
   EntityName: EntityName
@@ -154,3 +173,4 @@ module.exports =
   setPGOForRegionId: setPGOForRegionId
   unsetPGOForRegionId: unsetPGOForRegionId
   getRegionIdForPGOWithEmail: getRegionIdForPGOWithEmail
+  getValidationAuthorititesUnderPGOWithEmail: getValidationAuthorititesUnderPGOWithEmail

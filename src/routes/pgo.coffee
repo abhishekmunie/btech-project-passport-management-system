@@ -20,7 +20,7 @@ router.post '/va-management', (req, res, next) ->
         res.locals.error = new Error('Invalid email.')
         next()
         return
-      pgo.getRegionIdForPGOWithEmail req.session.user.email, (err, Id) ->
+      region.getRegionIdForPGOWithEmail req.session.user.email, (err, Id) ->
         if err
           res.locals.error = err
           next()
@@ -54,7 +54,7 @@ router.post '/va-management', (req, res, next) ->
   return
 
 router.all '/va-management', (req, res, next) ->
-  pgo.getValidationAuthorititesUnderPGOWithEmail req.session.user.email, (err, vas) ->
+  region.getValidationAuthorititesUnderPGOWithEmail req.session.user.email, (err, vas) ->
     return next err if err
     res.locals.validationAuthorities = vas
     next()

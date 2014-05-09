@@ -78,6 +78,15 @@ app.use '/va',                   require './routes/va'
 app.use '/user',                 require './routes/user'
 app.use '/citizen-registration', require './routes/citizen-registration'
 
+
+## error handler
+app.use (err, req, res, next) ->
+  debug "Locals Error Handler: #{req.url}"
+  if res.locals.error
+    console.error res.locals.error
+  next()
+  return
+
 app.all /.*\/[^\.\/]*$/, (req, res, next) ->
   debug "/ Handler: #{req.url}"
   [urlPath, query] = req.url.split '?'

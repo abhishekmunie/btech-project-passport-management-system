@@ -5,7 +5,6 @@ globals = require '../globals'
 debug = globals.debug
 PGConnect = globals.PGConnect
 
-region = require '../passport/region'
 va = require './va'
 
 EntityName = '"passport"."PassportGrantingOfficer"'
@@ -154,27 +153,6 @@ isPassportGrantingOfficer = (email, callback) ->
       done?()
       callback? null, result.rows[0].exists is '1'
 
-getRegionIdForPGOWithEmail = region.getRegionIdForPGOWithEmail
-
-getValidationAuthorititesUnderPGOWithEmail = (email, callback) ->
-  PGConnect (err, client, done) ->
-    if err
-      done? client
-      callback? err
-      return
-    client.query
-      name: "get_vas_under_pgo"
-      text: "SELECT * FROM #{region.EntityName} , #{va.EntityName} WHERE \"GrantingOfficerEmail\" = $1::varchar AND \"RegionId\" = \"Id\" "
-      values: [email]
-    , (err, result) ->
-      if err
-        done? client
-        callback? err
-        return
-      done?()
-      callback? null, result.rows
-
-
 filter = (req, res, next) ->
   debug "Passport Granting Officer Auth Filter: #{req.url}"
   return res.redirect "/auth/signin?redirect=#{encodeURIComponent req.url}" unless req.session.user
@@ -203,5 +181,3 @@ module.exports =
   removePassportGrantingOfficer: removePassportGrantingOfficer
   isPassportGrantingOfficer: isPassportGrantingOfficer
   getForEmail: getForEmail
-  getValidationAuthorititesUnderPGOWithEmail: getValidationAuthorititesUnderPGOWithEmail
-  getRegionIdForPGOWithEmail: getRegionIdForPGOWithEmail
