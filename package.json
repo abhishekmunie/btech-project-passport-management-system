@@ -32,7 +32,7 @@
     "cachelicious": "cblage/node-cachelicious",
     "coffee-script": "1.7.x",
     "connect": "2.14.x",
-    "connect-pg-simple": "1.0.x",
+    "connect-pg-simple": "6.2.x",
     "convict": "0.4.x",
     "cookie-parser": "1.0.x",
     "debug": "0.8.x",
