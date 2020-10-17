@@ -41,7 +41,7 @@
     "express-session": "1.0.x",
     "hogan.js": "2.0.x",
     "lodash": "2.4.x",
-    "morgan": "1.0.x",
+    "morgan": "1.10.x",
     "newrelic": "1.5.x",
     "nodemailer": "0.6.x",
     "pg": "3.0.x",
